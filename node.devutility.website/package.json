@@ -5,7 +5,8 @@
     "version": "1.0.0",
     "description": "The website example for node.js",
     "scripts": {
-        "build:folders": "",
+        "build:resource": "node ./.build/build-resource",
+        "build": "npm run build:resource",
         "start": "node ./bin/bootstrap"
     },
     "dependencies": {
