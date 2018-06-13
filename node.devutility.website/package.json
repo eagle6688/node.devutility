@@ -1,0 +1,11 @@
+{
+    "name": "node.devutility.website",
+    "version": "1.0.0",
+    "description": "The website example for node.js",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}
