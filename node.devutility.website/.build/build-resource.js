@@ -1,5 +1,5 @@
 /**
- * Create directory and complie SASS and Typescript files.
+ * Create directory and copy resources file such as fonts and images to deploy directory.
  */
 
 let path = require("path");

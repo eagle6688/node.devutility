@@ -3,6 +3,9 @@
  */
 
 let config = {
+    compile: {
+        jsLibName: 'libs.bundle.js'
+    },
     deploy: {
         directory: {
             fonts: 'dist/fonts',
