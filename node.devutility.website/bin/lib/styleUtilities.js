@@ -35,7 +35,8 @@ styleUtilities.compress = function (file) {
         return content;
     }
 
-    return cssMinify.minify(content);
+    let result = cssMinify.minify(content);
+    return result.styles
 };
 
 module.exports = styleUtilities;
