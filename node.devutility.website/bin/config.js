@@ -3,6 +3,11 @@
  */
 
 let config = {
+    port: 8000,
+    forward: {
+        host: "127.0.0.1",
+        port: 28003
+    },
     compile: {
         jsLibName: 'libs.bundle.js'
     },
@@ -14,6 +19,10 @@ let config = {
             scripts: 'dist/scripts'
         }
     }
+};
+
+config.getForwardTarget = function () {
+    return 'http://' + config.forward.host + ':' + config.forward.port;
 };
 
 module.exports = config;
