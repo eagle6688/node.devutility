@@ -6,7 +6,9 @@
  * @Copyright: 2018. All rights reserved.
  */
 
+const fs = require("fs");
 const uglifyJs = require("uglify-js");
+
 let jsUtilities = {};
 
 /**

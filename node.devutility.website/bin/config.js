@@ -14,6 +14,19 @@ let config = {
     },
     directory: {
         pages: 'contents/pages',
+        resources: {
+            fonts: 'resources/fonts',
+            images: 'resources/images',
+            styles: [
+                'resources/styles/bootstrap.min.css',
+                'resources/styles/bootstrap-theme.min.css'
+            ],
+            scripts: [
+                'resources/scripts/jquery.min.js',
+                'resources/scripts/bootstrap.min.js',
+                'resources/scripts/vue.min.js'
+            ]
+        },
         deploy: {
             fonts: 'dist/fonts',
             images: 'dist/images',

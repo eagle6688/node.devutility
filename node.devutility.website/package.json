@@ -12,7 +12,7 @@
         "build:resource": "node ./.build/build-resource",
         "build:lib": "node ./.build/build-lib",
         "build:sass": "node ./.build/build-sass",
-        "build": "npm run build:resource",
+        "build": "npm run build:resource && npm run build:lib && npm run build:sass",
         "start": "node ./bin/bootstrap"
     },
     "dependencies": {
@@ -21,6 +21,7 @@
         "http-proxy": "^1.17.0",
         "node-sass": "^4.9.0",
         "typescript": "^2.9.1",
-        "uglify-js": "^3.4.0"
+        "uglify-js": "^3.4.0",
+        "clean-css": "^4.1.11"
     }
 }

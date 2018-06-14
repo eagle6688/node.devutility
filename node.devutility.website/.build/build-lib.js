@@ -7,20 +7,15 @@ const fs = require('fs');
 const path = require('path');
 
 const config = require("../bin/config");
-const ioUtilities = require("../bin/lib/ioUtilities");
 const jsUtilities = require("../bin/lib/jsUtilities");
 
+let jsArray = [];
 let jsLibPath = path.join(config.directory.deploy.scripts, config.compile.jsLibName);
-let files = ioUtilities.getAllFiles("./resources/scripts");
+let files = config.directory.resources.scripts;
 
-fs.writeFileSync(jsLibPath, '');
-
-for (let i = 0; i < files.length; i++) {
-    let content = jsUtilities.compressJs(files[i]);
-
-    if (content && i > 0) {
-        content = '\n' + content;
-    }
-
-    fs.appendFileSync(jsLibPath, content);
+for (let index in files) {
+    let content = jsUtilities.compressJs(files[index]);
+    jsArray.push(content);
 }
+
+fs.writeFileSync(jsLibPath, jsArray.join('\n'));

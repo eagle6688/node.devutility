@@ -13,18 +13,14 @@ ioUtilities.createDirectory(config.directory.deploy.images);
 ioUtilities.createDirectory(config.directory.deploy.styles);
 ioUtilities.createDirectory(config.directory.deploy.scripts);
 
-copyfiles([getResourcePath("fonts"), config.directory.deploy.fonts], true, function (error) {
+copyfiles([path.join(config.directory.resources.fonts, "*"), config.directory.deploy.fonts], true, function (error) {
     if (error) {
         console.log(error);
     }
 });
 
-copyfiles([getResourcePath("images"), config.directory.deploy.images], true, function (error) {
+copyfiles([path.join(config.directory.resources.images, "*"), config.directory.deploy.images], true, function (error) {
     if (error) {
         console.log(error);
     }
 });
-
-function getResourcePath(folder) {
-    return path.join("resources", folder, "*");
-}
