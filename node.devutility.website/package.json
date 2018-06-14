@@ -12,16 +12,18 @@
         "build:resource": "node ./.build/build-resource",
         "build:lib": "node ./.build/build-lib",
         "build:sass": "node ./.build/build-sass",
-        "build": "npm run build:resource && npm run build:lib && npm run build:sass",
+        "build:ts": "node ./.build/build-ts",
+        "build": "npm run build:resource && npm run build:lib && npm run build:sass && npm run build:ts",
         "start": "node ./bin/bootstrap"
     },
     "dependencies": {
         "body-parser": "^1.18.3",
+        "clean-css": "^4.1.11",
         "copyfiles": "^2.0.0",
         "http-proxy": "^1.17.0",
         "node-sass": "^4.9.0",
         "typescript": "^2.9.1",
         "uglify-js": "^3.4.0",
-        "clean-css": "^4.1.11"
+        "vue": "^2.5.16"
     }
 }
