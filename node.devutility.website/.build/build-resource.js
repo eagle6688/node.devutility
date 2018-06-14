@@ -8,18 +8,18 @@ let copyfiles = require('copyfiles');
 let config = require("../bin/config");
 let ioUtilities = require("../bin/lib/ioUtilities");
 
-ioUtilities.createDirectory(config.deploy.directory.fonts);
-ioUtilities.createDirectory(config.deploy.directory.images);
-ioUtilities.createDirectory(config.deploy.directory.styles);
-ioUtilities.createDirectory(config.deploy.directory.scripts);
+ioUtilities.createDirectory(config.directory.deploy.fonts);
+ioUtilities.createDirectory(config.directory.deploy.images);
+ioUtilities.createDirectory(config.directory.deploy.styles);
+ioUtilities.createDirectory(config.directory.deploy.scripts);
 
-copyfiles([getResourcePath("fonts"), config.deploy.directory.fonts], true, function (error) {
+copyfiles([getResourcePath("fonts"), config.directory.deploy.fonts], true, function (error) {
     if (error) {
         console.log(error);
     }
 });
 
-copyfiles([getResourcePath("images"), config.deploy.directory.images], true, function (error) {
+copyfiles([getResourcePath("images"), config.directory.deploy.images], true, function (error) {
     if (error) {
         console.log(error);
     }

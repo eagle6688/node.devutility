@@ -8,7 +8,6 @@
 
 const fs = require('fs');
 const sysPath = require("path");
-const uglifyJs = require("uglify-js");
 
 let ioUtilities = {};
 let projectDirectory = process.cwd();
@@ -37,8 +36,9 @@ ioUtilities.createDirectory = function (directory) {
 /**
  * Return all files absolute path located in directoty path, if path is a file return itself.
  * @param {*} path 
+ * @param {*} regex 
  */
-ioUtilities.getAllFiles = function (path) {
+ioUtilities.getAllFiles = function (path, regex) {
     let files = [];
     path = sysPath.resolve(path);
 
@@ -50,6 +50,14 @@ ioUtilities.getAllFiles = function (path) {
             let stat = fs.statSync(filePath);
 
             if (stat.isFile()) {
+                if (regex) {
+                    if (regex.test(filePath)) {
+                        files.push(filePath);
+                    }
+
+                    continue;
+                }
+
                 files.push(filePath);
             }
 
@@ -64,19 +72,56 @@ ioUtilities.getAllFiles = function (path) {
 };
 
 /**
- * Compress js file if its name without .min.js
- * @param {*} file 
+ * Return all files under the specified path.
+ * @param {*} path 
+ * @param {*} regex 
  */
-ioUtilities.compressJs = function (file) {
-    let regex = /\.min.js$/;
-    let content = fs.readFileSync(file).toString();
+ioUtilities.getFiles = function (path, regex) {
+    let files = [];
+    path = sysPath.resolve(path);
+    let array = fs.readdirSync(path);
 
-    if (regex.test(file)) {
-        return content;
+    for (let index in array) {
+        let filePath = sysPath.join(path, array[index]);
+        let stat = fs.statSync(filePath);
+
+        if (!stat.isFile()) {
+            continue;
+        }
+
+        if (regex) {
+            if (regex.test(filePath)) {
+                files.push(filePath);
+            }
+
+            continue;
+        }
+
+        files.push(filePath);
     }
 
-    let result = uglifyJs.minify(content);
-    return result.code;
+    return files;
+};
+
+/**
+ * Return all directories under the specified path.
+ * @param {*} path 
+ */
+ioUtilities.getDirectories = function (path) {
+    let directories = [];
+    path = sysPath.resolve(path);
+    let array = fs.readdirSync(path);
+
+    for (let i = 0; i < array.length; i++) {
+        let filePath = sysPath.join(path, array[i]);
+        let stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            directories.push(filePath);
+        }
+    }
+
+    return directories;
 };
 
 module.exports = ioUtilities;

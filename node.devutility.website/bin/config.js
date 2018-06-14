@@ -9,10 +9,12 @@ let config = {
         port: 28003
     },
     compile: {
-        jsLibName: 'libs.bundle.js'
+        jsLibName: 'libs.bundle.js',
+        pageStyleName: '{page}.min.css'
     },
-    deploy: {
-        directory: {
+    directory: {
+        pages: 'contents/pages',
+        deploy: {
             fonts: 'dist/fonts',
             images: 'dist/images',
             styles: 'dist/stylesheets',

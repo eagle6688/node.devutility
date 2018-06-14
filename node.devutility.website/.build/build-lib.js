@@ -8,14 +8,15 @@ const path = require('path');
 
 const config = require("../bin/config");
 const ioUtilities = require("../bin/lib/ioUtilities");
+const jsUtilities = require("../bin/lib/jsUtilities");
 
-let jsLibPath = path.join(config.deploy.directory.scripts, config.compile.jsLibName);
+let jsLibPath = path.join(config.directory.deploy.scripts, config.compile.jsLibName);
 let files = ioUtilities.getAllFiles("./resources/scripts");
 
 fs.writeFileSync(jsLibPath, '');
 
 for (let i = 0; i < files.length; i++) {
-    let content = ioUtilities.compressJs(files[i]);
+    let content = jsUtilities.compressJs(files[i]);
 
     if (content && i > 0) {
         content = '\n' + content;
