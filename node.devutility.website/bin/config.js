@@ -10,7 +10,7 @@ let config = {
     },
     compile: {
         jsLibName: 'libs.bundle.js',
-        pageStyleName: '{page}.min.css'
+        pageStyleNameFormat: '{page}.min.css'
     },
     directory: {
         pages: 'contents/pages',
@@ -25,6 +25,10 @@ let config = {
 
 config.getForwardTarget = function () {
     return 'http://' + config.forward.host + ':' + config.forward.port;
+};
+
+config.getPageStyleName = function (page) {
+    return config.compile.pageStyleNameFormat.replace(/{page}/, page);
 };
 
 module.exports = config;

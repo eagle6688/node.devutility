@@ -124,4 +124,13 @@ ioUtilities.getDirectories = function (path) {
     return directories;
 };
 
+/**
+ * Get the last path.
+ * @param {*} path 
+ */
+ioUtilities.getLastPath = function (path) {
+    let array = path.split(sysPath.sep);
+    return array[array.length - 1];
+};
+
 module.exports = ioUtilities;

@@ -7,12 +7,17 @@
  */
 
 const nodeSass = require('node-sass');
-const ioUtilities = require("../bin/lib/ioUtilities");
 
-let sassUtilities = {};
+let sassUtilities = {
+    commentFormat: "/*!\n * Sass file: {file}\n */\n"
+};
+
+sassUtilities.getComment = function (file) {
+    return sassUtilities.commentFormat.replace(/{file}/, file);
+};
 
 sassUtilities.compile = function (file, data) {
-    let result = nodeSass.renderSync({
+    return nodeSass.renderSync({
         file: file,
         data: data,
         outputStyle: 'compressed'
