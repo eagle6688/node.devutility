@@ -6,8 +6,8 @@ const fs = require('fs');
 const sysPath = require("path");
 
 const config = require("../bin/config");
-const ioUtilities = require("../bin/lib/ioUtilities");
-const styleUtilities = require("../bin/lib/styleUtilities");
+const ioUtilities = require("../../node.devutility.internal/ioUtilities");
+const styleUtilities = require("../../node.devutility.external/styleUtilities");
 
 function getStyle(sassFile) {
     let sassFileName = ioUtilities.getLastPath(sassFile);
@@ -46,13 +46,12 @@ for (let index in pagePaths) {
         continue;
     }
 
-    let cssArray = [];
-    cssArray.push(baseStyles);
+    let array = [];
+    array.push(baseStyles);
 
-    for (let sassFileIndex in sassFiles) {
-        let cssContent = getStyle(sassFiles[sassFileIndex]);
-        cssArray.push(cssContent);
-    }
+    sassFiles.forEach(sassFile => {
+        array.push(getStyle(sassFile));
+    });
 
-    fs.writeFileSync(styleFilePath, cssArray.join('\n'));
+    fs.writeFileSync(styleFilePath, array.join('\n'));
 }

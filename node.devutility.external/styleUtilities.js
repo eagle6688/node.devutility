@@ -13,7 +13,7 @@ const CleanCSS = require('clean-css');
 const cssMinify = new CleanCSS();
 
 let styleUtilities = {
-    commentFormat: "/*!\n * Sass file: {file}\n */\n"
+    commentFormat: "/*!\n * Style file: {file}\n */\n"
 };
 
 styleUtilities.getComment = function (file) {

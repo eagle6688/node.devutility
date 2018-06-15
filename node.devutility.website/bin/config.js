@@ -10,7 +10,8 @@ let config = {
     },
     compile: {
         jsLibName: 'libs.bundle.js',
-        pageStyleNameFormat: '{page}.min.css'
+        pageStyleNameFormat: '{page}.min.css',
+        pageScriptNameFormat: '{page}.min.js'
     },
     directory: {
         pages: 'contents/pages',
@@ -33,6 +34,16 @@ let config = {
             styles: 'dist/stylesheets',
             scripts: 'dist/scripts'
         }
+    },
+    tsConfig: {
+        "compilerOptions": {
+            "module": "commonjs",
+            "target": "es5",
+            "allowJs": true
+        },
+        "exclude": [
+            "node_modules"
+        ]
     }
 };
 
@@ -42,6 +53,10 @@ config.getForwardTarget = function () {
 
 config.getPageStyleName = function (page) {
     return config.compile.pageStyleNameFormat.replace(/{page}/, page);
+};
+
+config.getPageScriptName = function (page) {
+    return config.compile.pageScriptNameFormat.replace(/{page}/, page);
 };
 
 module.exports = config;

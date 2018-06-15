@@ -7,14 +7,14 @@ const fs = require('fs');
 const path = require('path');
 
 const config = require("../bin/config");
-const jsUtilities = require("../bin/lib/jsUtilities");
+const scriptUtilities = require("../../node.devutility.external/scriptUtilities");
 
 let jsArray = [];
 let jsLibPath = path.join(config.directory.deploy.scripts, config.compile.jsLibName);
 let files = config.directory.resources.scripts;
 
 for (let index in files) {
-    let content = jsUtilities.compressJs(files[index]);
+    let content = scriptUtilities.compressJs(files[index]);
     jsArray.push(content);
 }
 

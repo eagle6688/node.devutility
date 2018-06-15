@@ -6,7 +6,7 @@ let path = require("path");
 let copyfiles = require('copyfiles');
 
 let config = require("../bin/config");
-let ioUtilities = require("../bin/lib/ioUtilities");
+let ioUtilities = require("../../node.devutility.internal/ioUtilities");
 
 ioUtilities.createDirectory(config.directory.deploy.fonts);
 ioUtilities.createDirectory(config.directory.deploy.images);
