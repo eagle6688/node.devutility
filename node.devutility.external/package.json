@@ -8,6 +8,9 @@
         "type": "git",
         "url": "https://github.com/eagle6688/node.devutility.git"
     },
+    "scripts": {
+        "test:script": "node ./test/scriptUtilities/compileTsTest.js && node ./test/scriptUtilities/compileTsFileTest.js"
+    },
     "dependencies": {
         "clean-css": "^4.1.11",
         "copyfiles": "^2.0.0",

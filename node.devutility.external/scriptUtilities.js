@@ -28,8 +28,23 @@ scriptUtilities.compressJs = function (file) {
     return result.code;
 };
 
-scriptUtilities.compileTs = function () {
+/**
+ * Complie typescript content to javascript content.
+ * @param {*} tsContent 
+ * @param {*} tsConfig 
+ */
+scriptUtilities.compileTs = function (tsContent, tsConfig) {
+    return typescript.transpileModule(tsContent, tsConfig);
+};
 
+/**
+ * Compile typescript file to javascript content.
+ * @param {*} tsFile 
+ * @param {*} tsConfig 
+ */
+scriptUtilities.compileTsFile = function (tsFile, tsConfig) {
+    let content = fs.readFileSync(tsFile).toString();
+    return this.compileTs(content, tsConfig);
 };
 
 module.exports = scriptUtilities;
