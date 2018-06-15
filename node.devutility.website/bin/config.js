@@ -14,7 +14,9 @@ let config = {
         pageScriptNameFormat: '{page}.min.js'
     },
     directory: {
-        pages: 'contents/pages',
+        views: 'views',
+        pages: 'views/pages',
+        partials: '/views/partials',
         resources: {
             fonts: 'resources/fonts',
             images: 'resources/images',
