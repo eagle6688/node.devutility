@@ -1,0 +1,19 @@
+{
+    "name": "node.devutility.external",
+    "version": "1.0.0",
+    "description": "Developing utilities that used Node.js external package.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/eagle6688/node.devutility.git"
+    },
+    "dependencies": {
+        "clean-css": "^4.1.11",
+        "copyfiles": "^2.0.0",
+        "http-proxy": "^1.17.0",
+        "node-sass": "^4.9.0",
+        "typescript": "^2.9.1",
+        "uglify-js": "^3.4.0"
+    }
+}
