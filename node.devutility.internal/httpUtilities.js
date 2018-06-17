@@ -14,7 +14,7 @@ let httpUtilities = {};
  * @param {*} options 
  * @param {*} callback 
  */
-httpUtilities.httpGet = function (options, callback) {
+httpUtilities.get = function (options, callback) {
     this.createHttpRequest(options, callback).end();
 };
 
@@ -22,7 +22,7 @@ httpUtilities.httpGet = function (options, callback) {
  * Call http get method and return an promise object.
  * @param {*} options 
  */
-httpUtilities.httpGetPromise = function (options) {
+httpUtilities.getPromise = function (options) {
     return new Promise((resolve, reject) => {
         httpUtilities.httpGet(options, response => {
             resolve(response);
@@ -38,7 +38,7 @@ httpUtilities.httpGetPromise = function (options) {
  * @param {*} data 
  * @param {*} callback 
  */
-httpUtilities.httpPost = function (options, data, callback) {
+httpUtilities.post = function (options, data, callback) {
     let request = this.createHttpRequest(options, callback);
 
     if (options.method && typeof options.method == 'string' && options.method.toLowerCase() == 'post' && data) {
@@ -87,6 +87,28 @@ httpUtilities.createHttpRequest = function (options, callback) {
     });
 
     return request;
+};
+
+/**
+ * Create a new request options object.
+ * @param {*} hostname 
+ * @param {*} port 
+ * @param {*} path 
+ * @param {*} cookies 
+ */
+httpUtilities.requestOptions = function (hostname, port, path, cookies) {
+    let options = {
+        hostname: hostname,
+        port: port,
+        path: path,
+        headers: {}
+    };
+
+    if (cookies) {
+        options.headers.Cookie = cookies;
+    }
+
+    return options;
 };
 
 module.exports = httpUtilities;

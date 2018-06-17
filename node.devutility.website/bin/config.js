@@ -6,7 +6,14 @@ let config = {
     port: 8000,
     forward: {
         host: "127.0.0.1",
-        port: 28003
+        port: 8001
+    },
+    url: {
+        login: '/login',
+        apis: {
+            baseDataUrl: '/system/base-data'
+        },
+        whiteUrls: ['/login', '/api']
     },
     compile: {
         jsLibName: 'libs.bundle.js',
@@ -16,7 +23,7 @@ let config = {
     directory: {
         views: 'views',
         pages: 'views/pages',
-        partials: '/views/partials',
+        partials: 'views/partials',
         resources: {
             fonts: 'resources/fonts',
             images: 'resources/images',
@@ -31,6 +38,7 @@ let config = {
             ]
         },
         deploy: {
+            root: "dist",
             fonts: 'dist/fonts',
             images: 'dist/images',
             styles: 'dist/stylesheets',
@@ -49,9 +57,9 @@ let config = {
     }
 };
 
-config.getForwardTarget = function () {
-    return 'http://' + config.forward.host + ':' + config.forward.port;
-};
+let sysPath = require("path");
+let httpUtilities = require("../../node.devutility.internal/httpUtilities");
+let projectDirectory = process.cwd();
 
 config.getPageStyleName = function (page) {
     return config.compile.pageStyleNameFormat.replace(/{page}/, page);
@@ -59,6 +67,41 @@ config.getPageStyleName = function (page) {
 
 config.getPageScriptName = function (page) {
     return config.compile.pageScriptNameFormat.replace(/{page}/, page);
+};
+
+config.viewsPath = function () {
+    return sysPath.join(projectDirectory, config.directory.views);
+};
+
+config.partialsPath = function () {
+    return sysPath.join(projectDirectory, config.directory.partials);;
+};
+
+config.faviconPath = function () {
+    return sysPath.join(projectDirectory, config.directory.deploy.images, "favicon.ico");
+};
+
+config.staticPath = function () {
+    return sysPath.join(projectDirectory, config.directory.deploy.root);
+};
+
+config.pageStyleUrl = function (page) {
+    return "/" + config.directory.deploy.styles + "/" + config.getPageStyleName(page);
+};
+
+config.pageScriptUrl = function (page) {
+    return "/" + config.directory.deploy.scripts + "/" + config.getPageScriptName(page);
+};
+
+config.getForwardOptions = function () {
+    return {
+        target: "http://" + config.forward.host + ":" + config.forward.port,
+        changeOrigin: true
+    };
+};
+
+config.getRequestOptions_baseData = function (request) {
+    return httpUtilities.requestOptions(config.forward.host, config.forward.port, config.url.apis.baseDataUrl, request.headers.cookie);
 };
 
 module.exports = config;
