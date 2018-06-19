@@ -7,7 +7,7 @@ const sysPath = require("path");
 
 const config = require("../bin/config");
 const ioUtilities = require("utilities-io");
-const styleUtilities = require("../../node.devutility.external/lib/styleUtilities");
+const styleUtilities = require("utilities-style");
 
 function getStyle(sassFile) {
     let sassFileName = ioUtilities.getLastPath(sassFile);

@@ -35,6 +35,7 @@
         "utilities-http": "^1.0.0",
         "utilities-io": "^1.0.0",
         "utilities-forwarder": "^1.0.1",
-        "utilities-script": "^1.0.0"
+        "utilities-script": "^1.0.0",
+        "utilities-style": "^1.0.0"
     }
 }
