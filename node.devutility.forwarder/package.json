@@ -1,0 +1,12 @@
+{
+    "name": "utilities-forwarder",
+    "version": "1.0.0",
+    "description": "Developing utilities about request forwarder.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.forwarder",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    }
+}
