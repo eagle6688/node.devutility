@@ -4,7 +4,7 @@
 
 const config = require("../config");
 const handler = require("./handler");
-const forwarder = require("../../../node.devutility.external/forwarder")(config.getForwardOptions());
+const forwarder = require("forwarder")(config.getForwardOptions());
 
 let router = {};
 

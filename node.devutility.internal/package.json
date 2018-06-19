@@ -1,12 +1,12 @@
 {
     "name": "utility-internal",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Developing utilities that used Node.js internal methods.",
     "author": "Aldwin Su",
     "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/eagle6688/node.devutility.git"
-    },
-    "homepage": "https://github.com/eagle6688/node.devutility"
+    }
 }

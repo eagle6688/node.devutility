@@ -58,7 +58,7 @@ let config = {
 };
 
 let sysPath = require("path");
-let httpUtilities = require("../../node.devutility.internal/httpUtilities");
+let httpUtilities = require("utility-internal").httpUtilities;
 let projectDirectory = process.cwd();
 
 config.getPageStyleName = function (page) {
