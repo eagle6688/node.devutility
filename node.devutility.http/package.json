@@ -1,0 +1,12 @@
+{
+    "name": "utilities-http",
+    "version": "1.0.0",
+    "description": "Developing utilities about http.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.http",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    }
+}
