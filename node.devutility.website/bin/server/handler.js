@@ -2,8 +2,8 @@
  * Server business handler.
  */
 const config = require("../config");
-const httpUtilities = require("httpUtilities");
-const collectionUtilities = require("collectionUtilities");
+const httpUtilities = require("../../../node.devutility.internal/lib/httpUtilities");
+const collectionUtilities = require("utilities-collection");
 
 let handler = {};
 let staticUrl = config.staticUrl();
