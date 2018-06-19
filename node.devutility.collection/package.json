@@ -1,0 +1,12 @@
+{
+    "name": "utility-collection",
+    "version": "1.0.1",
+    "description": "Developing utilities about collection.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    }
+}
