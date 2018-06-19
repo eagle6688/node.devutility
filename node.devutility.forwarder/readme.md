@@ -8,4 +8,4 @@ npm install utilities-forwarder
 const forwarder = require("utilities-forwarder")(options);
 ```
 
-options can refer to https://www.npmjs.com/package/http-proxy
+The options can refer to https://github.com/nodejitsu/node-http-proxy
