@@ -1,0 +1,16 @@
+{
+    "name": "utilities-style",
+    "version": "1.0.0",
+    "description": "Developing utilities about style.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.style",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    },
+    "dependencies": {
+        "clean-css": "^4.1.11",
+        "node-sass": "^4.9.0"
+    }
+}
