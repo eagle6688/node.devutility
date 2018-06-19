@@ -1,0 +1,19 @@
+{
+    "name": "utilities-script",
+    "version": "1.0.0",
+    "description": "Developing utilities about script.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.script",
+    "scripts": {
+        "test:script": "node ./test/compileTsTest.js && node ./test/compileTsFileTest.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    },
+    "dependencies": {
+        "typescript": "^2.9.1",
+        "uglify-js": "^3.4.0"
+    }
+}

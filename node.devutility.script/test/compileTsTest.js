@@ -1,5 +1,5 @@
 const config = require("../config");
-const scriptUtilities = require("../../lib/scriptUtilities");
+const scriptUtilities = require("../index");
 
 console.log("Start complieTsTest...", "\n");
 
