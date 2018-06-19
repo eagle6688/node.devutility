@@ -1,4 +1,4 @@
-const config = require("../config");
+const config = require("./config");
 const scriptUtilities = require("../index");
 
 console.log("Start complieTsTest...", "\n");
