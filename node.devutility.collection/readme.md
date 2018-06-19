@@ -1,9 +1,9 @@
 #### Install
 ``` bash
-npm install utility-collection
+npm install utilities-collection
 ```
 
 #### Usage
 ``` javascript
-const collectionUtilities = require("utility-collection");
+const collectionUtilities = require("utilities-collection");
 ```
