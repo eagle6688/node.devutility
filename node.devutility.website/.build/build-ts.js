@@ -7,7 +7,7 @@ const sysPath = require("path");
 
 const config = require("../bin/config");
 const ioUtilities = require("utilities-io");
-const scriptUtilities = require("../../node.devutility.external/lib/scriptUtilities");
+const scriptUtilities = require("utilities-script");
 
 function getScript(tsFile) {
     let fileName = ioUtilities.getLastPath(tsFile);

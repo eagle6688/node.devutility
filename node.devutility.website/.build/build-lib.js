@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const config = require("../bin/config");
-const scriptUtilities = require("../../node.devutility.external/lib/scriptUtilities");
+const scriptUtilities = require("utilities-script");
 
 let jsArray = [];
 let jsLibPath = path.join(config.directory.deploy.scripts, config.compile.jsLibName);
