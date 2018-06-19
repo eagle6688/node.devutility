@@ -85,8 +85,16 @@ config.staticPath = function () {
     return sysPath.join(projectDirectory, config.directory.deploy.root);
 };
 
+config.staticUrl = function () {
+    return "/" + config.directory.deploy;
+};
+
 config.pageStyleUrl = function (page) {
     return "/" + config.directory.deploy.styles + "/" + config.getPageStyleName(page);
+};
+
+config.libScriptUrl = function () {
+    return "/" + config.directory.deploy.scripts + "/" + config.compile.jsLibName;
 };
 
 config.pageScriptUrl = function (page) {

@@ -33,8 +33,8 @@ handler.getPageData = function (request, title) {
     let pageName = this.getPageName(request);
 
     let data = {
-        css: [config.pageStyleUrl(pageName)],
-        js: [config.pageScriptUrl(pageName)]
+        styles: [config.pageStyleUrl(pageName)],
+        scripts: [config.libScriptUrl(), config.pageScriptUrl(pageName)]
     };
 
     if (!request && !request.data) {

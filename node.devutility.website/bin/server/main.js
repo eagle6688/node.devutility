@@ -37,7 +37,7 @@ app.engine('hbs', hbs.__express);
 app.use(favicon(config.faviconPath()));
 
 // Static resources.
-app.use(express.static(config.staticPath()));
+app.use(config.staticUrl(), express.static(config.staticPath()));
 
 // Register router.
 router.register(app);

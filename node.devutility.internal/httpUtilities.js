@@ -24,7 +24,7 @@ httpUtilities.get = function (options, callback) {
  */
 httpUtilities.getPromise = function (options) {
     return new Promise((resolve, reject) => {
-        httpUtilities.httpGet(options, response => {
+        httpUtilities.get(options, response => {
             resolve(response);
         });
     }).catch(error => {
@@ -84,6 +84,10 @@ httpUtilities.createHttpRequest = function (options, callback) {
 
     request.on('error', function (e) {
         console.log("Request", options.path, "error,", e);
+
+        if (callback) {
+            callback(null);
+        }
     });
 
     return request;
