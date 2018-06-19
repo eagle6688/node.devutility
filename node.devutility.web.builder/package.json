@@ -1,0 +1,17 @@
+{
+    "name": "utilities-web-builder",
+    "version": "1.0.0",
+    "description": "Developing utilities for website building.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.web.builder",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    },
+    "dependencies": {
+        "extend": "^3.0.1",
+        "copyfiles": "^2.0.0",
+        "utilities-io": "^1.0.0"
+    }
+}
