@@ -1,12 +1,13 @@
 {
-    "name": "node.devutility.external",
+    "name": "utility-external",
     "version": "1.0.0",
-    "description": "Developing utilities that used Node.js external package.",
+    "description": "Developing utilities with some dependencies.",
     "author": "Aldwin Su",
     "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility",
     "repository": {
         "type": "git",
-        "url": "https://github.com/eagle6688/node.devutility.git"
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
     },
     "scripts": {
         "test:script": "node ./test/scriptUtilities/compileTsTest.js && node ./test/scriptUtilities/compileTsFileTest.js"
