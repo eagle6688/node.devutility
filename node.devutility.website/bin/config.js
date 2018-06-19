@@ -85,8 +85,10 @@ config.staticPath = function () {
     return sysPath.join(projectDirectory, config.directory.deploy.root);
 };
 
+/* Url start */
+
 config.staticUrl = function () {
-    return "/" + config.directory.deploy;
+    return "/" + config.directory.deploy.root;
 };
 
 config.pageStyleUrl = function (page) {
@@ -100,6 +102,8 @@ config.libScriptUrl = function () {
 config.pageScriptUrl = function (page) {
     return "/" + config.directory.deploy.scripts + "/" + config.getPageScriptName(page);
 };
+
+/* Url end */
 
 config.getForwardOptions = function () {
     return {
