@@ -5,5 +5,5 @@ npm install utilities-style
 
 #### Usage
 ``` javascript
-const ioUtilities = require("utilities-style");
+const styleUtilities = require("utilities-style");
 ```
