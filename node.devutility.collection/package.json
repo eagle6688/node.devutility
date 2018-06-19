@@ -4,7 +4,7 @@
     "description": "Developing utilities about collection.",
     "author": "Aldwin Su",
     "license": "ISC",
-    "homepage": "https://github.com/eagle6688/node.devutility",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.collection",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/eagle6688/node.devutility.git"
