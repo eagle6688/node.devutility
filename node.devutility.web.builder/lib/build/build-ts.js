@@ -17,7 +17,7 @@ function compileTsFile(tsFile) {
 }
 
 module.exports = function (config) {
-    let configHelper = require("../config-helper")(config);
+    let configHelper = ConfigHelper(config);
     let pagePaths = ioUtilities.getDirectories(config.pages.dir);
     let scriptDirectory = configHelper.getScriptDirectory();
     ioUtilities.createDirectory(scriptDirectory);

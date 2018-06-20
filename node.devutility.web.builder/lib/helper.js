@@ -13,6 +13,7 @@ const build_fonts = require("./build/build-fonts");
 const build_images = require("./build/build-images");
 const build_script_lib = require("./build/build-script-lib");
 const build_sass = require("./build/build-sass");
+const build_ts = require("./build/build-ts");
 
 function Helper(options) {
     this.options = extend({}, config, options);
@@ -35,7 +36,7 @@ Helper.prototype.build_sass = function () {
 };
 
 Helper.prototype.build_ts = function () {
-
+    build_ts(this.options);
 };
 
 module.exports = Helper;
