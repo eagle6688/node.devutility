@@ -22,6 +22,16 @@ let config = {
         stylesDir: 'dist/stylesheets',
         scriptsDir: 'dist/scripts',
         scriptsLibName: 'libs.bundle.js'
+    },
+    tsConfig: {
+        "compilerOptions": {
+            "module": "commonjs",
+            "target": "es5",
+            "allowJs": true
+        },
+        "exclude": [
+            "node_modules"
+        ]
     }
 };
 

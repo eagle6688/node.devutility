@@ -1,5 +1,5 @@
 /**
- * Compile sass files and integrate into one css file for each page.
+ * Compile typescript files and integrate into one javascript file for each page.
  */
 
 const fs = require('fs');
