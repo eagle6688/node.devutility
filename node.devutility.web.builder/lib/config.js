@@ -20,7 +20,8 @@ let config = {
         fontsDir: "dist/fonts",
         imagesDir: 'dist/images',
         stylesDir: 'dist/stylesheets',
-        scriptsDir: 'dist/scripts'
+        scriptsDir: 'dist/scripts',
+        scriptsLibName: 'libs.bundle.js'
     }
 };
 

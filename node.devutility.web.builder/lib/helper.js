@@ -8,8 +8,10 @@
 
 const extend = require("extend");
 const config = require("./config");
+
 const build_fonts = require("./build/build-fonts");
 const build_images = require("./build/build-images");
+const build_script_lib = require("./build/build-script-lib");
 
 function Helper(options) {
     this.options = extend({}, config, options);
@@ -24,7 +26,7 @@ Helper.prototype.build_images = function () {
 };
 
 Helper.prototype.build_scriptLib = function () {
-
+    build_script_lib(this.options);
 };
 
 Helper.prototype.build_sass = function () {
