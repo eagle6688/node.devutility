@@ -30,6 +30,7 @@ router.register = function (app) {
     // Catch api and 404 request.
     app.use(function (request, response, next) {
         if (request.url.indexOf('/api') == 0) {
+            request.url = request.url.replace(/\/api\//i, '/');
             forwarder.request(request, response);
         }
         else {

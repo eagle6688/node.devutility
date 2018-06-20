@@ -6,18 +6,14 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-var httpProxy = require('http-proxy');
-var querystring = require("querystring");
+const extend = require("extend");
+const httpProxy = require("http-proxy");
+const querystring = require("querystring");
 
-/**
- * Forwarder class.
- * @param {*} http-proxy options, such as  {
-        target: 'http://host:port',
-        changeOrigin: true
-    }
- */
+const config = require("./config");
+
 function Forwarder(options) {
-    this.options = options;
+    this.options = extend({}, config, options);
     this.init();
 }
 
@@ -81,7 +77,6 @@ Forwarder.prototype.init = function () {
 
 Forwarder.prototype.request = function (request, response) {
     delete request.headers.host;
-    request.url = request.url.replace(/\/api\//i, '/');
     this.proxy.web(request, response);
 };
 
