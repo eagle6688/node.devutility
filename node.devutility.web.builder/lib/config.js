@@ -10,7 +10,7 @@ let config = {
         scripts: []
     },
     pages: {
-        dir: "view/pages",
+        dir: "views/pages",
         styleNameRegex: /.+(index.scss|index.sass)$/,
         styleNameFormat: "{page}.min.css",
         scriptNameRegex: /.+index.ts$/,
