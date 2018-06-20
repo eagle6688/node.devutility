@@ -10,22 +10,27 @@ const fs = require('fs');
 const sysPath = require("path");
 
 let ioUtilities = {};
-let projectDirectory = process.cwd();
 
+/**
+ * Create a directory recursively.
+ * @param {*} directory 
+ */
 ioUtilities.createDirectory = function (directory) {
     if (!directory) {
         throw new Error("Invalid directory parameter!");
     }
 
-    if (directory.indexOf('/') == 0 || directory.indexOf('.') == 0) {
-        throw new Error("Directory cannot start with . or /");
+    if (!sysPath.isAbsolute(directory)) {
+        directory = sysPath.resolve(directory);
     }
 
-    let array = directory.split('/');
-    let dir = sysPath.join(projectDirectory);
+    let array = directory.split(sysPath.sep);
+    let dir = array[0];
 
     for (let i = 0; i < array.length; i++) {
-        dir = sysPath.join(dir, array[i]);
+        if (i > 0) {
+            dir = sysPath.join(dir, array[i]);
+        }
 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
