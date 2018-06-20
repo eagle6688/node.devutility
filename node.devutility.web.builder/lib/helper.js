@@ -8,13 +8,14 @@
 
 const extend = require("extend");
 const config = require("./config");
+const build_fonts = require("./build/build-fonts");
 
 function Helper(options) {
     this.options = extend({}, config, options);
 }
 
 Helper.prototype.build_fonts = function () {
-
+    build_fonts(this.options);
 };
 
 Helper.prototype.build_images = function () {
