@@ -9,6 +9,9 @@
         "type": "git",
         "url": "git+https://github.com/eagle6688/node.devutility.git"
     },
+    "scripts": {
+        "test:bf": "node ./test/build-fonts.js"
+    },
     "dependencies": {
         "extend": "^3.0.1",
         "copyfiles": "^2.0.0",
