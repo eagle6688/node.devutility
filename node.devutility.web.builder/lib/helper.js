@@ -9,6 +9,7 @@
 const extend = require("extend");
 const config = require("./config");
 const build_fonts = require("./build/build-fonts");
+const build_images = require("./build/build-images");
 
 function Helper(options) {
     this.options = extend({}, config, options);
@@ -19,7 +20,7 @@ Helper.prototype.build_fonts = function () {
 };
 
 Helper.prototype.build_images = function () {
-
+    build_images(this.options);
 };
 
 Helper.prototype.build_scriptLib = function () {
