@@ -3,11 +3,8 @@
  */
 
 const fs = require('fs');
-
 const ioUtilities = require("utilities-io");
 const scriptUtilities = require("utilities-script");
-
-const ConfigHelper = require("../config-helper");
 
 function compileTsFile(tsConfig, tsFile) {
     let fileName = ioUtilities.getLastPath(tsFile);
@@ -16,8 +13,8 @@ function compileTsFile(tsConfig, tsFile) {
     return comment + script;
 }
 
-module.exports = function (config) {
-    let configHelper = ConfigHelper(config);
+module.exports = function (configHelper) {
+    let config = configHelper.options;
     let pagePaths = ioUtilities.getDirectories(config.pages.dir);
     let scriptDirectory = configHelper.getScriptDirectory();
     ioUtilities.createDirectory(scriptDirectory);

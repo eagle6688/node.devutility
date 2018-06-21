@@ -6,8 +6,6 @@ const fs = require('fs');
 const ioUtilities = require("utilities-io");
 const styleUtilities = require("utilities-style");
 
-const ConfigHelper = require("../config-helper");
-
 function getBaseStyles(styles) {
     let array = [];
 
@@ -26,8 +24,8 @@ function compileSassFile(sassFile) {
     return comment + result.css.toString();
 }
 
-module.exports = function (config) {
-    let configHelper = ConfigHelper(config);
+module.exports = function (configHelper) {
+    let config = configHelper.options;
     let baseStylesContent = getBaseStyles(config.resources.styles);
     let pagePaths = ioUtilities.getDirectories(config.pages.dir);
     let styleDirectory = configHelper.getStyleDirectory();
