@@ -10,6 +10,8 @@ const extend = require("extend");
 const config = require("./config");
 
 const ConfigHelper = require("./config-helper");
+const Server = require("./server");
+
 const build_fonts = require("./build/build-fonts");
 const build_images = require("./build/build-images");
 const build_script_lib = require("./build/build-script-lib");
@@ -18,7 +20,8 @@ const build_ts = require("./build/build-ts");
 
 function Helper(options) {
     this.options = extend({}, config, options);
-    this.configHelper = ConfigHelper(this.options);
+    this.configHelper = new ConfigHelper(this.options);
+    this.server = new Server(this.configHelper);
 }
 
 Helper.prototype.build_fonts = function () {
@@ -43,6 +46,10 @@ Helper.prototype.build_ts = function () {
 
 Helper.prototype.configer = function () {
     return this.configHelper;
+};
+
+Helper.prototype.start = function () {
+    this.server.start();
 };
 
 module.exports = Helper;

@@ -3,6 +3,7 @@
  */
 
 let config = {
+    port: 8000,
     resources: {
         fontsDir: "resources/fonts",
         imagesDir: "resources/images",
@@ -19,11 +20,16 @@ let config = {
         scriptNameFormat: "{page}.min.js"
     },
     deploy: {
+        favicon: "dist/images/favicon.ico",
         fontsDir: "dist/fonts",
         imagesDir: 'dist/images',
         stylesDir: 'dist/stylesheets',
         scriptsDir: 'dist/scripts',
         scriptsLibName: 'libs.bundle.js'
+    },
+    server: {
+        express: null,
+        router: function (express) { }
     },
     tsConfig: {
         "compilerOptions": {

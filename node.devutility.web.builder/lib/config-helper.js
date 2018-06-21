@@ -21,7 +21,7 @@ Helper.prototype.getPageScriptName = function (page) {
 
 /* File name end */
 
-/* Path */
+/* Directory */
 
 Helper.prototype.getStyleDirectory = function () {
     return sysPath.join(projectDirectory, this.options.deploy.stylesDir);
@@ -30,6 +30,18 @@ Helper.prototype.getStyleDirectory = function () {
 Helper.prototype.getScriptDirectory = function () {
     return sysPath.join(projectDirectory, this.options.deploy.scriptsDir);
 };
+
+Helper.prototype.viewsDirectory = function () {
+    return sysPath.join(projectDirectory, this.options.views.dir);
+};
+
+Helper.prototype.partialsDirectory = function () {
+    return sysPath.join(projectDirectory, this.options.views.partials);
+};
+
+/* Directory end */
+
+/* Path */
 
 Helper.prototype.getPageStylePath = function (page) {
     let fileName = this.getPageStyleName(page);
@@ -41,10 +53,15 @@ Helper.prototype.getPageScriptPath = function (page) {
     return sysPath.join(projectDirectory, this.options.deploy.scriptsDir, fileName);
 };
 
+Helper.prototype.faviconPath = function () {
+    return sysPath.join(projectDirectory, this.options.deploy.favicon);
+};
+
 /* Path end */
 
 /* Url */
 
+//TODO
 Helper.prototype.staticUrls = function () {
     let array = [];
     array.push("/" + this.options.deploy.fontsDir);
@@ -68,6 +85,4 @@ Helper.prototype.pageScriptUrl = function (page) {
 
 /* Url end */
 
-module.exports = function (options) {
-    return new Helper(options);
-};
+module.exports = Helper;
