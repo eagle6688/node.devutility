@@ -61,7 +61,6 @@ Helper.prototype.faviconPath = function () {
 
 /* Url */
 
-//TODO
 Helper.prototype.staticUrls = function () {
     let array = [];
     array.push("/" + this.options.deploy.fontsDir);

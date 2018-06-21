@@ -6,7 +6,8 @@
     "license": "ISC",
     "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.test",
     "scripts": {
-        "test": "node ./path/join-test"
+        "test:resolve": "node ./path/resolve.js",
+        "test": "node ./path/join.js"
     },
     "repository": {
         "type": "git",
