@@ -2,13 +2,9 @@
  * Router for express.
  */
 
-const config = require("../config");
 const handler = require("./handler");
-const forwarder = require("utilities-forwarder")(config.getForwardOptions());
 
-let router = {};
-
-router.register = function (app) {
+module.exports = function (app, helper, config) {
     app.use(handler.login);
 
     app.get('/', function (request, response, next) {
@@ -47,5 +43,3 @@ router.register = function (app) {
         res.render('error', { title: 'Not Found', layout: false });
     });
 };
-
-module.exports = router;

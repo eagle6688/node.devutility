@@ -6,13 +6,8 @@ const httpUtilities = require("utilities-http");
 const collectionUtilities = require("utilities-collection");
 
 let handler = {};
-let staticUrl = config.staticUrl();
 
 handler.login = async function (request, response, next) {
-    if (request.path.indexOf(staticUrl) == 0) {
-        return;
-    }
-
     if (collectionUtilities.valueContainElement(config.url.whiteUrls, request.url)) {
         return next();
     }
