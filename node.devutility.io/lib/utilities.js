@@ -138,4 +138,25 @@ ioUtilities.getLastPath = function (path) {
     return array[array.length - 1];
 };
 
+/**
+ * Synchronously copy files from source to dest.
+ * @param {*} source 
+ * @param {*} dest 
+ */
+ioUtilities.copyFiles = function (source, dest) {
+    let sourceDir = sysPath.resolve(source);
+    let destDir = sysPath.resolve(dest);
+    let files = ioUtilities.getAllFiles(sourceDir);
+
+    for (let index in files) {
+        let file = files[index];
+        let tailPath = file.substr(sourceDir.length);
+        let destPath = sysPath.join(destDir, tailPath);
+
+        let fileInfo = sysPath.parse(destPath);
+        ioUtilities.createDirectory(fileInfo.dir);
+        fs.copyFileSync(file, destPath);
+    }
+};
+
 module.exports = ioUtilities;

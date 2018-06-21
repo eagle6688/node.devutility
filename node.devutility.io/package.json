@@ -1,12 +1,13 @@
 {
     "name": "utilities-io",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Developing utilities about io.",
     "author": "Aldwin Su",
     "license": "ISC",
     "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.io",
     "scripts": {
-        "test:cd": "node ./test/createDirectory"
+        "test:cd": "node ./test/createDirectory",
+        "test:cf": "node ./test/copyFiles"
     },
     "repository": {
         "type": "git",
