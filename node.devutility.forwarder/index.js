@@ -2,5 +2,8 @@
  * Export modules.
  */
 
-const utilities = require("./lib/helper");
-module.exports = utilities;
+const Helper = require("./lib/helper");
+
+module.exports = function (options) {
+    return new Helper(options);
+};

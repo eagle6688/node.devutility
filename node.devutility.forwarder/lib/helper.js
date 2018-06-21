@@ -9,15 +9,20 @@
 const extend = require("extend");
 const httpProxy = require("http-proxy");
 const querystring = require("querystring");
+const defaults = require("./defaults");
 
-const config = require("./config");
+function Helper(options, debug) {
+    this.options = extend(true, {}, defaults, options);
+    this.debug = false;
 
-function Forwarder(options) {
-    this.options = extend({}, config, options);
+    if (debug) {
+        this.debug = debug;
+    }
+
     this.init();
 }
 
-Forwarder.prototype.init = function () {
+Helper.prototype.init = function () {
     /**
      * Create a proxy server.
      */
@@ -75,7 +80,7 @@ Forwarder.prototype.init = function () {
     this.proxy = proxy;
 };
 
-Forwarder.prototype.request = function (request, response) {
+Helper.prototype.request = function (request, response) {
     delete request.headers.host;
     this.proxy.web(request, response);
 };
@@ -92,6 +97,4 @@ var forwardData = function (proxyReq, data) {
     proxyReq.write(data);
 };
 
-module.exports = function (options) {
-    return new Forwarder(options);
-};
+module.exports = Helper;
