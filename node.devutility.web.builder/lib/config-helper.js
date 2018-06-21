@@ -12,11 +12,11 @@ function Helper(options) {
 /* File name */
 
 Helper.prototype.getPageStyleName = function (page) {
-    return this.options.pages.styleNameFormat.replace(/{page}/, page);
+    return this.options.views.styleNameFormat.replace(/{page}/, page);
 };
 
 Helper.prototype.getPageScriptName = function (page) {
-    return this.options.pages.scriptNameFormat.replace(/{page}/, page);
+    return this.options.views.scriptNameFormat.replace(/{page}/, page);
 };
 
 /* File name end */

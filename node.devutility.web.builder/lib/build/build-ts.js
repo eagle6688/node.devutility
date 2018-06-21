@@ -15,7 +15,7 @@ function compileTsFile(tsConfig, tsFile) {
 
 module.exports = function (configHelper) {
     let config = configHelper.options;
-    let pagePaths = ioUtilities.getDirectories(config.pages.dir);
+    let pagePaths = ioUtilities.getDirectories(config.views.pages);
     let scriptDirectory = configHelper.getScriptDirectory();
     ioUtilities.createDirectory(scriptDirectory);
 
@@ -23,7 +23,7 @@ module.exports = function (configHelper) {
         let pagePath = pagePaths[index];
         let pageName = ioUtilities.getLastPath(pagePath);
         let scriptFilePath = configHelper.getPageScriptPath(pageName);
-        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.pages.scriptNameRegex);
+        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.views.scriptNameRegex);
 
         if (!scriptFiles || scriptFiles.length == 0) {
             continue;
