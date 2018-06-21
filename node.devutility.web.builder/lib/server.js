@@ -33,10 +33,10 @@ Server.prototype.init = function () {
         config.server.router(this.app);
     }
 
-    this.server = http.createServer(application);
+    this.server = http.createServer(this.app);
 
     this.server.on('listening', function () {
-        console.log('Listening to port', this.port);
+        console.log('Listening to port', config.port);
     });
 
     this.server.on('error', function (error) {

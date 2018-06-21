@@ -19,9 +19,8 @@ const build_sass = require("./build/build-sass");
 const build_ts = require("./build/build-ts");
 
 function Helper(options) {
-    this.options = extend({}, config, options);
+    this.options = extend(true, {}, config, options);
     this.configHelper = new ConfigHelper(this.options);
-    this.server = new Server(this.configHelper);
 }
 
 Helper.prototype.build_fonts = function () {
@@ -49,7 +48,7 @@ Helper.prototype.configer = function () {
 };
 
 Helper.prototype.start = function () {
-    this.server.start();
+    new Server(this.configHelper).start();
 };
 
 module.exports = Helper;

@@ -14,7 +14,8 @@
         "test:bi": "node ./test/build-images.js",
         "test:bsl": "node ./test/build-script-lib.js",
         "test:bss": "node ./test/build-sass.js",
-        "test:bt": "node ./test/build-ts.js"
+        "test:bt": "node ./test/build-ts.js",
+        "test:start": "node ./test/bootstrap.js"
     },
     "dependencies": {
         "extend": "^3.0.1",
