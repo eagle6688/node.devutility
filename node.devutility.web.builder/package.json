@@ -26,6 +26,7 @@
         "cookie-parser": "^1.4.3",
         "utilities-io": "^1.0.2",
         "utilities-style": "1.0.0",
-        "utilities-script": "^1.0.0"
+        "utilities-script": "^1.0.0",
+        "utilities-collection": "^1.0.0"
     }
 }

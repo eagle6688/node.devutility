@@ -29,7 +29,7 @@ let config = {
     },
     server: {
         express: null,
-        router: function (express) { }
+        router: function (express, configer) { }
     },
     tsConfig: {
         "compilerOptions": {

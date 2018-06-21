@@ -82,6 +82,14 @@ Helper.prototype.pageScriptUrl = function (page) {
     return "/" + this.options.deploy.scriptsDir + "/" + this.getPageScriptName(page);
 };
 
+Helper.prototype.getPageData = function (page) {
+    return {
+        page: page,
+        styles: [this.pageStyleUrl(page)],
+        scripts: [this.scriptLibUrl(), this.pageScriptUrl(page)]
+    };
+};
+
 /* Url end */
 
 module.exports = Helper;

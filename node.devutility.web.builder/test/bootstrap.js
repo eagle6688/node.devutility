@@ -13,19 +13,20 @@ let config = {
         ]
     },
     server: {
-        router: function (app) {
+        router: function (app, helper) {
             app.get('/', function (request, response, next) {
+                console.log(request.url);
                 response.redirect('/index');
             });
 
             app.get('/login', function (request, response, next) {
-                let data = {};
+                let data = helper.getPageData("login");
                 data.requireAuth = false;
                 response.render("pages/login/index", data);
             });
 
             app.get('/index', function (request, response, next) {
-                let data = {};
+                let data = helper.getPageData("index");
                 data.requireAuth = true;
                 response.render("pages/index/index", data);
             });

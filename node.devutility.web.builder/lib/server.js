@@ -11,6 +11,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 
+const collectionUtilities = require("utilities-collection");
+
 let projectDirectory = process.cwd();
 
 function Server(configer) {
@@ -30,7 +32,7 @@ Server.prototype.init = function () {
     }
 
     if (config.server.router) {
-        config.server.router(this.app);
+        config.server.router(this.app, this.configer);
     }
 
     this.server = http.createServer(this.app);
@@ -77,6 +79,14 @@ Server.prototype.register_static = function () {
         let staticDir = sysPath.join(projectDirectory, staticUrl);
         this.app.use(staticUrl, express.static(staticDir));
     }
+
+    this.app.use(function (request, response, next) {
+        if (collectionUtilities.valueContainElement(staticUrls, request.url)) {
+            return;
+        }
+
+        next();
+    });
 };
 
 Server.prototype.start = function () {
