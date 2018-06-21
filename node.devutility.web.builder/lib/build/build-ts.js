@@ -9,10 +9,10 @@ const scriptUtilities = require("utilities-script");
 
 const ConfigHelper = require("../config-helper");
 
-function compileTsFile(tsFile) {
+function compileTsFile(tsConfig, tsFile) {
     let fileName = ioUtilities.getLastPath(tsFile);
     let comment = scriptUtilities.getComment(fileName);
-    let script = scriptUtilities.compileTsFile(tsFile, config.tsConfig).outputText;
+    let script = scriptUtilities.compileTsFile(tsFile, tsConfig).outputText;
     return comment + script;
 }
 
@@ -35,7 +35,7 @@ module.exports = function (config) {
         let array = [];
 
         scriptFiles.forEach(scriptFile => {
-            array.push(compileTsFile(scriptFile));
+            array.push(compileTsFile(config.tsConfig, scriptFile));
         });
 
         fs.writeFileSync(scriptFilePath, array.join('\n'));
