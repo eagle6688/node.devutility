@@ -30,16 +30,6 @@ let defaults = {
     server: {
         express: null,
         router: function(express, configer) { }
-    },
-    tsConfig: {
-        "compilerOptions": {
-            "module": "commonjs",
-            "target": "es5",
-            "allowJs": true
-        },
-        "exclude": [
-            "node_modules"
-        ]
     }
 };
 

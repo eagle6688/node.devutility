@@ -12,6 +12,16 @@ let config = {
             'resources/scripts/vue.min.js'
         ]
     },
+    tsConfig: {
+        "compilerOptions": {
+            "module": "commonjs",
+            "target": "es5",
+            "allowJs": true
+        },
+        "exclude": [
+            "node_modules"
+        ]
+    },
     server: {
         router: function (app, helper) {
             app.get('/', function (request, response, next) {
