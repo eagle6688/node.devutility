@@ -6,6 +6,8 @@
  * @Copyright: 2018 Aldwin. All rights reserved.
  */
 
-const WebBuilder = require('utilities-web-builder');
+const webBuilder = require('utilities-web-builder');
+const forwarder = require('utilities-forwarder');
 const config = require('./config');
-WebBuilder(config.buildConfig).start();
+
+webBuilder(config.buildConfig).start();

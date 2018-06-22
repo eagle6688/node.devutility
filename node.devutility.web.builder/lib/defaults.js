@@ -1,8 +1,8 @@
 /**
- * Application configuration file example.
+ * Default configuration file.
  */
 
-let config = {
+let defaults = {
     port: 8000,
     resources: {
         fontsDir: "resources/fonts",
@@ -29,7 +29,7 @@ let config = {
     },
     server: {
         express: null,
-        router: function (express, configer) { }
+        router: function(express, configer) { }
     },
     tsConfig: {
         "compilerOptions": {
@@ -43,4 +43,4 @@ let config = {
     }
 };
 
-module.exports = config;
+module.exports = defaults;

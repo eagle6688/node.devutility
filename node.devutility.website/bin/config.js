@@ -3,7 +3,6 @@
  */
 
 const httpUtilities = require("utilities-http");
-const Forwarder = require("utilities-forwarder");
 const router = require("./server/router");
 
 let config = {
@@ -50,5 +49,4 @@ config.getRequestOptions_baseData = function (request) {
     return httpUtilities.requestOptions(config.forward.host, config.forward.port, config.url.apis.baseDataUrl, request.headers.cookie);
 };
 
-config.forwarder = new Forwarder(config.getForwardOptions());
 module.exports = config;

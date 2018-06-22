@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 
 const collectionUtilities = require("utilities-collection");
-
 let projectDirectory = process.cwd();
 
 function Server(configer) {

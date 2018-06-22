@@ -7,7 +7,7 @@
  */
 
 const extend = require("extend");
-const config = require("./config");
+const defaults = require("./defaults");
 
 const ConfigHelper = require("./config-helper");
 const Server = require("./server");
@@ -19,7 +19,7 @@ const build_sass = require("./build/build-sass");
 const build_ts = require("./build/build-ts");
 
 function Helper(options) {
-    this.options = extend(true, {}, config, options);
+    this.options = extend(true, {}, defaults, options);
     this.configHelper = new ConfigHelper(this.options);
 }
 
