@@ -24,6 +24,6 @@
         "utilities-collection": "^1.0.0",
         "utilities-http": "^1.0.0",
         "utilities-forwarder": "^1.0.3",
-        "utilities-web-builder": "^1.0.3"
+        "utilities-web-builder": "^1.0.4"
     }
 }
