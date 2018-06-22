@@ -2,30 +2,13 @@
  * Router for express.
  */
 
-const httpUtilities = require("utilities-http");
-const collectionUtilities = require("utilities-collection");
-
-const Forwarder = require('utilities-forwarder');
+const Forwarder = require("utilities-forwarder");
 const handler = require("./handler");
+const config = require("../config");
 
-module.exports = function (app, helper, config) {
+module.exports = function (app, helper) {
     let forwarder = Forwarder(config.getForwardOptions());
-
-    app.use(async function (request, response, next) {
-        if (collectionUtilities.valueContainElement(config.url.whiteUrls, request.url)) {
-            return next();
-        }
-
-        let options = getRequestOptions_baseData(request, config);
-        let result = await httpUtilities.getPromise(options);
-
-        if (!result || result.statusCode == 0 || result.statusCode == 401) {
-            return response.redirect(config.url.login);
-        }
-
-        request.data = result;
-        next();
-    });
+    app.use(handler.login);
 
     app.get('/', function (request, response, next) {
         response.redirect('/index');
@@ -63,7 +46,3 @@ module.exports = function (app, helper, config) {
         res.render('error', { title: 'Not Found', layout: false });
     });
 };
-
-function getRequestOptions_baseData(request, options) {
-    return httpUtilities.requestOptions(options.forward.host, options.forward.port, options.url.apis.baseDataUrl, request.headers.cookie);
-}

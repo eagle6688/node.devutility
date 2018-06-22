@@ -2,6 +2,8 @@
  * Application configuration file.
  */
 
+const httpUtilities = require("utilities-http");
+
 let config = {
     forward: {
         host: "127.0.0.1",
@@ -26,8 +28,7 @@ let config = {
                 'resources/scripts/bootstrap.min.js',
                 'resources/scripts/vue.min.js'
             ]
-        },
-        server: {}
+        }
     }
 };
 
@@ -36,6 +37,10 @@ config.getForwardOptions = function () {
         target: "http://" + config.forward.host + ":" + config.forward.port,
         changeOrigin: true
     };
+};
+
+config.getRequestOptions_baseData = function (request) {
+    return httpUtilities.requestOptions(config.forward.host, config.forward.port, config.url.apis.baseDataUrl, request.headers.cookie);
 };
 
 module.exports = config;

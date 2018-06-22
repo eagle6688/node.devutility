@@ -2,7 +2,27 @@
  * Server business handler.
  */
 
+const httpUtilities = require("utilities-http");
+const collectionUtilities = require("utilities-collection");
+const config = require("../config");
+
 let handler = {};
+
+handler.login = async function (request, response, next) {
+    if (collectionUtilities.valueContainElement(config.url.whiteUrls, request.url)) {
+        return next();
+    }
+
+    let options = config.getRequestOptions_baseData(request);
+    let result = await httpUtilities.getPromise(options);
+
+    if (!result || result.statusCode == 0 || result.statusCode == 401) {
+        return response.redirect(config.url.login);
+    }
+
+    request.data = result;
+    next();
+};
 
 handler.render = function (context, data) {
     let request = context[0];

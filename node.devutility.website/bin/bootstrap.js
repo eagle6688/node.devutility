@@ -7,13 +7,6 @@
  */
 
 const webBuilder = require('utilities-web-builder');
-const config = require('./config');
+const builderConfig = require('./config').builderConfig;
 const router = require('./server/router');
-
-let builderConfig = config.builderConfig;
-
-builderConfig.server.router = function (app, helper) {
-    router(app, helper, config);
-};
-
-webBuilder(builderConfig).start();
+webBuilder(builderConfig, router).start();
