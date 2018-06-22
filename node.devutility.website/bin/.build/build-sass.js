@@ -1,2 +1,2 @@
 const config = require("../config");
-require('utilities-web-builder')(config.buildConfig).build_sass();
+require('utilities-web-builder')(config.builderConfig).build_sass();

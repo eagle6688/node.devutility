@@ -32,33 +32,31 @@ module.exports = function (app, helper, config) {
     });
 
     app.get('/login', function (request, response, next) {
-        let data = helper.getPageData();
+        let data = helper.getPageData("login");
         data.title = "Login";
         data.requireAuth = false;
         handler.render(arguments, data);
     });
 
     app.get('/index', function (request, response, next) {
-        let data = helper.getPageData();
+        let data = helper.getPageData("index");
         data.title = "Index";
         data.requireAuth = true;
         handler.render(arguments, data);
     });
 
-    // Catch api and 404 request.
     app.use(function (request, response, next) {
         if (request.url.indexOf('/api') == 0) {
             request.url = request.url.replace(/\/api\//i, '/');
             forwarder.request(request, response);
         }
         else {
-            var error = new Error('Not Found');
+            var error = new Error("Not found request url: " + request.url);
             error.status = 404;
             next(error);
         }
     });
 
-    // Error handler
     app.use(function (err, req, res, next) {
         console.log("express error: ", err);
         res.status(err.status || 500);
