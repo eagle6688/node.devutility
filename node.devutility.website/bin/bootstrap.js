@@ -7,7 +7,12 @@
  */
 
 const webBuilder = require('utilities-web-builder');
-const forwarder = require('utilities-forwarder');
-const config = require('./config');
 
-webBuilder(config.buildConfig).start();
+const config = require('./config');
+const router = require('./server/router');
+
+config.builderConfig.server.router = function (app, helper) {
+    router(app, helper, config);
+};
+
+webBuilder(config.builderConfig).start();
