@@ -1,5 +1,5 @@
 /**
- * All modules.
+ * Export modules.
  */
-const collectionUtilities = require("./lib/collectionUtilities");
-module.exports = collectionUtilities;
+
+module.exports = require("./lib/utilities");

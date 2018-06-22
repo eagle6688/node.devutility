@@ -6,14 +6,14 @@
  * @Copyright: 2018 Aldwin Su. All rights reserved.
  */
 
-let collectionUtilities = {};
+let utilities = {};
 
 /**
  * Check whether value contains any element belong to array.
  * @param {*} array 
  * @param {*} value 
  */
-collectionUtilities.valueContainElement = function (array, value) {
+utilities.valueContainElement = function (array, value) {
     for (var index in array) {
         let element = array[index];
 
@@ -25,4 +25,4 @@ collectionUtilities.valueContainElement = function (array, value) {
     return false;
 };
 
-module.exports = collectionUtilities;
+module.exports = utilities;
