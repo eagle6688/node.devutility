@@ -1,11 +1,8 @@
 module.exports = {
     tsConfig: {
         "compilerOptions": {
-            "module": "commonjs",
-            "noImplicitAny": true,
-            "removeComments": true,
-            "preserveConstEnums": true,
-            "sourceMap": true
+            "sourceMap": true,
+            "allowJs": true
         }
     }
 };
