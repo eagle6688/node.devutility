@@ -1,6 +1,6 @@
 {
     "name": "utilities-forwarder",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Developing utilities about request forwarder.",
     "author": "Aldwin Su",
     "license": "ISC",
