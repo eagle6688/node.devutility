@@ -13,16 +13,16 @@ module.exports = {
         path: path.resolve('dist')
     },
     resolve: {
-        extensions: [".webpack.js", ".web.js", ".ts", ".js"]
+        extensions: [".ts", ".js"]
     },
     module: {
         rules: [
             {
                 test: /\.ts(x?)$/,
-                loader: 'ts-loader?' + JSON.stringify({
+                loader: 'ts-loader',
+                options: {
                     transpileOnly: true
-                }),
-                exclude: /node-modules/
+                }
             }
         ]
     }
