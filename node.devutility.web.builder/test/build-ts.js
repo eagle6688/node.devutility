@@ -1,2 +1,7 @@
+
 const builder = require("../index");
-builder(null).build_ts();
+const config = require("./config");
+builder(config).build_ts();
+
+const webpack = require('webpack');
+webpack(require("../webpack.config"));

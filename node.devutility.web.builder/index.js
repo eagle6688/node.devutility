@@ -4,6 +4,10 @@
 const Builder = require("./lib/helper");
 
 module.exports = function (options, router) {
+    if (!options) {
+        throw new Error("Need parameter \"options\"!");
+    }
+
     if (!options.server) {
         options.server = {};
     }
