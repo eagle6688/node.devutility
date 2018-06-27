@@ -20,6 +20,7 @@ let defaults = {
         scriptNameFormat: "{page}.min.js"
     },
     deploy: {
+        host: "/",
         favicon: "dist/images/favicon.ico",
         fontsDir: "dist/fonts",
         imagesDir: 'dist/images',
@@ -27,9 +28,28 @@ let defaults = {
         scriptsDir: 'dist/scripts',
         scriptsLibName: 'libs.bundle.js'
     },
+    webpack: {
+        context: process.cwd(),
+        entry: {},
+        output: {},
+        resolve: {
+            extensions: [".ts", ".js"]
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.ts(x?)$/,
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true
+                    }
+                }
+            ]
+        }
+    },
     server: {
         express: null,
-        router: function(express, configer) { }
+        router: function (express, configer) { }
     }
 };
 

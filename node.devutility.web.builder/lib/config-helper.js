@@ -2,8 +2,9 @@
  * Application configuration file helper.
  */
 
-let sysPath = require("path");
-let projectDirectory = process.cwd();
+const sysPath = require("path");
+const ioUtilities = require("utilities-io");
+const projectDirectory = process.cwd();
 
 function Helper(options) {
     this.options = options;
@@ -63,23 +64,24 @@ Helper.prototype.faviconPath = function () {
 
 Helper.prototype.staticUrls = function () {
     let array = [];
-    array.push("/" + this.options.deploy.fontsDir);
-    array.push("/" + this.options.deploy.imagesDir);
-    array.push("/" + this.options.deploy.stylesDir);
-    array.push("/" + this.options.deploy.scriptsDir);
+    let host = this.options.deploy.host;
+    array.push(host + this.options.deploy.fontsDir);
+    array.push(host + this.options.deploy.imagesDir);
+    array.push(host + this.options.deploy.stylesDir);
+    array.push(host + this.options.deploy.scriptsDir);
     return array;
 };
 
 Helper.prototype.pageStyleUrl = function (page) {
-    return "/" + this.options.deploy.stylesDir + "/" + this.getPageStyleName(page);
+    return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.getPageStyleName(page);
 };
 
 Helper.prototype.scriptLibUrl = function () {
-    return "/" + this.options.deploy.scriptsDir + "/" + this.options.deploy.scriptsLibName;
+    return this.options.deploy.host + this.options.deploy.scriptsDir + "/" + this.options.deploy.scriptsLibName;
 };
 
 Helper.prototype.pageScriptUrl = function (page) {
-    return "/" + this.options.deploy.scriptsDir + "/" + this.getPageScriptName(page);
+    return this.options.deploy.host + this.options.deploy.scriptsDir + "/" + this.getPageScriptName(page);
 };
 
 Helper.prototype.getPageData = function (page) {
@@ -91,5 +93,40 @@ Helper.prototype.getPageData = function (page) {
 };
 
 /* Url end */
+
+/* Webpack */
+
+Helper.prototype.getEntry = function () {
+    let result = {};
+    let config = this.options;
+    let pagePaths = ioUtilities.getDirectories(config.views.pages);
+
+    for (let index in pagePaths) {
+        let pagePath = pagePaths[index];
+        let pageName = ioUtilities.getLastPath(pagePath);
+        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.views.scriptNameRegex);
+
+        if (!scriptFiles || scriptFiles.length == 0) {
+            continue;
+        }
+
+        if (scriptFiles.length > 1) {
+            throw new Error("One page should only has one main typescript file which match the regex " + config.views.scriptNameRegex);
+        }
+
+        result[pageName] = scriptFiles[0];
+    }
+
+    return result;
+};
+
+Helper.prototype.getOutput = function () {
+    let result = {};
+    result.filename = this.options.views.scriptNameFormat.replace(/{page}/, '[name]');
+    result.path = sysPath.resolve(this.options.deploy.scriptsDir);
+    return result;
+};
+
+/* Webpack end */
 
 module.exports = Helper;
