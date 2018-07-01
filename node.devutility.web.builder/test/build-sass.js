@@ -1,4 +1,5 @@
 const builder = require("../index");
+
 builder({
     resources: {
         styles: [

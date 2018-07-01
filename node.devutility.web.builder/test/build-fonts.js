@@ -1,2 +1,3 @@
 const builder = require("../index");
-builder(null).build_fonts();
+const config = require("./config");
+builder(config).build_fonts();
