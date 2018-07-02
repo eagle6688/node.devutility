@@ -1,4 +1,4 @@
-const utilities = require("../lib/utilities");
+const utilities = require("../index");
 utilities.createDirectory("test");
 utilities.createDirectory("asd");
 //utilities.createDirectory("/qwe/zxc");

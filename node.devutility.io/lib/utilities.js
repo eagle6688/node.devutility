@@ -9,13 +9,13 @@
 const fs = require('fs');
 const sysPath = require("path");
 
-let ioUtilities = {};
+let utilities = {};
 
 /**
  * Create a directory recursively.
  * @param {*} directory 
  */
-ioUtilities.createDirectory = function (directory) {
+utilities.createDirectory = function (directory) {
     if (!directory) {
         throw new Error("Invalid directory parameter!");
     }
@@ -43,7 +43,7 @@ ioUtilities.createDirectory = function (directory) {
  * @param {*} path 
  * @param {*} regex 
  */
-ioUtilities.getAllFiles = function (path, regex) {
+utilities.getAllFiles = function (path, regex) {
     let files = [];
     path = sysPath.resolve(path);
 
@@ -81,7 +81,7 @@ ioUtilities.getAllFiles = function (path, regex) {
  * @param {*} path 
  * @param {*} regex 
  */
-ioUtilities.getFiles = function (path, regex) {
+utilities.getFiles = function (path, regex) {
     let files = [];
     path = sysPath.resolve(path);
     let array = fs.readdirSync(path);
@@ -112,7 +112,7 @@ ioUtilities.getFiles = function (path, regex) {
  * Return all directories under the specified path.
  * @param {*} path 
  */
-ioUtilities.getDirectories = function (path) {
+utilities.getDirectories = function (path) {
     let directories = [];
     path = sysPath.resolve(path);
     let array = fs.readdirSync(path);
@@ -133,7 +133,7 @@ ioUtilities.getDirectories = function (path) {
  * Get the last path.
  * @param {*} path 
  */
-ioUtilities.getLastPath = function (path) {
+utilities.getLastPath = function (path) {
     let array = path.split(sysPath.sep);
     return array[array.length - 1];
 };
@@ -143,10 +143,10 @@ ioUtilities.getLastPath = function (path) {
  * @param {*} source 
  * @param {*} dest 
  */
-ioUtilities.copyFiles = function (source, dest) {
+utilities.copyFiles = function (source, dest) {
     let sourceDir = sysPath.resolve(source);
     let destDir = sysPath.resolve(dest);
-    let files = ioUtilities.getAllFiles(sourceDir);
+    let files = utilities.getAllFiles(sourceDir);
 
     for (let index in files) {
         let file = files[index];
@@ -154,9 +154,19 @@ ioUtilities.copyFiles = function (source, dest) {
         let destPath = sysPath.join(destDir, tailPath);
 
         let fileInfo = sysPath.parse(destPath);
-        ioUtilities.createDirectory(fileInfo.dir);
+        utilities.createDirectory(fileInfo.dir);
         fs.copyFileSync(file, destPath);
     }
 };
 
-module.exports = ioUtilities;
+/**
+ * Read Json object from json file.
+ * @param {*} file 
+ */
+utilities.readJson = function (file) {
+    file = sysPath.resolve(file);
+    let content = fs.readFileSync(file);
+    return JSON.parse(content);
+};
+
+module.exports = utilities;
