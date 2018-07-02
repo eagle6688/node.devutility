@@ -13,11 +13,11 @@ function Helper(options) {
 /* File name */
 
 Helper.prototype.getPageStyleName = function (page) {
-    return this.options.views.styleNameFormat.replace(/{page}/, page);
+    return this.options.app.styleNameFormat.replace(/{page}/, page);
 };
 
 Helper.prototype.getPageScriptName = function (page) {
-    return this.options.views.scriptNameFormat.replace(/{page}/, page);
+    return this.options.app.scriptNameFormat.replace(/{page}/, page);
 };
 
 /* File name end */
@@ -33,11 +33,11 @@ Helper.prototype.getScriptDirectory = function () {
 };
 
 Helper.prototype.viewsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.views.dir);
+    return sysPath.join(projectDirectory, this.options.app.dir);
 };
 
 Helper.prototype.partialsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.views.partials);
+    return sysPath.join(projectDirectory, this.options.app.partials);
 };
 
 /* Directory end */
@@ -99,19 +99,19 @@ Helper.prototype.getPageData = function (page) {
 Helper.prototype.getEntry = function () {
     let result = {};
     let config = this.options;
-    let pagePaths = ioUtilities.getDirectories(config.views.pages);
+    let pagePaths = ioUtilities.getDirectories(config.app.pages);
 
     for (let index in pagePaths) {
         let pagePath = pagePaths[index];
         let pageName = ioUtilities.getLastPath(pagePath);
-        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.views.scriptNameRegex);
+        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.app.scriptNameRegex);
 
         if (!scriptFiles || scriptFiles.length == 0) {
             continue;
         }
 
         if (scriptFiles.length > 1) {
-            throw new Error("One page should only has one main typescript file which match the regex " + config.views.scriptNameRegex);
+            throw new Error("One page should only has one main typescript file which match the regex " + config.app.scriptNameRegex);
         }
 
         result[pageName] = scriptFiles[0];
@@ -122,7 +122,7 @@ Helper.prototype.getEntry = function () {
 
 Helper.prototype.getOutput = function () {
     let result = {};
-    result.filename = this.options.views.scriptNameFormat.replace(/{page}/, '[name]');
+    result.filename = this.options.app.scriptNameFormat.replace(/{page}/, '[name]');
     result.path = sysPath.resolve(this.options.deploy.scriptsDir);
     return result;
 };

@@ -10,10 +10,10 @@ let defaults = {
         styles: [],
         scripts: []
     },
-    views: {
-        dir: "views",
-        pages: "views/pages",
-        partials: 'views/partials',
+    app: {
+        dir: "app",
+        pages: "app/pages",
+        partials: 'app/partials',
         styleNameRegex: /.+(index.scss|index.sass)$/,
         styleNameFormat: "{page}.min.css",
         scriptNameRegex: /.+index.ts$/,

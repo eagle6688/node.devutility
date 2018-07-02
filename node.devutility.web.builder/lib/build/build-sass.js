@@ -27,7 +27,7 @@ function compileSassFile(sassFile) {
 module.exports = function (configHelper) {
     let config = configHelper.options;
     let baseStylesContent = getBaseStyles(config.resources.styles);
-    let pagePaths = ioUtilities.getDirectories(config.views.pages);
+    let pagePaths = ioUtilities.getDirectories(config.app.pages);
     let styleDirectory = configHelper.getStyleDirectory();
     ioUtilities.createDirectory(styleDirectory);
 
@@ -35,7 +35,7 @@ module.exports = function (configHelper) {
         let pagePath = pagePaths[index];
         let pageName = ioUtilities.getLastPath(pagePath);
         let styleFilePath = configHelper.getPageStylePath(pageName);
-        let styleFiles = ioUtilities.getAllFiles(pagePath, config.views.styleNameRegex);
+        let styleFiles = ioUtilities.getAllFiles(pagePath, config.app.styleNameRegex);
 
         if (!styleFiles || styleFiles.length == 0) {
             continue;

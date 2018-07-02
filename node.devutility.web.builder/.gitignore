@@ -1,5 +1,5 @@
 /node_modules
 /resources
 /dist
-/views
+/app
 npm-debug.*
