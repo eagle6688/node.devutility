@@ -1,11 +1,23 @@
 /**
- * Open modules.
+ * utilities-web-builder
  */
+
+const fs = require("fs");
+const path = require("path");
 const Builder = require("./lib/helper");
+const configFileName = "webbuilder.config.js";
 
 module.exports = function (options, router) {
     if (!options) {
-        throw new Error("Need parameter \"options\"!");
+        let configFile = path.join(process.cwd(), configFileName);
+
+        if (fs.existsSync(configFile)) {
+            options = require(configFile);
+        }
+    }
+
+    if (!options) {
+        throw new Error("Need configuration!");
     }
 
     if (!options.server) {

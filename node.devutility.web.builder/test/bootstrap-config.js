@@ -1,5 +1,4 @@
-const config = require("./config");
-let builder = require("../index")(config);
+const builder = require("../index")();
 builder.build_fonts();
 builder.build_images();
 builder.build_scriptLib();

@@ -15,7 +15,8 @@
         "test:bsl": "node ./test/build-script-lib.js",
         "test:bss": "node ./test/build-sass.js",
         "test:bts": "node ./test/build-ts.js",
-        "test:start": "node ./test/bootstrap.js"
+        "test:start": "node ./test/bootstrap.js",
+        "test:bfc": "node ./test/bootstrap-config.js"
     },
     "dependencies": {
         "extend": "^3.0.1",
@@ -26,7 +27,7 @@
         "cookie-parser": "^1.4.3",
         "webpack": "^4.12.1",
         "ts-loader": "^4.4.1",
-        "utilities-io": "^1.0.2",
+        "utilities-io": "^1.0.3",
         "utilities-style": "1.0.0",
         "utilities-script": "^1.0.0",
         "utilities-collection": "^1.0.0"
