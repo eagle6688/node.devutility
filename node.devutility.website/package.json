@@ -14,7 +14,8 @@
         "build:sass": "node ./bin/.build/build-sass",
         "build:ts": "node ./bin/.build/build-ts",
         "build": "npm run build:resource && npm run build:lib && npm run build:sass && npm run build:ts",
-        "start": "node ./bin/bootstrap"
+        "start": "node ./bin/bootstrap",
+        "start:config": "node ./bin/bootstrap-config"
     },
     "dependencies": {
         "@types/bootstrap": "^4.1.0",
@@ -24,6 +25,6 @@
         "utilities-collection": "^1.0.0",
         "utilities-http": "^1.0.0",
         "utilities-forwarder": "^1.0.3",
-        "utilities-web-builder": "^1.0.6"
+        "utilities-web-builder": "^1.0.7"
     }
 }

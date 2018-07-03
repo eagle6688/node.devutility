@@ -6,7 +6,7 @@
  * @Copyright: 2018 Aldwin. All rights reserved.
  */
 
-const webBuilder = require('utilities-web-builder');
-const builderConfig = require('./config').builderConfig;
-const router = require('./server/router');
-webBuilder(builderConfig, router).start();
+const builderConfig = require("../webbuilder.config");
+const router = require("./server/router");
+const webBuilder = require("utilities-web-builder")(builderConfig, router);
+webBuilder.start();
