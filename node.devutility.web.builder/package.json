@@ -1,6 +1,6 @@
 {
     "name": "utilities-web-builder",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Developing utilities for website building.",
     "author": "Aldwin Su",
     "license": "ISC",
@@ -19,7 +19,8 @@
         "test:bss": "node ./test/build-sass.js",
         "test:bts": "node ./test/build-ts.js",
         "test:start": "node ./test/bootstrap.js",
-        "test:bfc": "node ./test/bootstrap-config.js"
+        "test:bfc": "node ./test/bootstrap-config.js",
+        "test:bin": "webbuilder -f build_fonts"
     },
     "dependencies": {
         "yargs": "^12.0.1",
