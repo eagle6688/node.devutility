@@ -1,6 +1,6 @@
 {
     "name": "utilities-web-builder",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Developing utilities for website building.",
     "author": "Aldwin Su",
     "license": "ISC",
@@ -8,6 +8,9 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/eagle6688/node.devutility.git"
+    },
+    "bin": {
+        "webbuilder": "./bin/index.js"
     },
     "scripts": {
         "test:bf": "node ./test/build-fonts.js",
@@ -19,6 +22,7 @@
         "test:bfc": "node ./test/bootstrap-config.js"
     },
     "dependencies": {
+        "yargs": "^12.0.1",
         "extend": "^3.0.1",
         "express": "^4.16.3",
         "hbs": "^4.0.1",
