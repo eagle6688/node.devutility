@@ -1,53 +1,48 @@
 /**
- * Compile sass files and integrate into one css file for each page.
+ * Compile sass files and integrate them into one css file for each page.
  */
 
 const fs = require('fs');
 const ioUtilities = require("utilities-io");
 const styleUtilities = require("utilities-style");
 
-function getBaseStyles(styles) {
-    let array = [];
+function compile(configHelper, styleFiles, pageName) {
+    let styleFileName = configHelper.getPageStyleName(pageName);
+    let styleFilePath = configHelper.getPageStylePath(pageName);
 
-    for (let index in styles) {
-        let content = styleUtilities.compress(styles[index]);
-        array.push(content);
-    }
+    styleFiles.forEach(styleFile => {
+        let style = '';
 
-    return array.join('\n');
-}
+        try {
+            style = styleUtilities.compile(styleFile).css;
+        }
+        catch (err) {
+            console.log('Compile file', styleFile, 'failed!');
+            return;
+        }
 
-function compileSassFile(sassFile) {
-    let sassFileName = ioUtilities.getLastPath(sassFile);
-    let comment = styleUtilities.getComment(sassFileName);
-    let result = styleUtilities.compile(sassFile);
-    return comment + result.css.toString();
+        fs.writeFileSync(styleFilePath, style);
+    });
+
+    console.log(styleFileName, 'was generated!');
 }
 
 module.exports = function (configHelper) {
-    let config = configHelper.options;
-    let baseStylesContent = getBaseStyles(config.resources.styles);
-    let pagePaths = ioUtilities.getDirectories(config.app.pages);
     let styleDirectory = configHelper.getStyleDirectory();
     ioUtilities.createDirectory(styleDirectory);
+
+    let config = configHelper.options;
+    let pagePaths = ioUtilities.getDirectories(config.app.pages);
 
     for (let index in pagePaths) {
         let pagePath = pagePaths[index];
         let pageName = ioUtilities.getLastPath(pagePath);
-        let styleFilePath = configHelper.getPageStylePath(pageName);
         let styleFiles = ioUtilities.getAllFiles(pagePath, config.app.styleNameRegex);
 
         if (!styleFiles || styleFiles.length == 0) {
             continue;
         }
 
-        let array = [];
-        array.push(baseStylesContent);
-
-        styleFiles.forEach(styleFile => {
-            array.push(compileSassFile(styleFile));
-        });
-
-        fs.writeFileSync(styleFilePath, array.join('\n'));
+        compile(configHelper, styleFiles, pageName);
     }
 };

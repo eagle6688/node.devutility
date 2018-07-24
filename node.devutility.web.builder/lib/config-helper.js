@@ -72,6 +72,10 @@ Helper.prototype.staticUrls = function () {
     return array;
 };
 
+Helper.prototype.styleLibUrl = function () {
+    return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.options.deploy.stylesLibName;
+};
+
 Helper.prototype.pageStyleUrl = function (page) {
     return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.getPageStyleName(page);
 };
@@ -87,7 +91,7 @@ Helper.prototype.pageScriptUrl = function (page) {
 Helper.prototype.getPageData = function (page) {
     return {
         page: page,
-        styles: [this.pageStyleUrl(page)],
+        styles: [this.styleLibUrl(), this.pageStyleUrl(page)],
         scripts: [this.scriptLibUrl(), this.pageScriptUrl(page)]
     };
 };

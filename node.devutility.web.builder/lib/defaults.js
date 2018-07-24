@@ -25,6 +25,7 @@ let defaults = {
         fontsDir: "dist/fonts",
         imagesDir: 'dist/images',
         stylesDir: 'dist/stylesheets',
+        stylesLibName: 'libs.bundle.css',
         scriptsDir: 'dist/scripts',
         scriptsLibName: 'libs.bundle.js'
     },
