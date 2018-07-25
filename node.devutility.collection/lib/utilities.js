@@ -25,4 +25,19 @@ utilities.valueContainElement = function (array, value) {
     return false;
 };
 
+/**
+ * Check whether array contains value or not.
+ * @param {*} array 
+ * @param {*} value 
+ */
+utilities.contain = function (array, value) {
+    for (let index in array) {
+        if (array[index] == value) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 module.exports = utilities;

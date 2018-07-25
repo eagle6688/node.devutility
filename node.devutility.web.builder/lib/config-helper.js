@@ -8,6 +8,12 @@ const projectDirectory = process.cwd();
 
 function Helper(options) {
     this.options = options;
+
+    this.resources = {
+        styleLib: null,
+        scriptLib: null,
+        pages: {}
+    };
 }
 
 /* File name */
@@ -89,6 +95,14 @@ Helper.prototype.pageScriptUrl = function (page) {
 };
 
 Helper.prototype.getPageData = function (page) {
+    let data = {
+        page: page,
+        styles: [],
+        scripts: []
+    };
+
+
+
     return {
         page: page,
         styles: [this.styleLibUrl(), this.pageStyleUrl(page)],
@@ -132,5 +146,19 @@ Helper.prototype.getOutput = function () {
 };
 
 /* Webpack end */
+
+/* Resource */
+
+Helper.prototype.saveResource_pageStyle = function (page) {
+    let url = this.pageStyleUrl(page);
+    this.resources.pageScripts.push(pageStyleUrl);
+};
+
+Helper.prototype.saveResource_pageScript = function (page) {
+    let url = this.pageScriptUrl(page);
+    this.resources.pageScripts.push(url);
+};
+
+/* Resource end */
 
 module.exports = Helper;

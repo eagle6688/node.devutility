@@ -1,6 +1,6 @@
 {
     "name": "utilities-web-builder",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Developing utilities for website building.",
     "author": "Aldwin Su",
     "license": "ISC",
@@ -35,6 +35,6 @@
         "utilities-io": "^1.0.3",
         "utilities-style": "1.0.0",
         "utilities-script": "^1.0.0",
-        "utilities-collection": "^1.0.0"
+        "utilities-collection": "^1.0.1"
     }
 }
