@@ -8,17 +8,18 @@ const config = require("../config");
 
 module.exports = function (app, helper) {
     let forwarder = Forwarder(config.getForwardOptions());
-    app.use(handler.login);
-
-    app.get('/', function (request, response, next) {
-        response.redirect('/index');
-    });
 
     app.get('/login', function (request, response, next) {
         let data = helper.getPageData("login");
         data.title = "Login";
         data.requireAuth = false;
         handler.render(arguments, data);
+    });
+
+    app.use(handler.login);
+
+    app.get('/', function (request, response, next) {
+        response.redirect('/index');
     });
 
     app.get('/index', function (request, response, next) {

@@ -10,6 +10,7 @@ const router = require("./server/router");
 const builder = require("utilities-web-builder")(null, router);
 builder.build_fonts();
 builder.build_images();
+builder.build_styleLib();
 builder.build_scriptLib();
 builder.build_sass();
 builder.build_ts();

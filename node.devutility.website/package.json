@@ -18,13 +18,13 @@
         "start:config": "node ./bin/bootstrap-config"
     },
     "dependencies": {
-        "@types/bootstrap": "^4.1.0",
-        "@types/jquery": "^3.3.2",
+        "@types/bootstrap": "^4.1.2",
+        "@types/jquery": "^3.3.5",
         "@types/vue": "^2.0.0",
-        "typescript": "^2.9.1",
-        "utilities-collection": "^1.0.0",
-        "utilities-http": "^1.0.0",
+        "typescript": "^2.9.2",
+        "utilities-collection": "^1.0.1",
         "utilities-forwarder": "^1.0.3",
-        "utilities-web-builder": "^1.0.9"
+        "utilities-http": "^1.0.0",
+        "utilities-web-builder": "^1.1.2"
     }
 }
