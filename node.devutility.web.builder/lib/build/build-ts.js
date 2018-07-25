@@ -17,8 +17,4 @@ module.exports = function (configHelper) {
             console.log(err);
         }
     });
-
-    for (let pageName in config.webpack.entry) {
-        configHelper.saveResource_pageScript(pageName);
-    }
 };

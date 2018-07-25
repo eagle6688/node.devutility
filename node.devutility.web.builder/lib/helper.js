@@ -12,40 +12,33 @@ const defaults = require("./defaults");
 const ConfigHelper = require("./classes/ConfigHelper");
 const Server = require("./server");
 
-const build_fonts = require("./build/build-fonts");
-const build_images = require("./build/build-images");
-const build_style_lib = require("./build/build-style-lib");
-const build_script_lib = require("./build/build-script-lib");
-const build_sass = require("./build/build-sass");
-const build_ts = require("./build/build-ts");
-
 function Helper(options) {
     this.options = extend(true, {}, defaults, options);
     this.configHelper = new ConfigHelper(this.options);
 }
 
 Helper.prototype.build_fonts = function () {
-    build_fonts(this.options);
+    require("./build/build-fonts")(this.options);
 };
 
 Helper.prototype.build_images = function () {
-    build_images(this.options);
+    require("./build/build-images")(this.options);
 };
 
 Helper.prototype.build_styleLib = function () {
-    build_style_lib(this.configHelper);
+    require("./build/build-style-lib")(this.configHelper);
 };
 
 Helper.prototype.build_scriptLib = function () {
-    build_script_lib(this.options);
+    require("./build/build-script-lib")(this.options);
 };
 
 Helper.prototype.build_sass = function () {
-    build_sass(this.configHelper);
+    require("./build/build-sass")(this.configHelper);
 };
 
 Helper.prototype.build_ts = function () {
-    build_ts(this.configHelper);
+    require("./build/build-ts")(this.configHelper);
 };
 
 Helper.prototype.configer = function () {

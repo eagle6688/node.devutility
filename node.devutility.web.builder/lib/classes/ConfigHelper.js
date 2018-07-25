@@ -9,8 +9,57 @@ const projectDirectory = process.cwd();
 
 function Helper(options) {
     this.options = options;
-    this.resources = [];
+    this.resources = {};
+    this.init();
 }
+
+Helper.prototype.init = function () {
+    let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
+
+    for (let index in pageDirs) {
+        let pageDir = pageDirs[index];
+        let pageName = ioUtilities.getLastPath(pageDir);
+        let pageResource = new PageResource(pageName);
+
+        if (this.hasStyleLibs()) {
+            let styleLibsUrl = this.styleLibUrl();
+            pageResource.saveStyle(styleLibsUrl);
+        }
+
+        if (this.hasScriptLibs()) {
+            let scriptLibsUrl = this.scriptLibUrl();
+            pageResource.saveScript(scriptLibsUrl);
+        }
+
+        let styleFiles = ioUtilities.getAllFiles(pageDir, this.options.app.styleNameRegex);
+
+        if (styleFiles && styleFiles.length > 0) {
+            if (styleFiles.length > 1) {
+                throw new Error("One page should only has one main sass file which match the regex " + this.options.app.styleNameRegex);
+            }
+
+            if (styleFiles.length == 1) {
+                let url = this.pageStyleUrl(pageName);
+                pageResource.saveStyle(url);
+            }
+        }
+
+        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.app.scriptNameRegex);
+
+        if (scriptFiles && scriptFiles.length > 0) {
+            if (scriptFiles.length > 1) {
+                throw new Error("One page should only has one main typescript file which match the regex " + this.options.app.scriptNameRegex);
+            }
+
+            if (scriptFiles.length == 1) {
+                let url = this.pageScriptUrl(pageName);
+                pageResource.saveScript(url);
+            }
+        }
+
+        this.resources[pageName] = pageResource;
+    }
+};
 
 /* File name */
 
@@ -97,21 +146,11 @@ Helper.prototype.getPageData = function (page) {
         scripts: []
     };
 
-    if (this.hasStyleLibs()) {
-        let styleLibsUrl = this.styleLibUrl();
-        data.styles.push(styleLibsUrl);
-    }
-
-    if (this.hasScriptLibs()) {
-        let scriptLibsUrl = this.scriptLibUrl();
-        data.scripts.push(scriptLibsUrl);
-    }
-
-    let pageResource = this.getPageResource(page);
+    let pageResource = this.resources[page];
 
     if (pageResource != null) {
-        data.styles.push(pageResource.styles);
-        data.scripts.push(pageResource.scripts);
+        data.styles = pageResource.styles;
+        data.scripts = pageResource.scripts;
     }
 
     return data;
@@ -123,20 +162,15 @@ Helper.prototype.getPageData = function (page) {
 
 Helper.prototype.getEntry = function () {
     let result = {};
-    let config = this.options;
-    let pagePaths = ioUtilities.getDirectories(config.app.pages);
+    let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
 
-    for (let index in pagePaths) {
-        let pagePath = pagePaths[index];
-        let pageName = ioUtilities.getLastPath(pagePath);
-        let scriptFiles = ioUtilities.getAllFiles(pagePath, config.app.scriptNameRegex);
+    for (let index in pageDirs) {
+        let pageDir = pageDirs[index];
+        let pageName = ioUtilities.getLastPath(pageDir);
+        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.app.scriptNameRegex);
 
         if (!scriptFiles || scriptFiles.length == 0) {
             continue;
-        }
-
-        if (scriptFiles.length > 1) {
-            throw new Error("One page should only has one main typescript file which match the regex " + config.app.scriptNameRegex);
         }
 
         result[pageName] = scriptFiles[0];
@@ -164,46 +198,6 @@ Helper.prototype.hasStyleLibs = function () {
 Helper.prototype.hasScriptLibs = function () {
     let scripts = this.options.resources.scripts;
     return scripts && scripts.length > 0;
-};
-
-Helper.prototype.getPageResource = function (page) {
-    for (let index in this.resources) {
-        let pageResource = this.resources[index];
-
-        if (pageResource.page == page) {
-            return pageResource;
-        }
-    }
-
-    return null;
-};
-
-Helper.prototype.createPageResource = function (page) {
-    let pageResource = new PageResource(page);
-    this.resources.push(pageResource);
-    return pageResource;
-};
-
-Helper.prototype.saveResource_pageStyle = function (page) {
-    let pageResource = this.getPageResource(page);
-
-    if (pageResource == null) {
-        return;
-    }
-
-    let url = this.pageStyleUrl(page);
-    pageResource.saveStyle(url);
-};
-
-Helper.prototype.saveResource_pageScript = function (page) {
-    let pageResource = this.getPageResource(page);
-
-    if (pageResource == null) {
-        return;
-    }
-
-    let url = this.pageScriptUrl(page);
-    pageResource.saveScript(url);
 };
 
 /* Resource end */
