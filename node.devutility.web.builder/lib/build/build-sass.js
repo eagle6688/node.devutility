@@ -18,13 +18,14 @@ function compile(configHelper, styleFiles, pageName) {
         }
         catch (err) {
             console.log('Compile file', styleFile, 'failed!');
-            return;
+            return false;
         }
 
         fs.writeFileSync(styleFilePath, style);
     });
 
     console.log(styleFileName, 'was generated!');
+    return true;
 }
 
 module.exports = function (configHelper) {
@@ -43,6 +44,8 @@ module.exports = function (configHelper) {
             continue;
         }
 
-        compile(configHelper, styleFiles, pageName);
+        if (compile(configHelper, styleFiles, pageName)) {
+            configHelper.saveResource_pageStyle(pageName);
+        }
     }
 };

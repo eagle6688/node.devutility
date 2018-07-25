@@ -4,16 +4,12 @@
 
 const sysPath = require("path");
 const ioUtilities = require("utilities-io");
+const PageResource = require("./PageResource");
 const projectDirectory = process.cwd();
 
 function Helper(options) {
     this.options = options;
-
-    this.resources = {
-        styleLib: null,
-        scriptLib: null,
-        pages: {}
-    };
+    this.resources = [];
 }
 
 /* File name */
@@ -101,13 +97,24 @@ Helper.prototype.getPageData = function (page) {
         scripts: []
     };
 
+    if (this.hasStyleLibs()) {
+        let styleLibsUrl = this.styleLibUrl();
+        data.styles.push(styleLibsUrl);
+    }
 
+    if (this.hasScriptLibs()) {
+        let scriptLibsUrl = this.scriptLibUrl();
+        data.scripts.push(scriptLibsUrl);
+    }
 
-    return {
-        page: page,
-        styles: [this.styleLibUrl(), this.pageStyleUrl(page)],
-        scripts: [this.scriptLibUrl(), this.pageScriptUrl(page)]
-    };
+    let pageResource = this.getPageResource(page);
+
+    if (pageResource != null) {
+        data.styles.push(pageResource.styles);
+        data.scripts.push(pageResource.scripts);
+    }
+
+    return data;
 };
 
 /* Url end */
@@ -149,14 +156,54 @@ Helper.prototype.getOutput = function () {
 
 /* Resource */
 
+Helper.prototype.hasStyleLibs = function () {
+    let styles = this.options.resources.styles;
+    return styles && styles.length > 0;
+};
+
+Helper.prototype.hasScriptLibs = function () {
+    let scripts = this.options.resources.scripts;
+    return scripts && scripts.length > 0;
+};
+
+Helper.prototype.getPageResource = function (page) {
+    for (let index in this.resources) {
+        let pageResource = this.resources[index];
+
+        if (pageResource.page == page) {
+            return pageResource;
+        }
+    }
+
+    return null;
+};
+
+Helper.prototype.createPageResource = function (page) {
+    let pageResource = new PageResource(page);
+    this.resources.push(pageResource);
+    return pageResource;
+};
+
 Helper.prototype.saveResource_pageStyle = function (page) {
+    let pageResource = this.getPageResource(page);
+
+    if (pageResource == null) {
+        return;
+    }
+
     let url = this.pageStyleUrl(page);
-    this.resources.pageScripts.push(pageStyleUrl);
+    pageResource.saveStyle(url);
 };
 
 Helper.prototype.saveResource_pageScript = function (page) {
+    let pageResource = this.getPageResource(page);
+
+    if (pageResource == null) {
+        return;
+    }
+
     let url = this.pageScriptUrl(page);
-    this.resources.pageScripts.push(url);
+    pageResource.saveScript(url);
 };
 
 /* Resource end */

@@ -9,7 +9,7 @@
 const extend = require("extend");
 const defaults = require("./defaults");
 
-const ConfigHelper = require("./config-helper");
+const ConfigHelper = require("./classes/ConfigHelper");
 const Server = require("./server");
 
 const build_fonts = require("./build/build-fonts");
