@@ -164,6 +164,10 @@ Helper.prototype.getEntry = function () {
     let result = {};
     let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
 
+    if (!pageDirs || pageDirs.length == 0) {
+        return null;
+    }
+
     for (let index in pageDirs) {
         let pageDir = pageDirs[index];
         let pageName = ioUtilities.getLastPath(pageDir);

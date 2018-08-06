@@ -6,9 +6,15 @@ const ioUtilities = require("utilities-io");
 
 module.exports = function (configHelper) {
     let config = configHelper.options;
+    let entry = configHelper.getEntry();
+
+    if (!entry) {
+        return;
+    }
+
     config.webpack.entry = configHelper.getEntry();
     config.webpack.output = configHelper.getOutput();
-
+    
     let scriptDirectory = configHelper.getScriptDirectory();
     ioUtilities.createDirectory(scriptDirectory);
 
