@@ -12,9 +12,9 @@ module.exports = function (configHelper) {
         return;
     }
 
-    config.webpack.entry = configHelper.getEntry();
+    config.webpack.entry = entry;
     config.webpack.output = configHelper.getOutput();
-    
+
     let scriptDirectory = configHelper.getScriptDirectory();
     ioUtilities.createDirectory(scriptDirectory);
 

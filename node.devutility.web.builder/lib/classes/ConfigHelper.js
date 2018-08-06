@@ -162,11 +162,8 @@ Helper.prototype.getPageData = function (page) {
 
 Helper.prototype.getEntry = function () {
     let result = {};
+    let counter = 0;
     let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
-
-    if (!pageDirs || pageDirs.length == 0) {
-        return null;
-    }
 
     for (let index in pageDirs) {
         let pageDir = pageDirs[index];
@@ -177,7 +174,12 @@ Helper.prototype.getEntry = function () {
             continue;
         }
 
+        counter++;
         result[pageName] = scriptFiles[0];
+    }
+
+    if (counter == 0) {
+        return null;
     }
 
     return result;
