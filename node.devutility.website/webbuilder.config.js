@@ -1,5 +1,10 @@
 module.exports = {
     port: 8002,
+    hbs: {
+        dir: "views",
+        pages: "views/pages",
+        partials: "views/partials"
+    },
     resources: {
         styles: [
             'resources/styles/bootstrap.min.css',
@@ -11,12 +16,13 @@ module.exports = {
             'resources/scripts/vue.min.js'
         ]
     },
+    copy: [
+        {
+            source: "resources/styles",
+            target: "dist/styles1"
+        }
+    ],
     webpack: {
         mode: "development"
-    },
-    app: {
-        dir: "views",
-        pages: "views/pages",
-        partials: "views/partials"
     }
 };

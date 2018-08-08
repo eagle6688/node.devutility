@@ -9,7 +9,7 @@
         "url": "https://github.com/eagle6688/node.devutility.git"
     },
     "scripts": {
-        "build:resource": "webbuilder -f build_fonts && webbuilder -f build_images",
+        "build:resource": "webbuilder -f build_fonts && webbuilder -f build_images && webbuilder -f build_copy",
         "build:lib": "node ./bin/.build/build-lib",
         "build:sass": "node ./bin/.build/build-sass",
         "build:ts": "node ./bin/.build/build-ts",
@@ -25,6 +25,6 @@
         "utilities-collection": "^1.0.1",
         "utilities-forwarder": "^1.0.3",
         "utilities-http": "^1.0.0",
-        "utilities-web-builder": "^1.1.2"
+        "utilities-web-builder": "^1.1.5"
     }
 }
