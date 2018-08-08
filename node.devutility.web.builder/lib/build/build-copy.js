@@ -12,7 +12,10 @@ module.exports = function (configHelper) {
 
     for (let index in array) {
         let entry = array[index];
-        ioUtilities.copy(entry.source, entry.target);
-        console.log("Copy source", entry.source, "to", entry.target);
+
+        if (entry.source && entry.target) {
+            ioUtilities.copy(entry.source, entry.target);
+            console.log("Copy source", entry.source, "to", entry.target);
+        }
     }
 };

@@ -29,12 +29,12 @@ module.exports = function (configHelper) {
     ioUtilities.createDirectory(styleDirectory);
 
     let config = configHelper.options;
-    let pagePaths = ioUtilities.getDirectories(config.app.pages);
+    let pagePaths = ioUtilities.getDirectories(config.hbs.pages);
 
     for (let index in pagePaths) {
         let pagePath = pagePaths[index];
         let pageName = ioUtilities.getLastPath(pagePath);
-        let styleFiles = ioUtilities.getAllFiles(pagePath, config.app.styleNameRegex);
+        let styleFiles = ioUtilities.getAllFiles(pagePath, config.compile.pageStyleNameRegex);
 
         if (!styleFiles || styleFiles.length == 0) {
             continue;
