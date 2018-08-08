@@ -4,31 +4,34 @@
 
 let defaults = {
     port: 8000,
+    hbs: {
+        dir: "app",
+        pages: "app/pages",
+        partials: 'app/partials'
+    },
     resources: {
         fontsDir: "resources/fonts",
         imagesDir: "resources/images",
         styles: [],
         scripts: []
     },
-    app: {
-        dir: "app",
-        pages: "app/pages",
-        partials: 'app/partials',
-        styleNameRegex: /.+(index.scss|index.sass)$/,
-        styleNameFormat: "{page}.min.css",
-        scriptNameRegex: /.+index.ts$/,
-        scriptNameFormat: "{page}.min.js"
+    compile: {
+        pageStyleNameRegex: /.+(index.scss|index.sass)$/,
+        pageScriptNameRegex: /.+index.ts$/,
+        styleLibName: "libs.bundle.css",
+        pageStyleNameFormat: "{page}.min.css",
+        scriptLibName: "libs.bundle.js",
+        pageScriptNameFormat: "{page}.min.js"
     },
     deploy: {
         host: "/",
         favicon: "dist/images/favicon.ico",
         fontsDir: "dist/fonts",
-        imagesDir: 'dist/images',
-        stylesDir: 'dist/stylesheets',
-        stylesLibName: 'libs.bundle.css',
-        scriptsDir: 'dist/scripts',
-        scriptsLibName: 'libs.bundle.js'
+        imagesDir: "dist/images",
+        stylesDir: "dist/stylesheets",
+        scriptsDir: "dist/scripts"
     },
+    copy: [{ source: null, target: null }],
     webpack: {
         context: process.cwd(),
         entry: {},

@@ -139,6 +139,20 @@ utilities.getLastPath = function (path) {
 };
 
 /**
+ * Get directory.
+ * @param {*} path 
+ */
+utilities.getDirectory = function (path) {
+    let pathInfo = sysPath.parse(path);
+
+    if (!pathInfo.ext) {
+        return sysPath.join(pathInfo.dir, pathInfo.base);
+    }
+
+    return pathInfo.dir;
+};
+
+/**
  * Synchronously copy files from source to dest.
  * @param {*} source 
  * @param {*} dest 

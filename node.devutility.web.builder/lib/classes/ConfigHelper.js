@@ -14,7 +14,7 @@ function Helper(options) {
 }
 
 Helper.prototype.init = function () {
-    let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
+    let pageDirs = ioUtilities.getDirectories(this.options.hbs.pages);
 
     for (let index in pageDirs) {
         let pageDir = pageDirs[index];
@@ -31,11 +31,11 @@ Helper.prototype.init = function () {
             pageResource.saveScript(scriptLibsUrl);
         }
 
-        let styleFiles = ioUtilities.getAllFiles(pageDir, this.options.app.styleNameRegex);
+        let styleFiles = ioUtilities.getAllFiles(pageDir, this.options.compile.pageStyleNameRegex);
 
         if (styleFiles && styleFiles.length > 0) {
             if (styleFiles.length > 1) {
-                throw new Error("One page should only has one main sass file which match the regex " + this.options.app.styleNameRegex);
+                throw new Error("One page should only has one main sass file which match the regex " + this.options.compile.pageStyleNameRegex);
             }
 
             if (styleFiles.length == 1) {
@@ -44,11 +44,11 @@ Helper.prototype.init = function () {
             }
         }
 
-        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.app.scriptNameRegex);
+        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.compile.pageScriptNameRegex);
 
         if (scriptFiles && scriptFiles.length > 0) {
             if (scriptFiles.length > 1) {
-                throw new Error("One page should only has one main typescript file which match the regex " + this.options.app.scriptNameRegex);
+                throw new Error("One page should only has one main typescript file which match the regex " + this.options.compile.pageScriptNameRegex);
             }
 
             if (scriptFiles.length == 1) {
@@ -64,11 +64,11 @@ Helper.prototype.init = function () {
 /* File name */
 
 Helper.prototype.getPageStyleName = function (page) {
-    return this.options.app.styleNameFormat.replace(/{page}/, page);
+    return this.options.compile.pageStyleNameFormat.replace(/{page}/, page);
 };
 
 Helper.prototype.getPageScriptName = function (page) {
-    return this.options.app.scriptNameFormat.replace(/{page}/, page);
+    return this.options.compile.pageScriptNameFormat.replace(/{page}/, page);
 };
 
 /* File name end */
@@ -84,11 +84,11 @@ Helper.prototype.getScriptDirectory = function () {
 };
 
 Helper.prototype.viewsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.app.dir);
+    return sysPath.join(projectDirectory, this.options.hbs.dir);
 };
 
 Helper.prototype.partialsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.app.partials);
+    return sysPath.join(projectDirectory, this.options.hbs.partials);
 };
 
 /* Directory end */
@@ -124,7 +124,7 @@ Helper.prototype.staticUrls = function () {
 };
 
 Helper.prototype.styleLibUrl = function () {
-    return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.options.deploy.stylesLibName;
+    return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.options.compile.styleLibName;
 };
 
 Helper.prototype.pageStyleUrl = function (page) {
@@ -132,7 +132,7 @@ Helper.prototype.pageStyleUrl = function (page) {
 };
 
 Helper.prototype.scriptLibUrl = function () {
-    return this.options.deploy.host + this.options.deploy.scriptsDir + "/" + this.options.deploy.scriptsLibName;
+    return this.options.deploy.host + this.options.deploy.scriptsDir + "/" + this.options.compile.scriptLibName;
 };
 
 Helper.prototype.pageScriptUrl = function (page) {
@@ -163,12 +163,12 @@ Helper.prototype.getPageData = function (page) {
 Helper.prototype.getEntry = function () {
     let result = {};
     let counter = 0;
-    let pageDirs = ioUtilities.getDirectories(this.options.app.pages);
+    let pageDirs = ioUtilities.getDirectories(this.options.hbs.pages);
 
     for (let index in pageDirs) {
         let pageDir = pageDirs[index];
         let pageName = ioUtilities.getLastPath(pageDir);
-        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.app.scriptNameRegex);
+        let scriptFiles = ioUtilities.getAllFiles(pageDir, this.options.compile.pageScriptNameRegex);
 
         if (!scriptFiles || scriptFiles.length == 0) {
             continue;
@@ -187,7 +187,7 @@ Helper.prototype.getEntry = function () {
 
 Helper.prototype.getOutput = function () {
     let result = {};
-    result.filename = this.options.app.scriptNameFormat.replace(/{page}/, '[name]');
+    result.filename = this.options.compile.pageScriptNameFormat.replace(/{page}/, '[name]');
     result.path = sysPath.resolve(this.options.deploy.scriptsDir);
     return result;
 };

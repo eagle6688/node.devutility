@@ -41,6 +41,10 @@ Helper.prototype.build_ts = function () {
     require("./build/build-ts")(this.configHelper);
 };
 
+Helper.prototype.build_copy = function () {
+
+};
+
 Helper.prototype.configer = function () {
     return this.configHelper;
 };

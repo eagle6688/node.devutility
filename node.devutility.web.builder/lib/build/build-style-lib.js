@@ -19,10 +19,20 @@ function getStyles(files) {
     return array;
 }
 
+function displayMessage(config, files) {
+    console.log("Style files:");
+
+    for (let index in files) {
+        console.log(files[index], ",");
+    }
+
+    console.log("have been bundled into", config.compile.styleLibName, "completely!");
+}
+
 module.exports = function (configHelper) {
     let config = configHelper.options;
     let styleDirectory = configHelper.getStyleDirectory();
-    let styleLibPath = sysPath.join(styleDirectory, config.deploy.stylesLibName);
+    let styleLibPath = sysPath.join(styleDirectory, config.compile.styleLibName);
     ioUtilities.createDirectory(styleDirectory);
 
     let styles = [];
@@ -32,13 +42,11 @@ module.exports = function (configHelper) {
         styles = getStyles(styleFiles);
     }
     catch (err) {
-        console.log('Bundle style files failed:', err);
+        console.log("Bundle style files failed:", err);
         return;
     }
 
     let content = styles.join('\n');
     fs.writeFileSync(styleLibPath, content);
-
-    let message = styleFiles.join(', ');
-    console.log('Style files', message, 'have been bundled into', config.deploy.stylesLibName, 'completely!');
+    displayMessage(config, styleFiles);
 };
