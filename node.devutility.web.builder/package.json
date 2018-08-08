@@ -18,6 +18,8 @@
         "test:bsl": "node ./test/build-style-lib.js && node ./test/build-script-lib.js",
         "test:bss": "node ./test/build-sass.js",
         "test:bts": "node ./test/build-ts.js",
+        "test:bc": "node ./test/build-copy.js",
+        "test:build": "npm run test:bf && npm run test:bi && npm run test:bsl && npm run test:bss && npm run test:bts && npm run test:bc",
         "test:start": "node ./test/bootstrap.js",
         "test:bfc": "node ./test/bootstrap-config.js",
         "test:bin-bf": "webbuilder -f build_fonts"

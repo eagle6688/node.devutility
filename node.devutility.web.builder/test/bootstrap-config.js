@@ -5,4 +5,5 @@ builder.build_styleLib();
 builder.build_scriptLib();
 builder.build_sass();
 builder.build_ts();
+builder.build_copy();
 builder.start();
