@@ -42,7 +42,7 @@ Helper.prototype.build_ts = function () {
 };
 
 Helper.prototype.build_copy = function () {
-
+    require("./build/build-copy")(this.configHelper);
 };
 
 Helper.prototype.configer = function () {

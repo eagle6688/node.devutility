@@ -4,34 +4,15 @@
  * If target path is a directory, this module would copy "source" path into it.
  */
 
-const fs = require('fs');
-const sysPath = require("path");
-
-function isFile(path) {
-    let stat = fs.statSync(path);
-    return stat.isFile();
-}
-
-function isDirectory(path) {
-    let stat = fs.statSync(path);
-    return stat.isDirectory();
-}
-
-function copyFile(source, target) {
-    if (!isFile(source)) {
-        throw new Error("Source path " + source + " is not a file, but target path " + target + " is.");
-    }
-
-
-}
+const ioUtilities = require("utilities-io");
 
 module.exports = function (configHelper) {
     let config = configHelper.options;
-    let copy = config.copy;
+    let array = config.copy;
 
-    for (let index in copy) {
-
+    for (let index in array) {
+        let entry = array[index];
+        ioUtilities.copy(entry.source, entry.target);
+        console.log("Copy source", entry.source, "to", entry.target);
     }
-
-
 };
