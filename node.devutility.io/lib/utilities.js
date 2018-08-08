@@ -143,7 +143,8 @@ utilities.getLastPath = function (path) {
  * @param {*} path 
  */
 utilities.getDirectory = function (path) {
-    let pathInfo = sysPath.parse(path);
+    let _path = sysPath.resolve(path);
+    let pathInfo = sysPath.parse(_path);
 
     if (!pathInfo.ext) {
         return sysPath.join(pathInfo.dir, pathInfo.base);
