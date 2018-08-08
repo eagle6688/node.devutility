@@ -36,6 +36,7 @@ let defaults = {
         context: process.cwd(),
         entry: {},
         output: {},
+        devtool: 'source-map',
         resolve: {
             extensions: [".ts", ".js"]
         },
