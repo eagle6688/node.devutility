@@ -154,6 +154,57 @@ utilities.getDirectory = function (path) {
 };
 
 /**
+ * Path is file or not?
+ * @param {*} path 
+ */
+utilities.isFile = function (path) {
+    let _path = sysPath.resolve(path);
+    let pathInfo = sysPath.parse(_path);
+
+    if (pathInfo.ext) {
+        return true;
+    }
+
+    return false;
+};
+
+/**
+ * Synchronously copy files or directories from source to dest.
+ * @param {*} source : File or directory.
+ * @param {*} dest : File or directory.
+ */
+utilities.copy = function (source, dest) {
+    let sourcePath = sysPath.resolve(source);
+    let sourceStats = fs.statSync(sourcePath);
+    let sourcePathInfo = sysPath.parse(sourcePath);
+
+    let destPath = sysPath.resolve(dest);
+    let destPathInfo = sysPath.parse(destPath);
+    let destDirectory = utilities.getDirectory(destPath);
+
+    if (destPathInfo.ext) {
+        if (sourceStats.isFile()) {
+            utilities.createDirectory(destDirectory);
+            fs.copyFileSync(sourcePath, destPath);
+            return;
+        }
+
+        throw new Error("Source path " + source + " is not a file, but target path " + dest + " is.");
+    }
+
+    if (sourceStats.isFile()) {
+        let fileDestPath = sysPath.join(destPath, sourcePathInfo.base);
+        utilities.createDirectory(destDirectory);
+        fs.copyFileSync(sourcePath, fileDestPath);
+        return;
+    }
+
+    if (sourceStats.isDirectory()) {
+        utilities.copyFiles(source, dest);
+    }
+};
+
+/**
  * Synchronously copy files from source to dest.
  * @param {*} source 
  * @param {*} dest 
