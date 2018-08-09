@@ -7,7 +7,8 @@ let defaults = {
     hbs: {
         dir: "app",
         pages: "app/pages",
-        partials: 'app/partials'
+        partials: "app/partials",
+        staticPaths: ["/dist"]
     },
     resources: {
         fontsDir: "resources/fonts",

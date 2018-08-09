@@ -71,21 +71,12 @@ Server.prototype.init_app = function () {
 };
 
 Server.prototype.register_static = function () {
-    let staticUrls = this.configer.staticUrls();
+    let staticPaths = this.configer.options.hbs.staticPaths;
 
-    for (let index in staticUrls) {
-        let staticUrl = staticUrls[index];
-        let staticDir = sysPath.join(projectDirectory, staticUrl);
-        this.app.use(staticUrl, express.static(staticDir));
+    for (let index in staticPaths) {
+        let staticDir = sysPath.join(projectDirectory, staticPaths[index]);
+        this.app.use(staticPaths[index], express.static(staticDir));
     }
-
-    this.app.use(function (request, response, next) {
-        if (collectionUtilities.valueContainElement(staticUrls, request.url)) {
-            return;
-        }
-
-        next();
-    });
 };
 
 Server.prototype.start = function () {

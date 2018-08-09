@@ -113,30 +113,6 @@ Helper.prototype.faviconPath = function () {
 
 /* Url */
 
-Helper.prototype.staticUrls = function () {
-    let array = [];
-    let copy = this.options.copy;
-    let host = this.options.deploy.host;
-    array.push(host + this.options.deploy.fontsDir);
-    array.push(host + this.options.deploy.imagesDir);
-    array.push(host + this.options.deploy.stylesDir);
-    array.push(host + this.options.deploy.scriptsDir);
-
-    if (!copy) {
-        return array;
-    }
-
-    for (let index in copy) {
-        let entry = copy[index];
-
-        if (entry.target) {
-            array.push(host + entry.target);
-        }
-    }
-
-    return array;
-};
-
 Helper.prototype.styleLibUrl = function () {
     return this.options.deploy.host + this.options.deploy.stylesDir + "/" + this.options.compile.styleLibName;
 };

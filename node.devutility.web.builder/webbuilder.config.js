@@ -21,15 +21,20 @@ module.exports = {
     },
     server: {
         router: function (app, helper) {
-            app.get('/', function (request, response, next) {
-                console.log(request.url);
-                response.redirect('/index');
-            });
-
             app.get('/login', function (request, response, next) {
                 let data = helper.getPageData("login");
                 data.requireAuth = false;
                 response.render("pages/login/index", data);
+            });
+
+            app.use(function (request, response, next) {
+                console.log("Pre request, login check for", request.url);
+                next();
+            });
+
+            app.get('/', function (request, response, next) {
+                console.log(request.url);
+                response.redirect('/index');
             });
 
             app.get('/index', function (request, response, next) {
@@ -40,14 +45,14 @@ module.exports = {
 
             // Catch api and 404 request.
             app.use(function (request, response, next) {
-                var error = new Error('Not Found');
+                var error = new Error(request.url + " not found!");
                 error.status = 404;
                 next(error);
             });
 
             // Error handler
             app.use(function (err, req, res, next) {
-                console.log("express error: ", err);
+                console.log("Express error: ", err);
                 res.status(err.status || 500);
                 res.render('error', { title: 'Not Found', layout: false });
             });
