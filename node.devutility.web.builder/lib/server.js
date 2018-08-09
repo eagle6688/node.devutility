@@ -11,9 +11,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 
-const collectionUtilities = require("utilities-collection");
-let projectDirectory = process.cwd();
-
 function Server(configer) {
     this.configer = configer;
     this.init();
@@ -46,6 +43,7 @@ Server.prototype.init = function () {
 };
 
 Server.prototype.init_app = function () {
+    // Set port
     this.app.set('port', this.port);
 
     // Handle cookie
@@ -61,16 +59,23 @@ Server.prototype.init_app = function () {
     this.app.set('views', this.configer.viewsDirectory());
 
     // Set view engine.
-    this.app.set('view engine', 'hbs');
-
     hbs.registerPartials(this.configer.partialsDirectory());
+    this.app.set('view engine', 'hbs');
     this.app.engine('hbs', hbs.__express);
 
     // Set favicon.
     this.app.use(favicon(this.configer.faviconPath()));
+
+    // Set default layout.
+    let defaultLayout = this.configer.options.hbs.defaultLayout;
+
+    if (defaultLayout) {
+        this.app.set('view options', { layout: defaultLayout });
+    }
 };
 
 Server.prototype.register_static = function () {
+    let projectDirectory = process.cwd();
     let staticPaths = this.configer.options.hbs.staticPaths;
 
     for (let index in staticPaths) {

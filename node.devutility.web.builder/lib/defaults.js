@@ -8,6 +8,7 @@ let defaults = {
         dir: "app",
         pages: "app/pages",
         partials: "app/partials",
+        defaultLayout: "",
         staticPaths: ["/dist"]
     },
     resources: {

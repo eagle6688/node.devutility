@@ -1,4 +1,7 @@
 module.exports = {
+    hbs: {
+        defaultLayout: "layouts/default"
+    },
     resources: {
         styles: [
             'resources/styles/bootstrap.min.css',
