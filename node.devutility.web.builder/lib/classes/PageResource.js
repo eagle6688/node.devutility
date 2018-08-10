@@ -29,9 +29,18 @@ PageResource.prototype.saveScript = function (script) {
 };
 
 PageResource.prototype.savePartial = function (name, data) {
-    let item = new PagePartial(name, data);
-    this.partials.push(item);
-    return item;
+    let partial = collectionUtilities.findOne(this.partials, function (item) {
+        return item.name == name;
+    });
+
+    if (partial) {
+        partial.data = data;
+        return partial;
+    }
+
+    partial = new PagePartial(name, data);
+    this.partials.push(partial);
+    return partial;
 };
 
 module.exports = PageResource;
