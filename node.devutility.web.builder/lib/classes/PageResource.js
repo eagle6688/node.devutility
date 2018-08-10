@@ -28,7 +28,7 @@ PageResource.prototype.saveScript = function (script) {
     this.scripts.push(script);
 };
 
-PageResource.prototype.addPartial = function (name, data) {
+PageResource.prototype.savePartial = function (name, data) {
     let item = new PagePartial(name, data);
     this.partials.push(item);
     return item;

@@ -47,7 +47,7 @@ module.exports = {
             app.get('/index', function (request, response, next) {
                 let data = helper.getPageData("index");
                 data.requireAuth = true;
-                data.addPartial("header", { message: "Hello World!" });
+                data.savePartial("header", { message: "Hello World!" });
                 response.render("pages/index/index", data);
             });
 

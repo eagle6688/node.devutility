@@ -6,12 +6,7 @@ function test(student) {
         return item.id == student.id;
     };
 
-    if (utilities.exists(array, comparator)) {
-        console.log(student, 'exists!');
-    }
-    else {
-        console.log(student, 'not exists!');
-    }
+    console.log(utilities.findOne(array, comparator));
 }
 
 test({

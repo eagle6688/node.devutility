@@ -41,7 +41,7 @@ utilities.contain = function (array, value) {
 };
 
 /**
- * Circulatint the array, pass each item in array to function comparator, call comparator and check the result of it.
+ * Circulating the array, pass each item in array to function comparator, call comparator and check the result of it.
  * @param {*} array 
  * @param {*} comparator 
  */
@@ -57,6 +57,38 @@ utilities.exists = function (array, comparator) {
     }
 
     return false;
+};
+
+/**
+ * Find the first of item that matched comparator function, if no one matched return null.
+ * @param {*} array 
+ * @param {*} comparator 
+ */
+utilities.findOne = function (array, comparator) {
+    let result = this.find(array, comparator);
+
+    if (!result || result.length == 0) {
+        return null;
+    }
+
+    return result[0];
+};
+
+/**
+ * Find all of items that matched comparator function, if no one matched return [].
+ * @param {*} array
+ * @param {*} comparator 
+ */
+utilities.find = function (array, comparator) {
+    let result = [];
+
+    for (let index in array) {
+        if (comparator(array[index])) {
+            result.push(array[index]);
+        }
+    }
+
+    return result;
 };
 
 module.exports = utilities;
