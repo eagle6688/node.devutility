@@ -40,4 +40,23 @@ utilities.contain = function (array, value) {
     return false;
 };
 
+/**
+ * Circulatint the array, pass each item in array to function comparator, call comparator and check the result of it.
+ * @param {*} array 
+ * @param {*} comparator 
+ */
+utilities.exists = function (array, comparator) {
+    if (!array || !comparator) {
+        return false;
+    }
+
+    for (let index in array) {
+        if (comparator(array[index])) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 module.exports = utilities;
