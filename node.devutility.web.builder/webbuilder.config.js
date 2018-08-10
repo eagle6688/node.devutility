@@ -15,8 +15,12 @@ module.exports = {
     },
     copy: [
         {
-            source: "resources/styles",
-            target: "dist/copy"
+            source: "resources/styles/bootstrap-theme.min.css.map",
+            target: "dist/stylesheets/bootstrap-theme.min.css.map"
+        },
+        {
+            source: "resources/styles/bootstrap.min.css.map",
+            target: "dist/stylesheets/bootstrap.min.css.map"
         }
     ],
     webpack: {
@@ -43,6 +47,7 @@ module.exports = {
             app.get('/index', function (request, response, next) {
                 let data = helper.getPageData("index");
                 data.requireAuth = true;
+                data.addPartial("header", { message: "Hello World!" });
                 response.render("pages/index/index", data);
             });
 

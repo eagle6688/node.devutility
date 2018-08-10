@@ -1,0 +1,8 @@
+/app
+/dist
+/node_modules
+/resources
+/test
+tsconfig.json
+webbuilder.config.js
+npm-debug.*

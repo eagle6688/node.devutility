@@ -130,20 +130,13 @@ Helper.prototype.pageScriptUrl = function (page) {
 };
 
 Helper.prototype.getPageData = function (page) {
-    let data = {
-        page: page,
-        styles: [],
-        scripts: []
-    };
-
     let pageResource = this.resources[page];
 
     if (pageResource != null) {
-        data.styles = pageResource.styles;
-        data.scripts = pageResource.scripts;
+        return pageResource;
     }
 
-    return data;
+    return new PageResource(page);
 };
 
 /* Url end */
