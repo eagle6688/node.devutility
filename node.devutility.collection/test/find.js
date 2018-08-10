@@ -1,12 +1,12 @@
 const utilities = require("../index");
-const array = require("./data");
+const data = require("./data");
 
 function test(student) {
     let comparator = function (item) {
         return item.name == student.name;
     };
 
-    console.log(utilities.find(array, comparator));
+    console.log(utilities.find(data.students, comparator));
 }
 
 test({

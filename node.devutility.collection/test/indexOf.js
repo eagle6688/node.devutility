@@ -6,18 +6,17 @@ function test(student) {
         return item.id == student.id;
     };
 
-    if (utilities.exists(data.students, comparator)) {
-        console.log(student, 'exists!');
-    }
-    else {
-        console.log(student, 'not exists!');
-    }
+    console.log(utilities.indexOf(data.students, comparator));
 }
 
 test({
-    id: 1
+    id: 2
 });
 
 test({
     id: 4
+});
+
+test({
+    id: 8
 });

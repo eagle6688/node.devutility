@@ -91,4 +91,34 @@ utilities.find = function (array, comparator) {
     return result;
 };
 
+/**
+ * Return the index of item which equals the specified value function in array.
+ * @param {*} array 
+ * @param {*} value 
+ */
+utilities.index = function (array, value) {
+    return this.indexOf(array, function (item) {
+        return item == value;
+    });
+};
+
+/**
+ * Return the index of item which matched comparator function in array.
+ * @param {*} array 
+ * @param {*} comparator 
+ */
+utilities.indexOf = function (array, comparator) {
+    if (!array || !comparator) {
+        return -1;
+    }
+
+    for (let index in array) {
+        if (comparator(array[index])) {
+            return index;
+        }
+    }
+
+    return -1;
+};
+
 module.exports = utilities;

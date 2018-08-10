@@ -1,8 +1,8 @@
-const collectionUtilities = require("../index");
-let array = [1, 2, 3, 4];
+const utilities = require("../index");
+const data = require("./data");
 
 function test(value) {
-    if (collectionUtilities.contain(array, value)) {
+    if (utilities.contain(data.numbers, value)) {
         console.log('Exists!');
     }
     else {
