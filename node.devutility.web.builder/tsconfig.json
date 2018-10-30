@@ -4,5 +4,12 @@
         "target": "es5",
         "allowJs": true,
         "sourceMap": true
-    }
+    },
+    "exclude": [
+        "bin",
+        "dist",
+        "lib",
+        "node_modules",
+        "resources"
+    ]
 }
