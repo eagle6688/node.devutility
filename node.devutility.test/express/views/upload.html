@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>upload - upload.html</title>
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.upload.helper.js"></script>
+</head>
+
+<body>
+    <h3>Upload file</h3>
+    <p>
+        <span>Please select file:</span>
+        <input id="file-upload" type="file" value="" />
+    </p>
+    <p>
+        <input id="btn-upload" type="button" value="upload">
+    </p>
+    <script>
+        $('#btn-upload').click(function () {
+            var uploadHelper = $.uploadHelper({
+                file: $('#file-upload')[0].files[0],
+                url: '/api/file/upload2',
+                uploadThreadsCount: 1,
+                beforeUpload: function (data) {
+                    console.log(data);
+                },
+                uploading: function (data) {
+                    console.log(data);
+                },
+                uploaded: function (data) {
+                    console.log(data);
+                },
+                failed: function (data) {
+                    console.log(data);
+                }
+            });
+
+            uploadHelper.upload();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>get - /get.html</title>
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <h3>get json data from backend</h3>
+    <p>
+        <input id="btn-get" type="button" value="get">
+    </p>
+    <p>
+        <span>Result:</span>
+        <span id="span-result"></span>
+    </p>
+    <script>
+        $('#btn-get').click(function () {
+            $.getJSON('/api/annotation/produces?asd=123&qwe=456', function (data) {
+                $('#span-result').text(JSON.stringify(data));
+            });
+        });
+    </script>
+</body>
+
+</html>

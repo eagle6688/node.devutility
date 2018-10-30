@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>post - /post.html</title>
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <h3>post json to backend</h3>
+    <p>
+        <label>name:</label>
+        <input id="txt-name" type="text" value="">
+    </p>
+    <p>
+        <label>age:</label>
+        <input id="txt-age" type="text" value="">
+    </p>
+    <p>
+        <label>birthday:</label>
+        <input id="txt-birthday" type="text" value="">
+    </p>
+    <p>
+        <input id="btn-submit" type="button" value="submit">
+    </p>
+    <p>
+        <span>Result from backend:</span>
+        <span id="span-result"></span>
+    </p>
+    <script type="text/javascript">
+        $('#btn-submit').click(function () {
+            var postData = {
+                name: $('#txt-name').val(),
+                age: $('#txt-age').val(),
+                birthday: $('#txt-birthday').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/annotation/consumes',
+                data: JSON.stringify(postData),
+                contentType: 'application/json',
+                success: function (data) {
+                    $('#span-result').text(JSON.stringify(data));
+                },
+                dataType: 'json'
+            });
+        });
+    </script>
+</body>
+
+</html>
