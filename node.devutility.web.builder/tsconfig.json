@@ -6,6 +6,7 @@
         "sourceMap": true
     },
     "exclude": [
+        "index.js",
         "bin",
         "dist",
         "lib",
