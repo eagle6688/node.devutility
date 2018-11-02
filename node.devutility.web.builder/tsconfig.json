@@ -2,15 +2,9 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
-        "allowJs": true,
         "sourceMap": true
     },
     "exclude": [
-        "index.js",
-        "bin",
-        "dist",
-        "lib",
-        "node_modules",
-        "resources"
+        "node_modules"
     ]
 }
