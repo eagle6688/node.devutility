@@ -2,6 +2,9 @@
  * Copy files or entire directory to target path.
  * If target path is a file, this module would overwrite it.
  * If target path is a directory, this module would copy "source" path into it.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
  */
 
 const ioUtilities = require("utilities-io");

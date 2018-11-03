@@ -4,7 +4,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const Builder = require("./lib/helper");
+const Builder = require("./lib/builder");
 const configFileName = "webbuilder.config.js";
 
 module.exports = function (options, router) {

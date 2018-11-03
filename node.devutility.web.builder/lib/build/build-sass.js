@@ -1,5 +1,8 @@
 /**
  * Compile sass files and integrate them into one css file for each page.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
  */
 
 const fs = require('fs');
@@ -25,11 +28,11 @@ function compile(configHelper, styleFile, pageName) {
 }
 
 module.exports = function (configHelper) {
-    let styleDirectory = configHelper.getStyleDirectory();
+    let styleDirectory = configHelper.getStyleDeployDirectory();
     ioUtilities.createDirectory(styleDirectory);
 
     let config = configHelper.options;
-    let pagePaths = ioUtilities.getDirectories(config.hbs.pages);
+    let pagePaths = configHelper.getPagesDirectories();
 
     for (let index in pagePaths) {
         let pagePath = pagePaths[index];

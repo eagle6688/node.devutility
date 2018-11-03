@@ -1,9 +1,12 @@
 /**
- * Class for page resource.
- */
+* Page resource class, as a container for resource.
+* 
+* @author: Aldwin Su
+* @Copyright: 2018. All rights reserved.
+*/
 
 const collectionUtilities = require("utilities-collection");
-const PagePartial = require("./PagePartial");
+const PagePartial = require("./page-partial");
 
 function PageResource(page) {
     this.page = page;

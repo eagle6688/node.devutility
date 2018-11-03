@@ -1,5 +1,8 @@
 /**
  * Combine all of script files to one script file.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
  */
 
 const fs = require('fs');
@@ -7,28 +10,30 @@ const sysPath = require('path');
 const ioUtilities = require("utilities-io");
 const scriptUtilities = require("utilities-script");
 
-function displayMessage(config, files) {
+function displayMessage(files, target) {
     console.log("Script files:");
 
     for (let index in files) {
         console.log(files[index], ",");
     }
 
-    console.log("have been bundled into", config.compile.scriptLibName, "completely!");
+    console.log("have been bundled into", target, "completely!");
 }
 
-module.exports = function (config) {
-    if (!config.resources.scripts) {
+module.exports = function (configer) {
+    let options = configer.options;
+
+    if (!options.resources.scripts) {
         return;
     }
 
-    let scriptFiles = config.resources.scripts;
-    let projectDirectory = process.cwd();
-    let scriptLibDir = sysPath.join(projectDirectory, config.deploy.scriptsDir);
-    let scriptLibPath = sysPath.join(scriptLibDir, config.compile.scriptLibName);
-    ioUtilities.createDirectory(scriptLibDir);
-
     let array = [];
+    let scriptFiles = options.resources.scripts;
+    let projectDirectory = process.cwd();
+    let scriptLibDir = sysPath.join(projectDirectory, options.deploy.dir, options.deploy.scriptsDir);
+    let scriptLibName = configer.getScriptLibName();
+    let scriptLibPath = sysPath.join(scriptLibDir, scriptLibName);
+    ioUtilities.createDirectory(scriptLibDir);
 
     for (let index in scriptFiles) {
         let content = scriptUtilities.compressJs(scriptFiles[index]);
@@ -36,5 +41,5 @@ module.exports = function (config) {
     }
 
     fs.writeFileSync(scriptLibPath, array.join('\n'));
-    displayMessage(config, scriptFiles);
+    displayMessage(scriptFiles, scriptLibPath);
 };

@@ -1,5 +1,8 @@
 /**
  * Compress all base styles and integrate them into one css file.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
  */
 
 const fs = require('fs');
@@ -19,20 +22,21 @@ function getStyles(files) {
     return array;
 }
 
-function displayMessage(config, files) {
+function displayMessage(files, target) {
     console.log("Style files:");
 
     for (let index in files) {
         console.log(files[index], ",");
     }
 
-    console.log("have been bundled into", config.compile.styleLibName, "completely!");
+    console.log("have been bundled into", target, "completely!");
 }
 
-module.exports = function (configHelper) {
-    let config = configHelper.options;
-    let styleDirectory = configHelper.getStyleDirectory();
-    let styleLibPath = sysPath.join(styleDirectory, config.compile.styleLibName);
+module.exports = function (configer) {
+    let config = configer.options;
+    let styleDirectory = configer.getStyleDeployDirectory();
+    let styleLibName = configer.getStyleLibName();
+    let styleLibPath = sysPath.join(styleDirectory, styleLibName);
     ioUtilities.createDirectory(styleDirectory);
 
     let styles = [];
@@ -48,5 +52,5 @@ module.exports = function (configHelper) {
 
     let content = styles.join('\n');
     fs.writeFileSync(styleLibPath, content);
-    displayMessage(config, styleFiles);
+    displayMessage(styleFiles, styleLibPath);
 };

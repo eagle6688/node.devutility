@@ -13,6 +13,10 @@ module.exports = {
             'resources/scripts/vue.min.js'
         ]
     },
+    deploy: {
+        version: "20181103",
+        versionedType: 'prefix'
+    },
     copy: [
         {
             source: "resources/styles/bootstrap-theme.min.css.map",

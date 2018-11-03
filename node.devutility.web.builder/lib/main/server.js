@@ -1,15 +1,18 @@
 /**
  * Express server use handlebars view engine.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
  */
 
 const http = require('http');
 const sysPath = require("path");
-
 const express = require('express');
 const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
+const Helper = require('../helper');
 
 function Server(configer) {
     this.configer = configer;
@@ -17,24 +20,25 @@ function Server(configer) {
 }
 
 Server.prototype.init = function () {
-    let config = this.configer.options;
-    this.port = config.port;
-    this.app = config.server.express;
+    let options = this.configer.options;
+    this.port = options.port;
+    this.app = options.server.express;
 
     if (!this.app) {
         this.app = express();
-        this.init_app(config);
+        this.init_app(options);
         this.register_static();
     }
 
-    if (config.server.router) {
-        config.server.router(this.app, this.configer);
+    if (options.server.router) {
+        let helper = new Helper(this.configer);
+        options.server.router(this.app, helper);
     }
 
     this.server = http.createServer(this.app);
 
     this.server.on('listening', function () {
-        console.log('Listening to port', config.port);
+        console.log('Listening to port', options.port);
     });
 
     this.server.on('error', function (error) {
@@ -56,15 +60,15 @@ Server.prototype.init_app = function () {
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
     // Set view path.
-    this.app.set('views', this.configer.viewsDirectory());
+    this.app.set('views', this.configer.getViewsDirectory());
 
     // Set view engine.
-    hbs.registerPartials(this.configer.partialsDirectory());
+    hbs.registerPartials(this.configer.getPartialsDirectory());
     this.app.set('view engine', 'hbs');
     this.app.engine('hbs', hbs.__express);
 
     // Set favicon.
-    this.app.use(favicon(this.configer.faviconPath()));
+    this.app.use(favicon(this.configer.getFaviconPath()));
 
     // Set default layout.
     let defaultLayout = this.configer.options.hbs.defaultLayout;
@@ -76,7 +80,7 @@ Server.prototype.init_app = function () {
 
 Server.prototype.register_static = function () {
     let projectDirectory = process.cwd();
-    let staticPaths = this.configer.options.hbs.staticPaths;
+    let staticPaths = this.configer.getStaticPaths();
 
     for (let index in staticPaths) {
         let staticDir = sysPath.join(projectDirectory, staticPaths[index]);
