@@ -32,7 +32,9 @@ utilities.createDirectory = function (directory) {
             dir = sysPath.join(dir, array[i]);
         }
 
-        if (!fs.existsSync(dir)) {
+        console.log(dir);
+
+        if (dir && !fs.existsSync(dir)) {
             fs.mkdir(dir, err => {
                 if (err) {
                     throw err;
