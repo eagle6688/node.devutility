@@ -207,7 +207,7 @@ utilities.copy = function (source, dest) {
     }
 
     if (sourceStats.isDirectory()) {
-        utilities.copyFileSync(source, dest);
+        utilities.copyFiles(source, dest);
     }
 };
 
