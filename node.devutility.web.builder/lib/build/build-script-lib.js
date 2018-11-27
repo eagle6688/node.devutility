@@ -40,6 +40,6 @@ module.exports = function (configer) {
         array.push(content);
     }
 
-    fs.writeFileSync(scriptLibPath, array.join('\n'));
+    fs.writeFile(scriptLibPath, array.join('\n'), err => { });
     displayMessage(scriptFiles, scriptLibPath);
 };

@@ -33,7 +33,7 @@ utilities.createDirectory = function (directory) {
         }
 
         if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
+            fs.mkdir(dir, err => { });
         }
     }
 };
@@ -185,7 +185,7 @@ utilities.copy = function (source, dest) {
     if (destPathInfo.ext) {
         if (sourceStats.isFile()) {
             utilities.createDirectory(destDirectory);
-            fs.copyFileSync(sourcePath, destPath);
+            fs.copyFile(sourcePath, destPath, err => { });
             return;
         }
 
@@ -195,7 +195,7 @@ utilities.copy = function (source, dest) {
     if (sourceStats.isFile()) {
         let fileDestPath = sysPath.join(destPath, sourcePathInfo.base);
         utilities.createDirectory(destDirectory);
-        fs.copyFileSync(sourcePath, fileDestPath);
+        fs.copyFile(sourcePath, fileDestPath, err => { });
         return;
     }
 
@@ -221,7 +221,7 @@ utilities.copyFiles = function (source, dest) {
 
         let fileInfo = sysPath.parse(destPath);
         utilities.createDirectory(fileInfo.dir);
-        fs.copyFileSync(file, destPath);
+        fs.copyFile(file, destPath, err => { });
     }
 };
 

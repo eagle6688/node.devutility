@@ -51,6 +51,6 @@ module.exports = function (configer) {
     }
 
     let content = styles.join('\n');
-    fs.writeFileSync(styleLibPath, content);
+    fs.writeFile(styleLibPath, content, err => { });
     displayMessage(styleFiles, styleLibPath);
 };

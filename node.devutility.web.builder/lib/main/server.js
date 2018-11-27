@@ -5,6 +5,7 @@
  * @Copyright: 2018. All rights reserved.
  */
 
+const fs = require('fs');
 const http = require('http');
 const sysPath = require("path");
 const express = require('express');
@@ -68,13 +69,21 @@ Server.prototype.init_app = function () {
     this.app.engine('hbs', hbs.__express);
 
     // Set favicon.
-    this.app.use(favicon(this.configer.getFaviconPath()));
+    this.register_favicon();
 
     // Set default layout.
     let defaultLayout = this.configer.options.hbs.defaultLayout;
 
     if (defaultLayout) {
         this.app.set('view options', { layout: defaultLayout });
+    }
+};
+
+Server.prototype.register_favicon = function () {
+    let path = this.configer.getFaviconPath();
+
+    if (fs.existsSync(path)) {
+        this.app.use(favicon(path));
     }
 };
 

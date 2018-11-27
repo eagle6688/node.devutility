@@ -22,7 +22,7 @@ function compile(configHelper, styleFile, pageName) {
         return false;
     }
 
-    fs.writeFileSync(styleFilePath, style);
+    fs.writeFile(styleFilePath, style, err => { });
     console.log(styleFileName, "was generated!");
     return true;
 }
