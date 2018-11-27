@@ -25,16 +25,21 @@ utilities.createDirectory = function (directory) {
     }
 
     let array = directory.split(sysPath.sep);
-    let dir = array[0];
 
-    for (let i = 0; i < array.length; i++) {
-        if (i > 0) {
-            dir = sysPath.join(dir, array[i]);
-        }
+    if (array.length < 2) {
+        throw new Error("Invalid directory parameter!");
+    }
 
-        console.log(dir);
+    if (directory.indexOf(sysPath.sep) == 0) {
+        array[0] = sysPath.sep;
+    }
 
-        if (dir && !fs.existsSync(dir)) {
+    let dir = sysPath.join(array[0], array[1]);
+
+    for (let i = 2; i < array.length; i++) {
+        dir = sysPath.join(dir, array[i]);
+
+        if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
         }
     }
@@ -187,13 +192,7 @@ utilities.copy = function (source, dest) {
     if (destPathInfo.ext) {
         if (sourceStats.isFile()) {
             utilities.createDirectory(destDirectory);
-
-            fs.copyFile(sourcePath, destPath, err => {
-                if (err) {
-                    throw err;
-                }
-            });
-
+            fs.copyFileSync(sourcePath, destPath);
             return;
         }
 
@@ -203,18 +202,12 @@ utilities.copy = function (source, dest) {
     if (sourceStats.isFile()) {
         let fileDestPath = sysPath.join(destPath, sourcePathInfo.base);
         utilities.createDirectory(destDirectory);
-
-        fs.copyFile(sourcePath, fileDestPath, err => {
-            if (err) {
-                throw err;
-            }
-        });
-
+        fs.copyFileSync(sourcePath, fileDestPath);
         return;
     }
 
     if (sourceStats.isDirectory()) {
-        utilities.copyFiles(source, dest);
+        utilities.copyFileSync(source, dest);
     }
 };
 
@@ -235,12 +228,7 @@ utilities.copyFiles = function (source, dest) {
 
         let fileInfo = sysPath.parse(destPath);
         utilities.createDirectory(fileInfo.dir);
-
-        fs.copyFile(file, destPath, err => {
-            if (err) {
-                throw err;
-            }
-        });
+        fs.copyFileSync(file, destPath);
     }
 };
 
