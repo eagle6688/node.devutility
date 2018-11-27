@@ -35,11 +35,7 @@ utilities.createDirectory = function (directory) {
         console.log(dir);
 
         if (dir && !fs.existsSync(dir)) {
-            fs.mkdir(dir, err => {
-                if (err) {
-                    throw err;
-                }
-            });
+            fs.mkdirSync(dir);
         }
     }
 };
