@@ -11,37 +11,31 @@ let httpUtilities = {};
 
 /**
  * Http get method.
- * @param {*} options 
- * @param {*} callback 
  */
-httpUtilities.get = function (options, callback) {
-    this.createHttpRequest(options, callback).end();
+httpUtilities.get = function (options, success, error) {
+    this.createHttpRequest(options, success, error).end();
 };
 
 /**
  * Call http get method and return an promise object.
- * @param {*} options 
  */
 httpUtilities.getPromise = function (options) {
     return new Promise((resolve, reject) => {
-        httpUtilities.get(options, response => {
-            resolve(response);
-        });
-    }).catch(error => {
-        console.log('Promise error:', error);
+        httpUtilities.get(options, resolve, reject);
     });
 };
 
 /**
  * Http post method.
- * @param {*} options 
- * @param {*} data 
- * @param {*} callback 
  */
-httpUtilities.post = function (options, data, callback) {
-    let request = this.createHttpRequest(options, callback);
+httpUtilities.post = function (options, data, success, error) {
+    if (options.method || typeof options.method != 'string' || options.method.toLowerCase() != 'post') {
+        options.method = 'post';
+    }
 
-    if (options.method && typeof options.method == 'string' && options.method.toLowerCase() == 'post' && data) {
+    let request = this.createHttpRequest(options, success, error);
+
+    if (data) {
         request.write(data);
     }
 
@@ -49,11 +43,18 @@ httpUtilities.post = function (options, data, callback) {
 };
 
 /**
- * Create an ClientHttpRequest object.
- * @param {*} options 
- * @param {*} callback 
+ * Call http post method and return an promise object.
  */
-httpUtilities.createHttpRequest = function (options, callback) {
+httpUtilities.postPromise = function (options) {
+    return new Promise((resolve, reject) => {
+        httpUtilities.post(options, resolve, reject);
+    });
+};
+
+/**
+ * Create an ClientHttpRequest object.
+ */
+httpUtilities.createHttpRequest = function (options, success, error) {
     let request = http.request(options, (response) => {
         let rawData = '';
         response.setEncoding('utf8');
@@ -63,7 +64,7 @@ httpUtilities.createHttpRequest = function (options, callback) {
         });
 
         response.on('end', () => {
-            if (callback) {
+            if (success) {
                 var result = {
                     statusCode: 0,
                     data: null
@@ -73,20 +74,24 @@ httpUtilities.createHttpRequest = function (options, callback) {
                     result.statusCode = response.statusCode;
                 }
 
-                if (rawData != '') {
-                    result.data = JSON.parse(rawData);
+                if (rawData) {
+                    try {
+                        result.data = JSON.parse(rawData);
+                    } catch (e) {
+                        if (error) {
+                            error(e);
+                        }
+                    }
                 }
 
-                callback(result);
+                success(result);
             }
         });
     });
 
     request.on('error', function (e) {
-        console.log("Request", options.path, "error,", e);
-
-        if (callback) {
-            callback(null);
+        if (error) {
+            error(e);
         }
     });
 
@@ -95,10 +100,6 @@ httpUtilities.createHttpRequest = function (options, callback) {
 
 /**
  * Create a new request options object.
- * @param {*} hostname 
- * @param {*} port 
- * @param {*} path 
- * @param {*} cookies 
  */
 httpUtilities.requestOptions = function (hostname, port, path, cookies) {
     let options = {
