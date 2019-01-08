@@ -58,13 +58,15 @@ Server.prototype.init_app = function () {
     this.app.use(bodyParser.json());
 
     // Handle application/x-www-form-urlencoded
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({
+        extended: false
+    }));
 
     // Set view path.
     this.app.set('views', this.configer.getViewsDirectory());
 
     // Set view engine.
-    hbs.registerPartials(this.configer.getPartialsDirectory());
+    this.register_partials();
     this.app.set('view engine', 'hbs');
     this.app.engine('hbs', hbs.__express);
 
@@ -75,7 +77,17 @@ Server.prototype.init_app = function () {
     let defaultLayout = this.configer.options.hbs.defaultLayout;
 
     if (defaultLayout) {
-        this.app.set('view options', { layout: defaultLayout });
+        this.app.set('view options', {
+            layout: defaultLayout
+        });
+    }
+};
+
+Server.prototype.register_partials = function () {
+    let directories = this.configer.getPartialsDirectories();
+
+    for (let index in directories) {
+        hbs.registerPartials(directories[index]);
     }
 };
 

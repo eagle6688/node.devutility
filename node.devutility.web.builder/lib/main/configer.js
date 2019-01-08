@@ -60,12 +60,26 @@ Configer.prototype.getViewsDirectory = function () {
 };
 
 Configer.prototype.getPagesDirectories = function () {
-    const dir = sysPath.join(this.options.views, this.options.hbs.pages);
-    return ioUtilities.getDirectories(dir);
+    let directories = [];
+    let rootDirectories = this.options.hbs.pages;
+
+    if (!rootDirectories || rootDirectories.length == 0) {
+        rootDirectories = [sysPath.join(this.options.views, "pages")];
+    }
+
+    for (let index in rootDirectories) {
+        directories.push(ioUtilities.getDirectories(rootDirectories[index]));
+    }
+
+    return directories;
 };
 
-Configer.prototype.getPartialsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.views, this.options.hbs.partials);
+Configer.prototype.getPartialsDirectories = function () {
+    if (!this.options.hbs.partials || this.options.hbs.partials.length == 0) {
+        return [sysPath.join(this.options.views, "partials")];
+    }
+
+    return this.options.hbs.partials;
 };
 
 Configer.prototype.getStyleDeployDirectory = function () {

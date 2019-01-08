@@ -10,8 +10,8 @@ let defaults = {
     views: "app", //Express views directory.
     staticPaths: [], //Static paths need be regitered in express, will automatically add the "deploy.dir".
     hbs: {
-        pages: "pages", //Handlebars pages root directory, located in "views".
-        partials: "partials", //Handlebars partials root directory, located in "views".
+        pages: [], //Handlebars pages root directory, default is "{defaults.views}/pages".
+        partials: [], //Handlebars partials directories, default is "{defaults.views}/partials".
         defaultLayout: "layouts/default" //Default handlebars layout, located in "views".
     },
     resources: {
