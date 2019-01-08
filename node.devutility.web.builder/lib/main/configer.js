@@ -68,7 +68,9 @@ Configer.prototype.getPagesDirectories = function () {
     }
 
     for (let index in rootDirectories) {
-        directories.push(ioUtilities.getDirectories(rootDirectories[index]));
+        ioUtilities.getDirectories(rootDirectories[index]).forEach(i => {
+            directories.push(i);
+        });
     }
 
     return directories;
