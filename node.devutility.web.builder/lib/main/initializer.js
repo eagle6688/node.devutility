@@ -25,7 +25,7 @@ module.exports = function (configer) {
 
         if (configer.hasScriptLibs()) {
             let scriptLibsUrl = configer.getScriptLibUrl();
-            pageResource.saveScript(scriptLibsUrl);
+            pageResource.saveScriptLib(scriptLibsUrl);
         }
 
         let styleFiles = ioUtilities.getAllFiles(pageDir, options.compile.pageStyleNameRegex);

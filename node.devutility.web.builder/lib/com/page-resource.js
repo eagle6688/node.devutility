@@ -1,9 +1,9 @@
 /**
-* Page resource class, as a container for resource.
-* 
-* @author: Aldwin Su
-* @Copyright: 2018. All rights reserved.
-*/
+ * Page resource class, as a container for resource.
+ * 
+ * @author: Aldwin Su
+ * @Copyright: 2018. All rights reserved.
+ */
 
 const collectionUtilities = require("utilities-collection");
 const PagePartial = require("./page-partial");
@@ -11,6 +11,7 @@ const PagePartial = require("./page-partial");
 function PageResource(page) {
     this.page = page;
     this.styles = [];
+    this.scriptLibs = [];
     this.scripts = [];
     this.partials = [];
 }
@@ -21,6 +22,14 @@ PageResource.prototype.saveStyle = function (style) {
     }
 
     this.styles.push(style);
+};
+
+PageResource.prototype.saveScriptLib = function (script) {
+    if (collectionUtilities.contain(this.scriptLibs, script)) {
+        return;
+    }
+
+    this.scriptLibs.push(script);
 };
 
 PageResource.prototype.saveScript = function (script) {
