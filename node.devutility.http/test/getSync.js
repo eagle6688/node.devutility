@@ -1,5 +1,5 @@
 const utilities = require("../index");
-let options = utilities.requestOptions('127.0.0.1', 29302, '/login/getdefaultpage');
+let options = utilities.requestOptions('127.0.0.1', 29302, '/system/httpstatus?status=403');
 
 async function getSync() {
     let data = await utilities.getPromise(options);
@@ -15,4 +15,4 @@ utilities.getPromise(options).then(function (result) {
     console.log(error);
 });
 
-console.log("asd");
+console.log("OK!");

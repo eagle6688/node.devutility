@@ -7,7 +7,8 @@
  */
 
 var http = require('http');
-let httpUtilities = {};
+var HttpResponse = require('./models/HttpResponse');
+var httpUtilities = {};
 
 /**
  * Http get method.
@@ -33,7 +34,7 @@ httpUtilities.post = function (options, data, success, error) {
         options.method = 'post';
     }
 
-    let request = this.createHttpRequest(options, success, error);
+    var request = this.createHttpRequest(options, success, error);
 
     if (data) {
         request.write(data);
@@ -55,44 +56,59 @@ httpUtilities.postPromise = function (options) {
  * Create an ClientHttpRequest object.
  */
 httpUtilities.createHttpRequest = function (options, success, error) {
-    let request = http.request(options, (response) => {
-        let rawData = '';
+    var request = http.request(options, function (response) {
+        var rawData = '';
         response.setEncoding('utf8');
 
-        response.on('data', (chunk) => {
+        if (options.setResponse) {
+            options.setResponse(response);
+        }
+
+        response.on('data', function (chunk) {
             rawData += chunk;
         });
 
-        response.on('end', () => {
-            if (success) {
-                var result = {
-                    statusCode: 0,
-                    data: null
-                };
+        response.on('end', function () {
+            var httpResponse = new HttpResponse(null, response.statusMessage, response.statusCode);
 
-                if (response) {
-                    result.statusCode = response.statusCode;
-                }
+            if (rawData) {
+                httpResponse.data = rawData;
 
-                if (rawData) {
+                if (options.responseType == 'json') {
                     try {
-                        result.data = JSON.parse(rawData);
+                        httpResponse.data = JSON.parse(rawData);
                     } catch (e) {
-                        if (error) {
-                            error(e);
-                        }
+                        httpResponse.statusCode = 422;
+                        httpResponse.data = e;
+                        httpUtilities.error(error, httpResponse);
+                        return null;
                     }
                 }
-
-                success(result);
             }
+
+            if (!httpResponse.isSucceeded()) {
+                httpUtilities.error(error, httpResponse);
+                return null;
+            }
+
+            httpUtilities.callback(success, httpResponse);
         });
     });
 
+    if (options.setRequest) {
+        options.setRequest(request);
+    }
+
     request.on('error', function (e) {
-        if (error) {
-            error(e);
-        }
+        var httpResponse = new HttpResponse(e);
+        httpUtilities.error(error, httpResponse);
+    });
+
+    request.on('timeout', function () {
+        var httpResponse = new HttpResponse();
+        httpResponse.statusCode = 408;
+        httpResponse.message = 'Request ' + options.path + ' timeout!';
+        httpUtilities.error(error, httpResponse);
     });
 
     return request;
@@ -102,11 +118,16 @@ httpUtilities.createHttpRequest = function (options, success, error) {
  * Create a new request options object.
  */
 httpUtilities.requestOptions = function (hostname, port, path, cookies) {
-    let options = {
+    var options = {
+        headers: {},
         hostname: hostname,
         port: port,
         path: path,
-        headers: {}
+        timeout: 5000,
+        timestamp: new Date().getTime(),
+        responseType: 'json',
+        setRequest: function (request) {},
+        setResponse: function (response) {}
     };
 
     if (cookies) {
@@ -114,6 +135,26 @@ httpUtilities.requestOptions = function (hostname, port, path, cookies) {
     }
 
     return options;
+};
+
+/**
+ * Callback handle for http request.
+ */
+httpUtilities.callback = function (_callback, data) {
+    if (_callback) {
+        _callback(data);
+    }
+};
+
+/**
+ * Error handle for http request.
+ */
+httpUtilities.error = function (_callback, e) {
+    if (!_callback) {
+        throw e;
+    }
+
+    httpUtilities.callback(_callback, e);
 };
 
 module.exports = httpUtilities;
