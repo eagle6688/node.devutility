@@ -27,6 +27,15 @@ httpUtilities.getPromise = function (options) {
 };
 
 /**
+ * Synchronized http get request.
+ */
+httpUtilities.syncGet = function (options) {
+    return httpUtilities.getPromise(options).catch(error => {
+        return error;
+    });
+};
+
+/**
  * Http post method.
  */
 httpUtilities.post = function (options, data, success, error) {
@@ -49,6 +58,15 @@ httpUtilities.post = function (options, data, success, error) {
 httpUtilities.postPromise = function (options) {
     return new Promise((resolve, reject) => {
         httpUtilities.post(options, resolve, reject);
+    });
+};
+
+/**
+ * Synchronized http post request.
+ */
+httpUtilities.syncPost = function (options) {
+    return httpUtilities.postPromise(options).catch(error => {
+        return error;
     });
 };
 
