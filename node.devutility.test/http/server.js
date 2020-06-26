@@ -4,6 +4,7 @@ http.createServer(function (req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
     res.write("<h1>Node.js</h1>");
     res.write("<p>Hello World</p>");
+    res.write("<p>Your request path is" + req.headers.host + req.url + "</p>");
     res.end("<p>beyondweb.cn</p>");
 }).listen(3000);
 
