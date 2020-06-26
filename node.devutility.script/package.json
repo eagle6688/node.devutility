@@ -6,8 +6,8 @@
     "license": "ISC",
     "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.script",
     "scripts": {
-        "test": "node ./test/compileTsTest.js && node ./test/compileTsFileTest.js",
-        "test:cts": "node ./test/compileTsFiles"
+        "test": "node ./test/compileLayoutTs.js && node ./test/compileTestTs.js",
+        "test:cts": "node ./test/compileTest"
     },
     "repository": {
         "type": "git",
