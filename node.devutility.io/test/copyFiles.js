@@ -1,2 +1,2 @@
 const utilities = require("../index");
-utilities.copyFiles("resources/source", "resources/dest");
+utilities.copyFiles("test/resources/source", "test/resources/dest");
