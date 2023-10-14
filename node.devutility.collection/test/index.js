@@ -1,8 +1,8 @@
-const utilities = require("../index");
-const data = require("./data");
+import devCollection from "../index.js";
+import data from "./data.js";
 
 function test(value) {
-    console.log(utilities.index(data.numbers, value));
+    console.log(devCollection.index(data.numbers, value));
 }
 
 test(1);

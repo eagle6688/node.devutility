@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     students: [
         {
             id: 1,

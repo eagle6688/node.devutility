@@ -1,6 +1,7 @@
 {
     "name": "utilities-forwarder",
-    "version": "1.0.5",
+    "version": "1.0.6",
+    "type": "module",
     "description": "Http/Https request forwarder.",
     "author": "Aldwin Su",
     "license": "ISC",

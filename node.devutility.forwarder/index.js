@@ -2,8 +2,10 @@
  * Export modules.
  */
 
-const Helper = require("./lib/helper");
+import HttpProxyHelper from "./lib/helper.js";
 
-module.exports = function (options) {
-    return new Helper(options);
+export {
+    HttpProxyHelper
 };
+
+export default HttpProxyHelper;

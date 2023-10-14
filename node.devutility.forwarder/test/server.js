@@ -3,15 +3,19 @@
  * Test step 2: npm run test in cmd
  * Test step 3: All request for http://127.0.0.1:9501 will forward to http://127.0.0.1:3000
  */
-const http = require("http");
+import { HttpProxyHelper } from "../index.js"
+import http from "http";
+
 const port = 9501;
 
-const forwarder = require("../index")({
-    target: 'http://127.0.0.1:3000'
+const httpProxyHelper = new HttpProxyHelper({
+    proxyOptions: {
+        target: 'http://127.0.0.1:3000'
+    }
 });
 
 http.createServer(function (req, res) {
-    forwarder.request(req, res);
+    httpProxyHelper.proxy(req, res);
 }).listen(port);
 
 console.log("HTTP server is listening at port", port, "....");

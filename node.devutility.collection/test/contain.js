@@ -1,8 +1,8 @@
-const utilities = require("../index");
-const data = require("./data");
+import devCollection from "../index.js";
+import data from "./data.js";
 
 function test(value) {
-    if (utilities.contain(data.numbers, value)) {
+    if (devCollection.contain(data.numbers, value)) {
         console.log('Exists!');
     }
     else {

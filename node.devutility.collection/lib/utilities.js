@@ -121,4 +121,4 @@ utilities.indexOf = function (array, comparator) {
     return -1;
 };
 
-module.exports = utilities;
+export default utilities;

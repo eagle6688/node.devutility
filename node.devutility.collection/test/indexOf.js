@@ -1,12 +1,12 @@
-const utilities = require("../index");
-const data = require("./data");
+import devCollection from "../index.js";
+import data from "./data.js";
 
 function test(student) {
     let comparator = function (item) {
         return item.id == student.id;
     };
 
-    console.log(utilities.indexOf(data.students, comparator));
+    console.log(devCollection.indexOf(data.students, comparator));
 }
 
 test({

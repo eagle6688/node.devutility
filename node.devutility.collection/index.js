@@ -2,4 +2,10 @@
  * Export modules.
  */
 
-module.exports = require("./lib/utilities");
+import devCollection from "./lib/utilities.js";
+
+export {
+    devCollection
+};
+
+export default devCollection;
