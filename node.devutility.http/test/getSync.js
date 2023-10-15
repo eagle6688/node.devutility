@@ -1,24 +1,26 @@
-const utilities = require("../index");
-let options = utilities.requestOptions('127.0.0.1', 9000, '/system/httpstatus?status=400');
+import { HttpUtilities } from "../index.js";
+
+let options = HttpUtilities.requestOptions('127.0.0.1', 9000, '/system/httpstatus?status=400');
 
 async function getSync() {
-    let data = await utilities.syncGet(options);
+    let data = await HttpUtilities.syncGet(options);
     console.log(data);
 
     options.path = '/system/httpstatus?status=200';
-    data = await utilities.syncGet(options);
+    data = await HttpUtilities.syncGet(options);
     console.log(data);
 
-    let data2 = await utilities.getPromise(options).catch(error => {
+    let data2 = await HttpUtilities.getPromise(options).catch(error => {
         console.log(error);
     });
 
-    console.log(data2); //undefined if catched error.
+    //undefined if catched error.
+    console.log(data2);
 }
 
 getSync();
 
-utilities.getPromise(options).then(function (result) {
+HttpUtilities.getPromise(options).then(function (result) {
     console.log(result);
     throw new Error("Test");
 }).catch(error => {

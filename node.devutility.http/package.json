@@ -1,6 +1,7 @@
 {
     "name": "utilities-http",
-    "version": "1.0.3",
+    "version": "1.0.4",
+    "type": "module",
     "description": "Developing utilities about http.",
     "author": "Aldwin Su",
     "license": "ISC",

@@ -6,31 +6,32 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-var http = require('http');
-var HttpResponse = require('./models/HttpResponse');
-var httpUtilities = {};
+import http from "http";
+import HttpResponse from "./models/HttpResponse.js"
+
+let utilities = {};
 
 /**
  * Http get method.
  */
-httpUtilities.get = function (options, success, error) {
+utilities.get = function (options, success, error) {
     this.createHttpRequest(options, success, error).end();
 };
 
 /**
  * Call http get method and return an promise object.
  */
-httpUtilities.getPromise = function (options) {
+utilities.getPromise = function (options) {
     return new Promise((resolve, reject) => {
-        httpUtilities.get(options, resolve, reject);
+        utilities.get(options, resolve, reject);
     });
 };
 
 /**
  * Synchronized http get request.
  */
-httpUtilities.syncGet = function (options) {
-    return httpUtilities.getPromise(options).catch(error => {
+utilities.syncGet = function (options) {
+    return utilities.getPromise(options).catch(error => {
         return error;
     });
 };
@@ -38,7 +39,7 @@ httpUtilities.syncGet = function (options) {
 /**
  * Http post method.
  */
-httpUtilities.post = function (options, data, success, error) {
+utilities.post = function (options, data, success, error) {
     if (options.method || typeof options.method != 'string' || options.method.toLowerCase() != 'post') {
         options.method = 'post';
     }
@@ -55,17 +56,17 @@ httpUtilities.post = function (options, data, success, error) {
 /**
  * Call http post method and return an promise object.
  */
-httpUtilities.postPromise = function (options) {
+utilities.postPromise = function (options) {
     return new Promise((resolve, reject) => {
-        httpUtilities.post(options, resolve, reject);
+        utilities.post(options, resolve, reject);
     });
 };
 
 /**
  * Synchronized http post request.
  */
-httpUtilities.syncPost = function (options) {
-    return httpUtilities.postPromise(options).catch(error => {
+utilities.syncPost = function (options) {
+    return utilities.postPromise(options).catch(error => {
         return error;
     });
 };
@@ -73,7 +74,7 @@ httpUtilities.syncPost = function (options) {
 /**
  * Create an ClientHttpRequest object.
  */
-httpUtilities.createHttpRequest = function (options, success, error) {
+utilities.createHttpRequest = function (options, success, error) {
     var request = http.request(options, function (response) {
         var rawData = '';
         response.setEncoding('utf8');
@@ -98,18 +99,18 @@ httpUtilities.createHttpRequest = function (options, success, error) {
                     } catch (e) {
                         httpResponse.statusCode = 422;
                         httpResponse.data = e;
-                        httpUtilities.error(error, httpResponse);
+                        utilities.error(error, httpResponse);
                         return null;
                     }
                 }
             }
 
             if (!httpResponse.isSucceeded()) {
-                httpUtilities.error(error, httpResponse);
+                utilities.error(error, httpResponse);
                 return null;
             }
 
-            httpUtilities.callback(success, httpResponse);
+            utilities.callback(success, httpResponse);
         });
     });
 
@@ -119,14 +120,14 @@ httpUtilities.createHttpRequest = function (options, success, error) {
 
     request.on('error', function (e) {
         var httpResponse = new HttpResponse(e);
-        httpUtilities.error(error, httpResponse);
+        utilities.error(error, httpResponse);
     });
 
     request.on('timeout', function () {
         var httpResponse = new HttpResponse();
         httpResponse.statusCode = 408;
         httpResponse.message = 'Request ' + options.path + ' timeout!';
-        httpUtilities.error(error, httpResponse);
+        utilities.error(error, httpResponse);
     });
 
     return request;
@@ -135,7 +136,7 @@ httpUtilities.createHttpRequest = function (options, success, error) {
 /**
  * Create a new request options object.
  */
-httpUtilities.requestOptions = function (hostname, port, path, cookies) {
+utilities.requestOptions = function (hostname, port, path, cookies) {
     var options = {
         headers: {},
         hostname: hostname,
@@ -144,8 +145,8 @@ httpUtilities.requestOptions = function (hostname, port, path, cookies) {
         timeout: 5000,
         timestamp: new Date().getTime(),
         responseType: 'json',
-        setRequest: function (request) {},
-        setResponse: function (response) {}
+        setRequest: function (request) { },
+        setResponse: function (response) { }
     };
 
     if (cookies) {
@@ -158,7 +159,7 @@ httpUtilities.requestOptions = function (hostname, port, path, cookies) {
 /**
  * Callback handle for http request.
  */
-httpUtilities.callback = function (_callback, data) {
+utilities.callback = function (_callback, data) {
     if (_callback) {
         _callback(data);
     }
@@ -167,12 +168,12 @@ httpUtilities.callback = function (_callback, data) {
 /**
  * Error handle for http request.
  */
-httpUtilities.error = function (_callback, e) {
+utilities.error = function (_callback, e) {
     if (!_callback) {
         throw e;
     }
 
-    httpUtilities.callback(_callback, e);
+    utilities.callback(_callback, e);
 };
 
-module.exports = httpUtilities;
+export default utilities;

@@ -1,23 +1,24 @@
-function HttpResponse(data, message, httpStatus) {
-    this.data = null;
-    this.message = '';
-    this.statusCode = 0;
+class HttpResponse {
+    constructor(data, message, httpStatus) {
+        this.data = null;
+        this.message = '';
+        this.statusCode = 0;
 
-    if (data) {
-        this.data = data;
+        if (data) {
+            this.data = data;
+        }
+
+        if (message) {
+            this.message = message;
+        }
+
+        if (httpStatus) {
+            this.statusCode = httpStatus;
+        }
     }
-
-    if (message) {
-        this.message = message;
-    }
-
-    if (httpStatus) {
-        this.statusCode = httpStatus;
+    isSucceeded() {
+        return this.statusCode >= 200 && this.statusCode < 400;
     }
 }
 
-HttpResponse.prototype.isSucceeded = function () {
-    return this.statusCode >= 200 && this.statusCode < 400;
-};
-
-module.exports = HttpResponse;
+export default HttpResponse;

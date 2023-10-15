@@ -1,5 +1,11 @@
 /**
  * All modules.
  */
-const utilities = require("./lib/utilities");
-module.exports = utilities;
+
+import HttpUtilities from "./lib/utilities.js"
+
+export {
+    HttpUtilities
+}
+
+export default HttpUtilities;

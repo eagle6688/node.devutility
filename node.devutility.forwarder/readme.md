@@ -10,6 +10,9 @@ npm install utilities-forwarder
 
 ``` javascript
 const forwarder = require("utilities-forwarder")(options);
+
+import { HttpProxyHelper } from "utilities-forwarder"
+let httpProxyHelper=new HttpProxyHelper(options);
 ```
 
 The options can refer to <https://github.com/nodejitsu/node-http-proxy>

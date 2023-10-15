@@ -1,9 +1,9 @@
-const utilities = require("../index");
+import { HttpUtilities } from "../index.js";
 
-let options = utilities.requestOptions('127.0.0.1', 9000, '/system/long-request');
+let options = HttpUtilities.requestOptions('127.0.0.1', 9000, '/system/long-request');
 options.timeout = 1000;
 
-utilities.getPromise(options).then(function (result) {
+HttpUtilities.getPromise(options).then(function (result) {
     console.log('Successful request1 cost:', new Date().getTime() - options.timestamp, 'milliseconds.');
     console.log(result);
 }).catch(error => {
@@ -13,7 +13,7 @@ utilities.getPromise(options).then(function (result) {
 
 options.timeout = 7000;
 
-utilities.getPromise(options).then(function (result) {
+HttpUtilities.getPromise(options).then(function (result) {
     console.log('Successful request2 cost:', new Date().getTime() - options.timestamp, 'milliseconds.');
     console.log(result);
 }).catch(error => {
@@ -23,7 +23,7 @@ utilities.getPromise(options).then(function (result) {
 
 options.path = '/system/httpstatus?status=400';
 
-utilities.getPromise(options).then(function (result) {
+HttpUtilities.getPromise(options).then(function (result) {
     console.log('Successful request3 cost:', new Date().getTime() - options.timestamp, 'milliseconds.');
     console.log(result);
 }).catch(error => {
@@ -33,7 +33,7 @@ utilities.getPromise(options).then(function (result) {
 
 options.path = '/system/404';
 
-utilities.getPromise(options).then(function (result) {
+HttpUtilities.getPromise(options).then(function (result) {
     console.log('Successful request4 cost:', new Date().getTime() - options.timestamp, 'milliseconds.');
     console.log(result);
 }).catch(error => {
