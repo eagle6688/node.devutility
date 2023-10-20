@@ -1,8 +1,8 @@
-import devCollection from "../index.js";
+import CollectionUtilities from "../index.js";
 import data from "./data.js";
 
 function test(value) {
-    console.log(devCollection.index(data.numbers, value));
+    console.log(CollectionUtilities.index(data.numbers, value));
 }
 
 test(1);

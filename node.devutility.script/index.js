@@ -1,5 +1,10 @@
 /**
  * All modules.
  */
-const utilities = require("./lib/utilities");
-module.exports = utilities;
+import ScriptUtilities from "./lib/utilities.js";
+
+export {
+    ScriptUtilities
+}
+
+export default ScriptUtilities;

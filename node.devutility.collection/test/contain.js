@@ -1,8 +1,8 @@
-import devCollection from "../index.js";
+import CollectionUtilities from "../index.js";
 import data from "./data.js";
 
 function test(value) {
-    if (devCollection.contain(data.numbers, value)) {
+    if (CollectionUtilities.contain(data.numbers, value)) {
         console.log('Exists!');
     }
     else {

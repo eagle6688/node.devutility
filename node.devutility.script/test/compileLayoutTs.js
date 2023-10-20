@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const config = require("./config");
-const scriptUtilities = require("../index");
-const tsFileName = "layout.ts";
+import fs from "fs";
+import path from "path";
+import config from "./config.js";
+import scriptUtilities from "../index.js";
 
+const tsFileName = "layout.ts";
 console.log("Start compiling ts file", tsFileName);
 
 let projectDirectory = process.cwd();

@@ -3,6 +3,7 @@
     "author": "Aldwin Su",
     "license": "ISC",
     "version": "1.0.0",
+    "type": "module",
     "description": "The website example for node.js",
     "repository": {
         "type": "git",

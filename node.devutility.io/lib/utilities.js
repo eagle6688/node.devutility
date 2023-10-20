@@ -6,8 +6,8 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-const fs = require('fs');
-const sysPath = require("path");
+import fs from "fs";
+import sysPath from "path";
 
 let utilities = {};
 
@@ -242,4 +242,4 @@ utilities.readJson = function (file) {
     return JSON.parse(content);
 };
 
-module.exports = utilities;
+export default utilities;

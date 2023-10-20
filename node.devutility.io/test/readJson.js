@@ -1,2 +1,2 @@
-const utilities = require("../index");
-console.log(utilities.readJson("package.json"));
+import { IOUtilities } from "../index.js";
+console.log(IOUtilities.readJson("package.json"));

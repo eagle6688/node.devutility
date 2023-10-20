@@ -1,4 +1,4 @@
-const sysPath = require("path");
+import sysPath from "path";
 
 let path1 = sysPath.resolve("asd");
 display(path1);

@@ -2,10 +2,10 @@
  * Export modules.
  */
 
-import devCollection from "./lib/utilities.js";
+import CollectionUtilities from "./lib/utilities.js";
 
 export {
-    devCollection
+    CollectionUtilities
 };
 
-export default devCollection;
+export default CollectionUtilities;

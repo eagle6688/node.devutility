@@ -1,5 +1,11 @@
 /**
  * All modules.
  */
-const utilities = require("./lib/utilities");
-module.exports = utilities;
+
+import IOUtilities from "./lib/utilities.js";
+
+export {
+    IOUtilities
+}
+
+export default IOUtilities;

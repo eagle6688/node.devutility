@@ -1,4 +1,4 @@
-import devCollection from "../index.js";
+import CollectionUtilities from "../index.js";
 import data from "./data.js";
 
 function test(student) {
@@ -6,7 +6,7 @@ function test(student) {
         return item.name == student.name;
     };
 
-    console.log(devCollection.find(data.students, comparator));
+    console.log(CollectionUtilities.find(data.students, comparator));
 }
 
 test({

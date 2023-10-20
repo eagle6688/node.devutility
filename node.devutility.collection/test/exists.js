@@ -1,4 +1,4 @@
-import devCollection from "../index.js";
+import CollectionUtilities from "../index.js";
 import data from "./data.js";
 
 function test(student) {
@@ -6,7 +6,7 @@ function test(student) {
         return item.id == student.id;
     };
 
-    if (devCollection.exists(data.students, comparator)) {
+    if (CollectionUtilities.exists(data.students, comparator)) {
         console.log(student, 'exists!');
     }
     else {

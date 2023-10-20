@@ -1,13 +1,13 @@
-const utilities = require("../index");
+import { IOUtilities } from "../index.js";
 
 //Directory to directory
-utilities.copy("resources/source", "resources/dest1");
+IOUtilities.copy("resources/source", "resources/dest1");
 
 //File to directory
-utilities.copy("resources/source/asd/456.js", "resources/dest2");
+IOUtilities.copy("resources/source/asd/456.js", "resources/dest2");
 
 //File to file
-utilities.copy("resources/source/asd/456.js", "resources/dest3/789.js");
+IOUtilities.copy("resources/source/asd/456.js", "resources/dest3/789.js");
 
 //Directory to file, error!
-utilities.copy("resources/source", "resources/dest4/789.js");
+IOUtilities.copy("resources/source", "resources/dest4/789.js");

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     tsConfig: {
         "compilerOptions": {
             "noImplicitUseStrict": true,
