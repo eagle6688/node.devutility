@@ -1,5 +1,5 @@
-const config = require("./config");
-const scriptUtilities = require("../index");
+import config from "./config.js";
+import scriptUtilities from "../index.js";
 
 console.log("Start complieTest...", "\n");
 

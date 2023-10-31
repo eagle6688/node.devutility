@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "utilities-collection": "^1.1.1",
-        "utilities-io": "^1.1.1"
+        "utilities-io": "^1.1.1",
+        "utilities-script": "^1.1.1"
     }
 }

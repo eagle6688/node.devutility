@@ -1,6 +1,6 @@
-const config = require("./config");
-const scriptUtilities = require("../index");
-const path = require("path");
+import path from "path";
+import config from "./config.js";
+import scriptUtilities from "../index.js";
 const tsFileName = "test.ts";
 
 console.log("Start compiling ts file", tsFileName);
