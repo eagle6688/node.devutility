@@ -1,1 +1,2 @@
-require("../index")().build_scriptLib();
+import WebBuilder from "../index.js";
+WebBuilder.build().build_scriptLib();

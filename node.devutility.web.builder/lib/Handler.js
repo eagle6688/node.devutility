@@ -5,17 +5,17 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-const sysPath = require("path");
-const ioUtilities = require("utilities-io");
-const projectDirectory = process.cwd();
+import sysPath from "path";
+import ioUtilities from "utilities-io";
 
-function Configer(options) {
+function Handler(options) {
     this.options = options;
+    this.projectDirectory = process.cwd();
 }
 
 /* File name */
 
-Configer.prototype.getStyleLibName = function () {
+Handler.prototype.getStyleLibName = function () {
     if (!this.options.deploy.versionedType || this.options.deploy.versionedType != 'prefix' || !this.options.deploy.version) {
         return this.options.compile.styleLibName;
     }
@@ -23,7 +23,7 @@ Configer.prototype.getStyleLibName = function () {
     return this.getVersionedName(this.options.compile.styleLibName);
 };
 
-Configer.prototype.getPageStyleName = function (page) {
+Handler.prototype.getPageStyleName = function (page) {
     let name = this.options.compile.pageStyleNameFormat.replace(/{page}/, page);
 
     if (!this.options.deploy.versionedType || this.options.deploy.versionedType != 'prefix' || !this.options.deploy.version) {
@@ -33,7 +33,7 @@ Configer.prototype.getPageStyleName = function (page) {
     return this.getVersionedName(name);
 };
 
-Configer.prototype.getScriptLibName = function () {
+Handler.prototype.getScriptLibName = function () {
     if (!this.options.deploy.versionedType || this.options.deploy.versionedType != 'prefix' || !this.options.deploy.version) {
         return this.options.compile.scriptLibName;
     }
@@ -41,7 +41,7 @@ Configer.prototype.getScriptLibName = function () {
     return this.getVersionedName(this.options.compile.scriptLibName);
 };
 
-Configer.prototype.getPageScriptName = function (page) {
+Handler.prototype.getPageScriptName = function (page) {
     let name = this.options.compile.pageScriptNameFormat.replace(/{page}/, page);
 
     if (!this.options.deploy.versionedType || this.options.deploy.versionedType != 'prefix' || !this.options.deploy.version) {
@@ -55,11 +55,11 @@ Configer.prototype.getPageScriptName = function (page) {
 
 /* Directory */
 
-Configer.prototype.getViewsDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.views);
+Handler.prototype.getViewsDirectory = function () {
+    return sysPath.join(this.projectDirectory, this.options.views);
 };
 
-Configer.prototype.getPagesDirectories = function () {
+Handler.prototype.getPagesDirectories = function () {
     let directories = [];
     let rootDirectories = this.options.hbs.pages;
 
@@ -76,7 +76,7 @@ Configer.prototype.getPagesDirectories = function () {
     return directories;
 };
 
-Configer.prototype.getPartialsDirectories = function () {
+Handler.prototype.getPartialsDirectories = function () {
     if (!this.options.hbs.partials || this.options.hbs.partials.length == 0) {
         return [sysPath.join(this.options.views, "partials")];
     }
@@ -84,12 +84,12 @@ Configer.prototype.getPartialsDirectories = function () {
     return this.options.hbs.partials;
 };
 
-Configer.prototype.getStyleDeployDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.deploy.dir, this.options.deploy.stylesDir);
+Handler.prototype.getStyleDeployDirectory = function () {
+    return sysPath.join(this.projectDirectory, this.options.deploy.dir, this.options.deploy.stylesDir);
 };
 
-Configer.prototype.getScriptDeployDirectory = function () {
-    return sysPath.join(projectDirectory, this.options.deploy.dir, this.options.deploy.scriptsDir);
+Handler.prototype.getScriptDeployDirectory = function () {
+    return sysPath.join(this.projectDirectory, this.options.deploy.dir, this.options.deploy.scriptsDir);
 };
 
 /* Directory end */
@@ -99,7 +99,7 @@ Configer.prototype.getScriptDeployDirectory = function () {
 /**
  * Get deploy root path, used for express register.
  */
-Configer.prototype.getDeployPath = function () {
+Handler.prototype.getDeployPath = function () {
     let dir = this.options.deploy.dir;
 
     if (dir.indexOf('/') == 0) {
@@ -112,33 +112,33 @@ Configer.prototype.getDeployPath = function () {
 /**
  * Get static relative paths, used for express register.
  */
-Configer.prototype.getStaticPaths = function () {
+Handler.prototype.getStaticPaths = function () {
     let paths = this.options.staticPaths;
     paths.push(this.getDeployPath());
     return paths;
 };
 
-Configer.prototype.getPageStylePath = function (page) {
+Handler.prototype.getPageStylePath = function (page) {
     let fileName = this.getPageStyleName(page);
     let deployDir = this.getStyleDeployDirectory();
     return sysPath.join(deployDir, fileName);
 };
 
-Configer.prototype.getPageScriptPath = function (page) {
+Handler.prototype.getPageScriptPath = function (page) {
     let fileName = this.getPageScriptName(page);
     let deployDir = this.getScriptDeployDirectory();
-    return sysPath.join(projectDirectory, deployDir, fileName);
+    return sysPath.join(this.projectDirectory, deployDir, fileName);
 };
 
-Configer.prototype.getFaviconPath = function () {
-    return sysPath.join(projectDirectory, this.options.deploy.dir, this.options.deploy.favicon);
+Handler.prototype.getFaviconPath = function () {
+    return sysPath.join(this.projectDirectory, this.options.deploy.dir, this.options.deploy.favicon);
 };
 
 /* Path end */
 
 /* Url */
 
-Configer.prototype.getBaseUrl = function () {
+Handler.prototype.getBaseUrl = function () {
     if (this.options.deploy.host.endsWith('/')) {
         return this.options.deploy.host;
     }
@@ -146,7 +146,7 @@ Configer.prototype.getBaseUrl = function () {
     return this.options.deploy.host + '/';
 };
 
-Configer.prototype.getStyleLibUrl = function () {
+Handler.prototype.getStyleLibUrl = function () {
     let url = this.getBaseUrl() + this.options.deploy.stylesDir + "/" + this.getStyleLibName();
 
     if (this.options.deploy.versionedType == 'prefix') {
@@ -156,7 +156,7 @@ Configer.prototype.getStyleLibUrl = function () {
     return this.getVersionedUrl(url);
 };
 
-Configer.prototype.getPageStyleUrl = function (page) {
+Handler.prototype.getPageStyleUrl = function (page) {
     let url = this.getBaseUrl() + this.options.deploy.stylesDir + "/" + this.getPageStyleName(page);
 
     if (this.options.deploy.versionedType == 'prefix') {
@@ -166,7 +166,7 @@ Configer.prototype.getPageStyleUrl = function (page) {
     return this.getVersionedUrl(url);
 };
 
-Configer.prototype.getScriptLibUrl = function () {
+Handler.prototype.getScriptLibUrl = function () {
     let url = this.getBaseUrl() + this.options.deploy.scriptsDir + "/" + this.getScriptLibName();
 
     if (this.options.deploy.versionedType == 'prefix') {
@@ -176,7 +176,7 @@ Configer.prototype.getScriptLibUrl = function () {
     return this.getVersionedUrl(url);
 };
 
-Configer.prototype.getPageScriptUrl = function (page) {
+Handler.prototype.getPageScriptUrl = function (page) {
     let url = this.getBaseUrl() + this.options.deploy.scriptsDir + "/" + this.getPageScriptName(page);
 
     if (this.options.deploy.versionedType == 'prefix') {
@@ -190,7 +190,7 @@ Configer.prototype.getPageScriptUrl = function (page) {
 
 /* Webpack */
 
-Configer.prototype.getEntry = function () {
+Handler.prototype.getEntry = function () {
     let result = {};
     let counter = 0;
     let pageDirs = this.getPagesDirectories();
@@ -215,7 +215,7 @@ Configer.prototype.getEntry = function () {
     return result;
 };
 
-Configer.prototype.getOutput = function () {
+Handler.prototype.getOutput = function () {
     let result = {};
     result.filename = this.getPageScriptName('[name]');
     result.path = this.getScriptDeployDirectory();
@@ -226,12 +226,12 @@ Configer.prototype.getOutput = function () {
 
 /* Resource */
 
-Configer.prototype.hasStyleLibs = function () {
+Handler.prototype.hasStyleLibs = function () {
     let styles = this.options.resources.styles;
     return styles && styles.length > 0;
 };
 
-Configer.prototype.hasScriptLibs = function () {
+Handler.prototype.hasScriptLibs = function () {
     let scripts = this.options.resources.scripts;
     return scripts && scripts.length > 0;
 };
@@ -240,11 +240,11 @@ Configer.prototype.hasScriptLibs = function () {
 
 /* Other */
 
-Configer.prototype.getVersionedName = function (name) {
+Handler.prototype.getVersionedName = function (name) {
     return this.options.deploy.version + "_" + name;
 };
 
-Configer.prototype.getVersionedUrl = function (url) {
+Handler.prototype.getVersionedUrl = function (url) {
     if (!this.options.deploy.version) {
         return url;
     }
@@ -254,4 +254,4 @@ Configer.prototype.getVersionedUrl = function (url) {
 
 /* Other end */
 
-module.exports = Configer;
+export default Handler;

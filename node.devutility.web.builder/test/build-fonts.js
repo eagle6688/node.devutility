@@ -1,1 +1,2 @@
-require("../index")().build_fonts();
+import WebBuilder from "../index.js";
+WebBuilder.build().build_fonts();

@@ -6,21 +6,21 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-const fs = require('fs');
+import fs from "fs";
+import nodeSass from "node-sass";
+import CleanCSS from "clean-css";
 
-const nodeSass = require('node-sass');
-const CleanCSS = require('clean-css');
 const cssMinify = new CleanCSS();
 
-let styleUtilities = {
+let utilities = {
     commentFormat: "/*!\n * Style file: {file}\n */\n"
 };
 
-styleUtilities.getComment = function (file) {
-    return styleUtilities.commentFormat.replace(/{file}/, file);
+utilities.getComment = function (file) {
+    return utilities.commentFormat.replace(/{file}/, file);
 };
 
-styleUtilities.compile = function (file, data) {
+utilities.compile = function (file, data) {
     return nodeSass.renderSync({
         file: file,
         data: data,
@@ -28,7 +28,7 @@ styleUtilities.compile = function (file, data) {
     });
 };
 
-styleUtilities.compress = function (file) {
+utilities.compress = function (file) {
     let content = fs.readFileSync(file, 'utf8');
 
     if (/.+\.min\.css$/.test(file)) {
@@ -39,4 +39,4 @@ styleUtilities.compress = function (file) {
     return result.styles
 };
 
-module.exports = styleUtilities;
+export default utilities;

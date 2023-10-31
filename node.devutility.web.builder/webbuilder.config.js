@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     hbs: {
         defaultLayout: "layouts/default"
     },
@@ -14,7 +14,7 @@ module.exports = {
         ]
     },
     deploy: {
-        version: "20181103",
+        version: "20231021",
         versionedType: 'prefix'
     },
     copy: [

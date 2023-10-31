@@ -5,7 +5,7 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-let defaults = {
+export default {
     port: 8000, //Website server port.
     views: "app", //Express views directory.
     staticPaths: [], //Static paths need be regitered in express, will automatically add the "deploy.dir".
@@ -74,5 +74,3 @@ let defaults = {
         router: function (express, configer) { }
     }
 };
-
-module.exports = defaults;

@@ -1,5 +1,11 @@
 /**
  * All modules.
  */
-const utilities = require("./lib/utilities");
-module.exports = utilities;
+
+import StyleUtilities from "./lib/utilities.js";
+
+export {
+    StyleUtilities
+}
+
+export default StyleUtilities;

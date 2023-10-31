@@ -12,4 +12,4 @@ class PagePartial {
     }
 }
 
-module.exports = PagePartial;
+export default PagePartial;

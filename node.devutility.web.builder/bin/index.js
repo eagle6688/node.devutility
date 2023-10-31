@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const webbuilder = require("../index")();
+import WebBuilder from "../index.js";
 
 const argv = require("yargs").option('f', {
     alias: 'func',
@@ -10,10 +10,11 @@ const argv = require("yargs").option('f', {
 }).argv;
 
 let funcName = argv.func;
-let webbuilder_func = webbuilder[funcName];
+let webBuilder = WebBuilder.build();
+let webBuilder_Func = webBuilder[funcName];
 
-if (!webbuilder_func || typeof webbuilder_func != "function") {
-    throw new Error("Wrong parameter \"func\": " + funcName);
+if (!webBuilder_Func || typeof webBuilder_Func != "function") {
+    throw new Error("Invalid parameter 'func': " + funcName + ", function not found.");
 }
 
-webbuilder_func.call(webbuilder);
+webBuilder_Func.call(webBuilder);

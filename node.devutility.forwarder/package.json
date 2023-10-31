@@ -2,6 +2,7 @@
     "name": "utilities-forwarder",
     "version": "1.1.0",
     "type": "module",
+    "main": "index.js",
     "description": "Http/Https request forwarder.",
     "author": "Aldwin Su",
     "license": "ISC",

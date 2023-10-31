@@ -1,1 +1,2 @@
-require("../index")().start();
+import WebBuilder from "../index.js";
+WebBuilder.build().start();

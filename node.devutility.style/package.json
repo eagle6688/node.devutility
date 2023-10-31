@@ -2,6 +2,7 @@
     "name": "utilities-style",
     "version": "1.1.0",
     "type": "module",
+    "main": "index.js",
     "description": "Developing utilities about style.",
     "author": "Aldwin Su",
     "license": "ISC",
@@ -14,7 +15,7 @@
         "url": "git+https://github.com/eagle6688/node.devutility.git"
     },
     "dependencies": {
-        "clean-css": "^4.2.3",
+        "clean-css": "^5.3.2",
         "node-sass": "^9.0.0"
     }
 }
