@@ -37,7 +37,7 @@
         "utilities-collection": "^1.1.1",
         "utilities-io": "^1.1.1",
         "utilities-script": "^1.1.1",
-        "utilities-style": "1.1.0",
+        "utilities-style": "1.1.1",
         "webpack": "^5.89.0",
         "yargs": "^17.7.2"
     }
