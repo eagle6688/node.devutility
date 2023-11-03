@@ -107,11 +107,11 @@ class Server {
     }
 
     init_server() {
-        let port = this.port;
+        let self = this;
         this.server = http.createServer(this.app);
 
         this.server.on('listening', function () {
-            console.log('Listening on port:', port);
+            console.log('Listening on port:', self.port);
         });
 
         this.server.on('error', function (error) {
