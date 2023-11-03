@@ -10,30 +10,30 @@ import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
 
 class Builder {
-    static compile(configer, styleFile, pageName) {
+    static compile(styleFile, pageName, handler) {
         let style = styleUtilities.compile(styleFile).css;
-        let styleFilePath = configer.getPageStylePath(pageName);
+        let styleFilePath = handler.getPageStylePath(pageName);
         fs.writeFileSync(styleFilePath, style);
 
-        let styleFileName = configer.getPageStyleName(pageName);
+        let styleFileName = handler.getPageStyleName(pageName);
         console.log(styleFileName, "compiled completed!");
     }
 
-    static build(configer) {
-        let styleDirectory = configer.getStyleDeployDirectory();
+    static build(handler) {
+        let styleDirectory = handler.getStyleDeployDirectory();
         ioUtilities.createDirectory(styleDirectory);
-        let pagePaths = configer.getPagesDirectories();
+        let pagePaths = handler.getPagesDirectories();
 
         for (let index in pagePaths) {
             let pagePath = pagePaths[index];
             let pageName = ioUtilities.getLastPath(pagePath);
-            let styleFiles = ioUtilities.getAllFiles(pagePath, configer.options.compile.pageStyleNameRegex);
+            let styleFiles = ioUtilities.getAllFiles(pagePath, handler.options.compile.pageStyleNameRegex);
 
             if (!styleFiles || styleFiles.length == 0) {
                 continue;
             }
 
-            this.compile(styleFiles[0], pageName);
+            Builder.compile(styleFiles[0], pageName, handler);
         }
 
         console.log("All style files compiled completed!");

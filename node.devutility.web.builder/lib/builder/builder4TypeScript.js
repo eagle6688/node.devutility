@@ -9,18 +9,18 @@ import webpack from "webpack";
 import ioUtilities from "utilities-io";
 
 class Builder {
-    static build(configer) {
-        let options = configer.options;
-        let entry = configer.getEntry();
+    static build(handler) {
+        let options = handler.options;
+        let entry = handler.getEntry();
 
         if (!entry) {
             return;
         }
 
         options.webpack.entry = entry;
-        options.webpack.output = configer.getOutput();
+        options.webpack.output = handler.getOutput();
 
-        let scriptDirectory = configer.getScriptDeployDirectory();
+        let scriptDirectory = handler.getScriptDeployDirectory();
         ioUtilities.createDirectory(scriptDirectory);
 
         webpack(options.webpack, (err, stats) => {

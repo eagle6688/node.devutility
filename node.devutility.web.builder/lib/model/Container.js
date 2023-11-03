@@ -11,6 +11,14 @@ class Container {
         this.setResources(resources);
     }
 
+    getPort() {
+        if (!this.options) {
+            return null;
+        }
+
+        return this.options.port;
+    }
+
     setOptions(options) {
         this.options = options;
     }

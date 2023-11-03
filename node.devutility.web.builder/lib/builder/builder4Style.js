@@ -12,15 +12,15 @@ import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
 
 class Builder {
-    static build(configer) {
-        let styleDirectory = configer.getStyleDeployDirectory();
+    static build(handler) {
+        let styleDirectory = handler.getStyleDeployDirectory();
         ioUtilities.createDirectory(styleDirectory);
 
         let styles = [];
-        let styleFiles = configer.options.resources.styles;
+        let styleFiles = handler.options.resources.styles;
 
         try {
-            styles = getStyles(styleFiles);
+            styles = Builder.getStyles(styleFiles);
         }
         catch (err) {
             console.log("Bundle style files failed:", err);
@@ -28,10 +28,10 @@ class Builder {
         }
 
         let content = styles.join('\n');
-        let styleLibName = configer.getStyleLibName();
+        let styleLibName = handler.getStyleLibName();
         let styleLibPath = sysPath.join(styleDirectory, styleLibName);
         fs.writeFileSync(styleLibPath, content);
-        displayMessage(styleFiles, styleLibPath);
+        Builder.displayMessage(styleFiles, styleLibPath);
     }
 
     static getStyles(files) {

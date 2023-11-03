@@ -2,7 +2,10 @@
  * utilities-web-builder
  */
 
+import fs from "fs";
+import path from "path";
 import extend from "extend";
+import { createRequire } from "module";
 
 import defaults from "./conf/defaults.js";
 import Validator from "./lib/Validator.js";
@@ -26,12 +29,12 @@ class WebBuilder {
         this.init();
     }
 
-    static async build(options, router) {
+    static build(options, router) {
         if (!options) {
-            let configFile = path.join(process.cwd(), "webbuilder.config.js");
+            let configFile = path.join(process.cwd(), "webbuilder.config.cjs");
 
             if (fs.existsSync(configFile)) {
-                options = await import(configFile);
+                options = createRequire(configFile);
             }
         }
 

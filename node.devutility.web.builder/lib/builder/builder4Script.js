@@ -11,8 +11,8 @@ import ioUtilities from "utilities-io";
 import scriptUtilities from "utilities-script";
 
 class Builder {
-    static build(configer) {
-        let options = configer.options;
+    static build(handler) {
+        let options = handler.options;
 
         if (!options.resources.scripts) {
             return;
@@ -22,7 +22,7 @@ class Builder {
         let scriptFiles = options.resources.scripts;
         let projectDirectory = process.cwd();
         let scriptLibDir = sysPath.join(projectDirectory, options.deploy.dir, options.deploy.scriptsDir);
-        let scriptLibName = configer.getScriptLibName();
+        let scriptLibName = handler.getScriptLibName();
         let scriptLibPath = sysPath.join(scriptLibDir, scriptLibName);
         ioUtilities.createDirectory(scriptLibDir);
 
@@ -32,7 +32,7 @@ class Builder {
         }
 
         fs.writeFileSync(scriptLibPath, array.join('\n'));
-        displayMessage(scriptFiles, scriptLibPath);
+        Builder.displayMessage(scriptFiles, scriptLibPath);
     }
 
     static displayMessage(files, target) {

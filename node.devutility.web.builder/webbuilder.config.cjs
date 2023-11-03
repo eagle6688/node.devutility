@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     hbs: {
         defaultLayout: "layouts/default"
     },

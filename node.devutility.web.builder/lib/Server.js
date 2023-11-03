@@ -22,12 +22,13 @@ class Server {
     }
 
     init() {
+        this.port = this.container.getPort();
         this.init_express();
         this.init_server();
     }
 
     init_express() {
-        let options = container.getOptions();
+        let options = this.container.getOptions();
         this.app = options.server.express;
 
         if (this.app) {
@@ -42,7 +43,7 @@ class Server {
         this.app.engine('hbs', hbs.__express);
 
         // Set port.
-        this.app.set('port', options.port);
+        this.app.set('port', this.port);
 
         // Set views.
         this.app.set('views', this.handler.getViewsDirectory());
@@ -106,10 +107,11 @@ class Server {
     }
 
     init_server() {
+        let port = this.port;
         this.server = http.createServer(this.app);
 
         this.server.on('listening', function () {
-            console.log('Listening on port:', this.port);
+            console.log('Listening on port:', port);
         });
 
         this.server.on('error', function (error) {
