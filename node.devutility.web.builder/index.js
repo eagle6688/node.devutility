@@ -14,13 +14,13 @@ import Server from "./lib/Server.js";
 import Container from "./lib/model/Container.js";
 import ResourceProvider from "./lib/service/ResourceProvider.js";
 
-import Builder4Copy from "./lib/builder/Builder4Copy.js";
-import Builder4Font from "./lib/builder/Builder4Font.js";
-import Builder4Image from "./lib/builder/Builder4Image.js";
-import Builder4Sass from "./lib/builder/Builder4Sass.js";
-import Builder4Script from "./lib/builder/Builder4Script.js";
-import Builder4Style from "./lib/builder/Builder4Style.js";
-import Builder4TypeScript from "./lib/builder/Builder4TypeScript.js";
+import CopyBuilder from "./lib/builder/CopyBuilder.js";
+import FontBuilder from "./lib/builder/FontBuilder.js";
+import ImageBuilder from "./lib/builder/ImageBuilder.js";
+import SassBuilder from "./lib/builder/SassBuilder.js";
+import Builder4Script from "./lib/builder/ScriptBuilder.js";
+import StyleBuilder from "./lib/builder/StyleBuilder.js";
+import TypeScriptBuilder from "./lib/builder/TypeScriptBuilder.js";
 
 class WebBuilder {
     static CONFIG_NAME = "webbuilder.config.cjs";
@@ -79,15 +79,15 @@ class WebBuilder {
     }
 
     build_fonts() {
-        Builder4Font.build(this.options);
+        FontBuilder.build(this.options);
     }
 
     build_images() {
-        Builder4Image.build(this.options);
+        ImageBuilder.build(this.options);
     }
 
     build_styleLib() {
-        Builder4Style.build(this.handler);
+        StyleBuilder.build(this.handler);
     }
 
     build_scriptLib() {
@@ -95,15 +95,15 @@ class WebBuilder {
     }
 
     build_sass() {
-        Builder4Sass.build(this.handler);
+        SassBuilder.build(this.handler);
     }
 
     build_ts() {
-        Builder4TypeScript.build(this.handler);
+        TypeScriptBuilder.build(this.handler);
     }
 
     build_copy() {
-        Builder4Copy.build(this.options);
+        CopyBuilder.build(this.options);
     }
 
     start() {
