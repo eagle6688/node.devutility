@@ -14,15 +14,17 @@ import Server from "./lib/Server.js";
 import Container from "./lib/model/Container.js";
 import ResourceProvider from "./lib/service/ResourceProvider.js";
 
-import builder4Copy from "./lib/builder/builder4Copy.js";
-import builder4Font from "./lib/builder/builder4Font.js";
-import builder4Image from "./lib/builder/builder4Image.js";
-import builder4Sass from "./lib/builder/builder4Sass.js";
-import builder4Script from "./lib/builder/builder4Script.js";
-import builder4Style from "./lib/builder/builder4Style.js";
-import builder4TypeScript from "./lib/builder/builder4TypeScript.js";
+import Builder4Copy from "./lib/builder/Builder4Copy.js";
+import Builder4Font from "./lib/builder/Builder4Font.js";
+import Builder4Image from "./lib/builder/Builder4Image.js";
+import Builder4Sass from "./lib/builder/Builder4Sass.js";
+import Builder4Script from "./lib/builder/Builder4Script.js";
+import Builder4Style from "./lib/builder/Builder4Style.js";
+import Builder4TypeScript from "./lib/builder/Builder4TypeScript.js";
 
 class WebBuilder {
+    static CONFIG_NAME = "webbuilder.config.cjs";
+
     constructor(options) {
         this.options = extend(true, {}, defaults, options);
         this.verify();
@@ -31,11 +33,7 @@ class WebBuilder {
 
     static build(options, router) {
         if (!options) {
-            let configFile = path.join(process.cwd(), "webbuilder.config.cjs");
-
-            if (fs.existsSync(configFile)) {
-                options = createRequire(configFile);
-            }
+            options = this.getConfiguration();
         }
 
         if (!options) {
@@ -53,6 +51,22 @@ class WebBuilder {
         return new WebBuilder(options);
     }
 
+    static getConfiguration() {
+        let configPath = path.resolve(this.CONFIG_NAME);
+
+        if (fs.existsSync(configPath)) {
+            return createRequire(configPath);
+        }
+
+        configPath = path.resolve(this.CONFIG_NAME);
+
+        if (fs.existsSync(configPath)) {
+            return createRequire(configPath);
+        }
+
+        throw new Error("Configuration file " + this.CONFIG_NAME + " not found!");
+    }
+
     verify() {
         Validator.verify(this.options);
     }
@@ -65,31 +79,31 @@ class WebBuilder {
     }
 
     build_fonts() {
-        builder4Font.build(this.options);
+        Builder4Font.build(this.options);
     }
 
     build_images() {
-        builder4Image.build(this.options);
+        Builder4Image.build(this.options);
     }
 
     build_styleLib() {
-        builder4Style.build(this.handler);
+        Builder4Style.build(this.handler);
     }
 
     build_scriptLib() {
-        builder4Script.build(this.handler);
+        Builder4Script.build(this.handler);
     }
 
     build_sass() {
-        builder4Sass.build(this.handler);
+        Builder4Sass.build(this.handler);
     }
 
     build_ts() {
-        builder4TypeScript.build(this.handler);
+        Builder4TypeScript.build(this.handler);
     }
 
     build_copy() {
-        builder4Copy.build(this.options);
+        Builder4Copy.build(this.options);
     }
 
     start() {

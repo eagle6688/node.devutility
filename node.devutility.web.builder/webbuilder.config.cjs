@@ -31,15 +31,15 @@ module.exports = {
         mode: "development"
     },
     server: {
-        router: function (app, helper) {
+        router: function (app, handler) {
             app.get('/login', function (request, response, next) {
-                let data = helper.getPageData("login");
+                let data = handler.getPageData("login");
                 data.requireAuth = false;
                 response.render("pages/login/index", data);
             });
 
             app.use(function (request, response, next) {
-                console.log("Pre request, login check for", request.url);
+                console.log("Authorization validation for", request.url);
                 next();
             });
 
@@ -49,13 +49,13 @@ module.exports = {
             });
 
             app.get('/index', function (request, response, next) {
-                let data = helper.getPageData("index");
+                let data = handler.getPageData("index");
                 data.requireAuth = true;
                 data.savePartial("header", { message: "Hello World!" });
                 response.render("pages/index/index", data);
             });
 
-            // Catch api and 404 request.
+            // Catch API and 404 request.
             app.use(function (request, response, next) {
                 var error = new Error(request.url + " not found!");
                 error.status = 404;

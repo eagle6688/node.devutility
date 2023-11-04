@@ -71,6 +71,6 @@ export default {
     },
     server: {
         express: null,
-        router: function (express, configer) { }
+        router: function (express, handler) { }
     }
 };
