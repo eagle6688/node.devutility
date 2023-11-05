@@ -11,9 +11,6 @@
         "type": "git",
         "url": "git+https://github.com/eagle6688/node.devutility.git"
     },
-    "bin": {
-        "webbuilder": "./bin/index.js"
-    },
     "scripts": {
         "test:bf": "node ./test/build-fonts.js",
         "test:bi": "node ./test/build-images.js",
@@ -23,8 +20,7 @@
         "test:bc": "node ./test/build-copy.js",
         "test:build": "npm run test:bf && npm run test:bi && npm run test:bsl && npm run test:bss && npm run test:bts && npm run test:bc",
         "test:start": "node ./test/bootstrap.js",
-        "test:bfc": "node ./test/bootstrap-config.js",
-        "test:bin-bf": "webbuilder -f build_fonts"
+        "test:bfc": "node ./test/bootstrap-config.js"
     },
     "dependencies": {
         "body-parser": "^1.20.2",
@@ -38,7 +34,6 @@
         "utilities-io": "^1.1.1",
         "utilities-script": "^1.1.1",
         "utilities-style": "1.1.1",
-        "webpack": "^5.89.0",
-        "yargs": "^17.7.2"
+        "webpack": "^5.89.0"
     }
 }

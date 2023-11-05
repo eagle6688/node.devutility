@@ -6,21 +6,22 @@ import fs from "fs";
 import path from "path";
 import extend from "extend";
 import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
 import defaults from "./conf/defaults.js";
-import Validator from "./lib/Validator.js";
-import Handler from "./lib/Handler.js";
-import Server from "./lib/Server.js";
-import Container from "./lib/model/Container.js";
-import ResourceProvider from "./lib/service/ResourceProvider.js";
+import Validator from "./bin/Validator.js";
+import Handler from "./bin/Handler.js";
+import Server from "./bin/Server.js";
+import Container from "./bin/model/Container.js";
+import ResourceProvider from "./bin/service/ResourceProvider.js";
 
-import CopyBuilder from "./lib/builder/CopyBuilder.js";
-import FontBuilder from "./lib/builder/FontBuilder.js";
-import ImageBuilder from "./lib/builder/ImageBuilder.js";
-import SassBuilder from "./lib/builder/SassBuilder.js";
-import Builder4Script from "./lib/builder/ScriptBuilder.js";
-import StyleBuilder from "./lib/builder/StyleBuilder.js";
-import TypeScriptBuilder from "./lib/builder/TypeScriptBuilder.js";
+import CopyBuilder from "./bin/builder/CopyBuilder.js";
+import FontBuilder from "./bin/builder/FontBuilder.js";
+import ImageBuilder from "./bin/builder/ImageBuilder.js";
+import SassBuilder from "./bin/builder/SassBuilder.js";
+import Builder4Script from "./bin/builder/ScriptBuilder.js";
+import StyleBuilder from "./bin/builder/StyleBuilder.js";
+import TypeScriptBuilder from "./bin/builder/TypeScriptBuilder.js";
 
 class WebBuilder {
     static CONFIG_NAME = "webbuilder.config.cjs";
@@ -55,13 +56,13 @@ class WebBuilder {
         let configPath = path.resolve(this.CONFIG_NAME);
 
         if (fs.existsSync(configPath)) {
-            return createRequire(configPath);
+            return require(configPath);
         }
 
-        configPath = path.resolve(this.CONFIG_NAME);
+        configPath = path.resolve("conf", this.CONFIG_NAME);
 
         if (fs.existsSync(configPath)) {
-            return createRequire(configPath);
+            return require(configPath);
         }
 
         throw new Error("Configuration file " + this.CONFIG_NAME + " not found!");

@@ -15,10 +15,12 @@ module.exports = {
             'resources/scripts/vue.min.js'
         ]
     },
-    copy: [{
-        source: "resources/styles",
-        target: "dist/styles1"
-    }],
+    copy: [
+        {
+            source: "resources/styles",
+            target: "dist/styles1"
+        }
+    ],
     webpack: {
         mode: "development"
     }

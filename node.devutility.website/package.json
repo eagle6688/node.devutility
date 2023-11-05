@@ -23,9 +23,9 @@
         "@types/jquery": "^3.3.5",
         "@types/vue": "^2.0.0",
         "typescript": "^2.9.2",
-        "utilities-collection": "^1.0.1",
-        "utilities-forwarder": "^1.0.3",
-        "utilities-http": "^1.0.0",
-        "utilities-web-builder": "^1.2.6"
+        "utilities-collection": "1.0.1",
+        "utilities-forwarder": "1.0.3",
+        "utilities-http": "1.0.0",
+        "utilities-web-builder": "1.2.6"
     }
 }

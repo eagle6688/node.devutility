@@ -13,7 +13,7 @@
         "test:dir_create": "node ./test/directory_create.js",
         "test:dir_get": "node ./test/directory_get.js",
         "test:rj": "node ./test/readJson.js",
-        "test:sysPath": "node ./test/sysPath_parse.js"
+        "test:path": "node ./test/path_parse.js"
     },
     "repository": {
         "type": "git",
