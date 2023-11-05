@@ -16,13 +16,24 @@ npm install utilities-web-builder
 
 ## Usage
 
-``` javascript
-// Require module
-const webBuilder = require("utilities-web-builder")(builderConfig, router);
+### Version 1.3.x
 
+``` javascript
 // Import default module
 import webBuilder from "utilities-web-builder";
 
 // Import named module
 import { webBuilder } from "utilities-web-builder";
 ```
+
+### Version 1.2.x
+
+``` javascript
+// Require module
+const webBuilder = require("utilities-web-builder")(builderConfig, router);
+```
+
+## Upgrade from 1.2.x to 1.3.x
+
+* 1. Use `import` instead of `require`;
+* 2. Rename configuration file from `webbuilder.config.cjs` to `webbuilder.config.js`;
