@@ -10,7 +10,7 @@ import extend from "extend";
 import httpProxy from "http-proxy";
 import defaults from "./defaults.js"
 
-class Helper {
+class HttpForwarder {
     constructor(options) {
         this.options = extend(true, {}, defaults, options);
         this.init();
@@ -72,4 +72,4 @@ class Helper {
     }
 }
 
-export default Helper;
+export default HttpForwarder;

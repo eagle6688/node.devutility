@@ -8,13 +8,18 @@ npm install utilities-style
 
 ## Usage
 
-``` javascript
-// Require module
-const styleUtilities = require("utilities-style");
+### Version 1.1.x
 
+``` javascript
 // Import default module
 import styleUtilities from "utilities-style";
 
 // Import named module
 import { styleUtilities } from "utilities-style";
+```
+
+### Version 1.0.x
+
+``` javascript
+const styleUtilities = require("utilities-style");
 ```

@@ -37,7 +37,7 @@ webBuilder.start();
 ## Upgrade from 1.2.x to 1.3.x
 
 * 1. Use `import` instead of `require`;
-* 2. Rename configuration file from `webbuilder.config.cjs` to `webbuilder.config.js`.
+* 2. Rename configuration file from `webbuilder.config.js` to `webbuilder.config.cjs`.
 
 ## Change list
 
@@ -45,13 +45,13 @@ webBuilder.start();
 
 * 1. Upgrade javascript to ES 6;
 * 2. Optimize codes and restructure folders;
-* 3. Rename configuration file from `webbuilder.config.cjs` to `webbuilder.config.js`;
+* 3. Rename configuration file from `webbuilder.config.js` to `webbuilder.config.cjs`;
 * 4. Remove support for `yargs`.
 
 ## Default configuration file
 
-Refer to <https://github.com/eagle6688/node.devutility/blob/master/node.devutility.web.builder/conf/defaults.js>
+> Refer to <https://github.com/eagle6688/node.devutility/blob/master/node.devutility.web.builder/conf/defaults.js>
 
 ## Usage example
 
-Refer to <https://github.com/eagle6688/node.devutility/tree/master/node.devutility.website>
+> Refer to <https://github.com/eagle6688/node.devutility/tree/master/node.devutility.website>
