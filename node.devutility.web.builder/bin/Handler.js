@@ -13,6 +13,14 @@ function Handler(options) {
     this.projectDirectory = process.cwd();
 }
 
+Handler.prototype.getOptions = function () {
+    return this.options;
+};
+
+Handler.prototype.getProjectDirectory = function () {
+    return this.projectDirectory;
+};
+
 /* File name */
 
 Handler.prototype.getStyleLibName = function () {

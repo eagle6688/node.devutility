@@ -9,7 +9,7 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 import defaults from "./conf/defaults.js";
-import Validator from "./bin/Validator.js";
+import Validator from "./bin/validator/Validator.js";
 import Handler from "./bin/Handler.js";
 import Server from "./bin/Server.js";
 import Container from "./bin/model/Container.js";
@@ -69,11 +69,11 @@ class WebBuilder {
     }
 
     verify() {
-        Validator.verify(this.options);
+        this.handler = new Handler(this.options);
+        Validator.verify(this.handler);
     }
 
     init() {
-        this.handler = new Handler(this.options);
         let resources = ResourceProvider.getPageResources(this.handler, this.options);
         let container = new Container(this.options, resources);
         this.server = new Server(container, this.handler);
