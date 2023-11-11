@@ -46,7 +46,8 @@ webBuilder.start();
 * 1. Upgrade javascript to ES 6;
 * 2. Optimize codes and restructure folders;
 * 3. Rename configuration file from `webbuilder.config.js` to `webbuilder.config.cjs`;
-* 4. Remove support for `yargs`.
+* 4. Remove support for `yargs`;
+* 5. Add validators for configuration file.
 
 ## Default configuration file
 

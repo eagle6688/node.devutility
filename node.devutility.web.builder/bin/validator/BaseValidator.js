@@ -56,6 +56,14 @@ class BaseValidator {
         }
     }
 
+    requireFunction(value, name) {
+        this.require(value, name);
+
+        if (typeof value != "function") {
+            throw new Error("Invalid configuration '" + name + "', should be function!");
+        }
+    }
+
     optionalString(value, name) {
         if (!value) {
             return;

@@ -21,6 +21,10 @@ Handler.prototype.getProjectDirectory = function () {
     return this.projectDirectory;
 };
 
+Handler.prototype.getPath = function (relativePath) {
+    return sysPath.join(this.getProjectDirectory(), relativePath);
+};
+
 /* File name */
 
 Handler.prototype.getStyleLibName = function () {

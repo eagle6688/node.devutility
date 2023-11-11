@@ -14,11 +14,11 @@ class Builder {
         let array = options.copy;
 
         for (let index in array) {
-            let entry = array[index];
+            let item = array[index];
 
-            if (entry.source && entry.target) {
-                ioUtilities.copy(entry.source, entry.target);
-                console.log("Copy source", entry.source, "to", entry.target);
+            if (item.source && item.target) {
+                ioUtilities.copy(item.source, item.target);
+                console.log("Copy source", item.source, "to", item.target);
             }
         }
     }
