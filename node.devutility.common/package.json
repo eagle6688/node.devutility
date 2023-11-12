@@ -1,0 +1,17 @@
+{
+    "name": "utilities-common",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "index.js",
+    "description": "Common class or utilities for Node.js.",
+    "author": "Aldwin Su",
+    "license": "ISC",
+    "homepage": "https://github.com/eagle6688/node.devutility/tree/master/node.devutility.common",
+    "scripts": {
+        "test": "node ./test/logger.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/eagle6688/node.devutility.git"
+    }
+}
