@@ -1,6 +1,6 @@
-import Logger from "../../lib/log/Logger.js";
+import * as Common from "../../index.js";
 
-let logger = Logger.create();
+let logger = Common.Logger.create();
 logger.debug("Hello world!");
 logger.info("Hello world!");
 logger.warn("Hello world!");

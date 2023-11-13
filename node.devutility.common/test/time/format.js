@@ -1,4 +1,4 @@
-import DateTimeFormatter from "../../lib/time/DateTimeFormatter.js";
+import { DateTimeFormatter } from "../../index.js";
 
 let formatter1 = new DateTimeFormatter('yyyy-MM-dd HH:mm:ss.SSS');
 console.log(formatter1.format(new Date()));
