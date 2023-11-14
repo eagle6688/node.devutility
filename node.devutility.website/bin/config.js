@@ -2,7 +2,7 @@
  * Application configuration file.
  */
 
-const httpUtilities = require("utilities-http");
+import httpUtilities from "utilities-http";
 
 let config = {
     forward: {
@@ -29,4 +29,4 @@ config.getRequestOptions_baseData = function (request) {
     return httpUtilities.requestOptions(config.forward.host, config.forward.port, config.url.apis.baseDataUrl, request.headers.cookie);
 };
 
-module.exports = config;
+export default config;

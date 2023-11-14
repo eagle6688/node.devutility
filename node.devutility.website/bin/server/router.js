@@ -2,15 +2,15 @@
  * Router for express.
  */
 
-const Forwarder = require("utilities-forwarder");
+import { HttpProxyHelper } from "utilities-forwarder";
+import config from "../config.js";
 const handler = require("./handler");
-const config = require("../config");
 
-module.exports = function (app, helper) {
-    let forwarder = Forwarder(config.getForwardOptions());
+export default function (app, handler) {
+    let httpProxyHelper = new HttpProxyHelper(config.getForwardOptions());
 
     app.get('/login', function (request, response, next) {
-        let data = helper.getPageData("login");
+        let data = handler.getPageData("login");
         data.title = "Login";
         data.requireAuth = false;
         handler.render(arguments, data);
@@ -23,7 +23,7 @@ module.exports = function (app, helper) {
     });
 
     app.get('/index', function (request, response, next) {
-        let data = helper.getPageData("index");
+        let data = handler.getPageData("index");
         data.title = "Index";
         data.requireAuth = true;
         handler.render(arguments, data);
@@ -32,7 +32,7 @@ module.exports = function (app, helper) {
     app.use(function (request, response, next) {
         if (request.url.indexOf('/api') == 0) {
             request.url = request.url.replace(/\/api\//i, '/');
-            forwarder.request(request, response);
+            httpProxyHelper.request(request, response);
         }
         else {
             var error = new Error("Not found request url: " + request.url);

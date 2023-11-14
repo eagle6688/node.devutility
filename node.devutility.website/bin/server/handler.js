@@ -2,9 +2,9 @@
  * Server business handler.
  */
 
-const httpUtilities = require("utilities-http");
-const collectionUtilities = require("utilities-collection");
-const config = require("../config");
+import collectionUtilities from "utilities-collection";
+import httpUtilities from "utilities-http";
+import config from "../config.js";
 
 let handler = {};
 
@@ -52,4 +52,4 @@ function getPagePathByRequest(request) {
     return getPagePath(pageName);
 }
 
-module.exports = handler;
+export default handler;

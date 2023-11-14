@@ -10,22 +10,21 @@
         "url": "https://github.com/eagle6688/node.devutility.git"
     },
     "scripts": {
-        "build:resource": "webbuilder -f build_fonts && webbuilder -f build_images && webbuilder -f build_copy",
-        "build:lib": "node ./bin/.build/build-lib",
-        "build:sass": "node ./bin/.build/build-sass",
-        "build:ts": "node ./bin/.build/build-ts",
+        "build:resource": "node ./bin/build/build-resource",
+        "build:lib": "node ./bin/build/build-lib",
+        "build:sass": "node ./bin/build/build-sass",
+        "build:ts": "node ./bin/build/build-ts",
         "build": "npm run build:resource && npm run build:lib && npm run build:sass && npm run build:ts",
-        "start": "node ./bin/bootstrap",
-        "start:config": "node ./bin/bootstrap-config"
+        "start": "node ./bin/bootstrap"
     },
     "dependencies": {
         "@types/bootstrap": "^4.1.2",
         "@types/jquery": "^3.3.5",
         "@types/vue": "^2.0.0",
         "typescript": "^2.9.2",
-        "utilities-collection": "1.0.1",
-        "utilities-forwarder": "1.0.3",
-        "utilities-http": "1.0.0",
-        "utilities-web-builder": "1.2.6"
+        "utilities-collection": "1.1.1",
+        "utilities-forwarder": "1.1.1",
+        "utilities-http": "1.1.0",
+        "utilities-web-builder": "1.3.0"
     }
 }
