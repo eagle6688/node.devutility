@@ -1,5 +1,4 @@
 import fs from "fs";
-import { type } from "os";
 
 class BaseValidator {
     constructor(handler) {
