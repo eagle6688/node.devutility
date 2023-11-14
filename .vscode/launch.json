@@ -11,8 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "cwd": "${workspaceFolder}\\node.devutility.forwarder",
-            "program": "${workspaceFolder}\\node.devutility.forwarder\\test\\server.js"
+            "cwd": "${workspaceFolder}\\node.devutility.website",
+            "program": "${workspaceFolder}\\node.devutility.website\\test\\bootstrap.js"
         }
     ]
 }

@@ -4,7 +4,7 @@
 
 import { HttpProxyHelper } from "utilities-forwarder";
 import config from "../config.js";
-const handler = require("./handler");
+import Service from "./Service.js";
 
 export default function (app, handler) {
     let httpProxyHelper = new HttpProxyHelper(config.getForwardOptions());
@@ -16,7 +16,7 @@ export default function (app, handler) {
         handler.render(arguments, data);
     });
 
-    app.use(handler.login);
+    app.use(Service.login);
 
     app.get('/', function (request, response, next) {
         response.redirect('/index');
