@@ -2,10 +2,10 @@
  * Export modules.
  */
 
-import HttpForwarder from "./lib/HttpForwarder.js";
+import HttpProxyHelper from "./lib/HttpProxyHelper.js";
 
 export {
-    HttpForwarder
+    HttpProxyHelper
 };
 
-export default HttpForwarder;
+export default HttpProxyHelper;
