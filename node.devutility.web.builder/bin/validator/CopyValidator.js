@@ -8,7 +8,7 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let copy = options.copy;
-        super.optionalObject(copy, 'copy');
+        super.optionalObject(copy, "copy", "configuration");
         this.#verify_array(copy);
     }
 
@@ -23,17 +23,21 @@ class Validator extends BaseValidator {
             let item = copy[index];
 
             if (!item) {
-                throw new Error("Invalid configuration 'copy." + index + "', should be removed or no-null object!");
+                continue;
+            }
+
+            if (!item.source && !item.target) {
+                continue;
             }
 
             let source = item.source;
-            super.requireString(source, 'copy[' + index + '].source');
+            super.requireString(source, "copy[" + index + "].source", "configuration");
 
             let target = item.target;
-            super.requireString(target, 'copy[' + index + '].target');
+            super.requireString(target, "copy[" + index + "].target", "configuration");
 
             let sourcePath = handler.getPath(source);
-            super.requirePath(sourcePath, 'copy[' + index + '].source');
+            super.requirePath(sourcePath, "copy[" + index + "].source", "configuration");
         }
     }
 }

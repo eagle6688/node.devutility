@@ -7,10 +7,13 @@
 
 import fs from "fs";
 import sysPath from "path";
+import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import scriptUtilities from "utilities-script";
 
 class Builder {
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/ScriptBuilder.js");
+
     static build(handler) {
         let options = handler.options;
 
@@ -36,13 +39,13 @@ class Builder {
     }
 
     static displayMessage(files, target) {
-        console.log("Script files:");
+        Builder.logger.info("Script files:");
 
         for (let index in files) {
-            console.log(files[index], ",");
+            Builder.logger.info(files[index], ",");
         }
 
-        console.log("have been bundled into", target, "completely!");
+        Builder.logger.info("have been bundled into", target, "completely!");
     }
 }
 

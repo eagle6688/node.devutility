@@ -8,12 +8,12 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let compile = options.compile;
-        super.requireObject(compile.pageStyleNameRegex, 'compile.pageStyleNameRegex');
-        super.requireObject(compile.pageScriptNameRegex, 'compile.pageScriptNameRegex');
-        super.requireString(compile.styleLibName, 'compile.styleLibName');
-        super.requireString(compile.pageStyleNameFormat, 'compile.pageStyleNameFormat');
-        super.requireString(compile.scriptLibName, 'compile.scriptLibName');
-        super.requireString(compile.pageScriptNameFormat, 'compile.pageScriptNameFormat');
+        super.requireObject(compile.pageStyleNameRegex, "compile.pageStyleNameRegex", "configuration");
+        super.requireObject(compile.pageScriptNameRegex, "compile.pageScriptNameRegex", "configuration");
+        super.requireString(compile.styleLibName, "compile.styleLibName", "configuration");
+        super.requireString(compile.pageStyleNameFormat, "compile.pageStyleNameFormat", "configuration");
+        super.requireString(compile.scriptLibName, "compile.scriptLibName", "configuration");
+        super.requireString(compile.pageScriptNameFormat, "compile.pageScriptNameFormat", "configuration");
     }
 }
 

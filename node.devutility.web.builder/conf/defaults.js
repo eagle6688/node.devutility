@@ -43,10 +43,13 @@ export default {
         stylesDir: "stylesheets", //Directory for styles, located in "deploy.dir".
         scriptsDir: "scripts" //Directory for scripts, located in "deploy.dir".
     },
+    /**
+     * The files that need copy from one place to another.
+     */
     copy: [
         {
-            source: null,
-            target: null
+            source: null, //Source file path
+            target: null //Target file path
         }
     ],
     webpack: {

@@ -6,9 +6,12 @@
  */
 
 import sysPath from "path";
+import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 
 class Builder {
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/FontBuilder.js");
+
     static build(options) {
         let projectDirectory = process.cwd();
         let sourceDir = sysPath.join(projectDirectory, options.resources.fontsDir);

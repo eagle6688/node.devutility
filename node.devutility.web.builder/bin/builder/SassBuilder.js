@@ -6,17 +6,20 @@
  */
 
 import fs from "fs";
+import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
 
 class Builder {
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/SassBuilder.js");
+
     static compile(styleFile, pageName, handler) {
         let style = styleUtilities.compile(styleFile).css;
         let styleFilePath = handler.getPageStylePath(pageName);
         fs.writeFileSync(styleFilePath, style);
 
         let styleFileName = handler.getPageStyleName(pageName);
-        console.log(styleFileName, "compiled completed!");
+        Builder.logger.info(styleFileName, "compiled completed!");
     }
 
     static build(handler) {
@@ -36,7 +39,7 @@ class Builder {
             Builder.compile(styleFiles[0], pageName, handler);
         }
 
-        console.log("All style files compiled completed!");
+        Builder.logger.info("All style files compiled completed!");
     }
 }
 

@@ -8,10 +8,10 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let resources = options.resources;
-        super.requireString(resources.fontsDir, "resources.fontsDir");
-        super.requireString(resources.imagesDir, "resources.imagesDir");
-        super.optionalObject(resources.styles, "resources.styles");
-        super.optionalObject(resources.scripts, "resources.scripts");
+        super.requireString(resources.fontsDir, "resources.fontsDir", "configuration");
+        super.requireString(resources.imagesDir, "resources.imagesDir", "configuration");
+        super.optionalObject(resources.styles, "resources.styles", "configuration");
+        super.optionalObject(resources.scripts, "resources.scripts", "configuration");
     }
 }
 

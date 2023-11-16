@@ -7,9 +7,12 @@
  * @Copyright: 2018. All rights reserved.
  */
 
+import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 
 class Builder {
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/CopyBuilder.js");
+
     static build(options) {
         let array = options.copy;
 
@@ -18,7 +21,7 @@ class Builder {
 
             if (item.source && item.target) {
                 ioUtilities.copy(item.source, item.target);
-                console.log("Copy source", item.source, "to", item.target);
+                Builder.logger.info("Copy source", item.source, "to", item.target);
             }
         }
     }

@@ -8,9 +8,9 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let hbs = options.hbs;
-        super.optionalObject(hbs.pages, 'hbs.pages');
-        super.optionalObject(hbs.partials, 'hbs.partials');
-        super.requireString(hbs.defaultLayout, 'hbs.defaultLayout');
+        super.optionalObject(hbs.pages, "hbs.pages", "configuration");
+        super.optionalObject(hbs.partials, "hbs.partials", "configuration");
+        super.requireString(hbs.defaultLayout, "hbs.defaultLayout", "configuration");
     }
 }
 

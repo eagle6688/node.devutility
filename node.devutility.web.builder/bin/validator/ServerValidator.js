@@ -8,10 +8,10 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let server = options.server;
-        super.requireObject(server, 'server');
+        super.requireObject(server, "server", "configuration");
 
         let router = server.router;
-        super.requireFunction(router, 'server.router');
+        super.requireFunction(router, "server.router", "configuration");
     }
 }
 

@@ -8,7 +8,7 @@ class Validator extends BaseValidator {
     verify() {
         let options = super.getOptions();
         let webpack = options.webpack;
-        super.requireObject(webpack, 'webpack');
+        super.requireObject(webpack, "webpack", "configuration");
     }
 }
 

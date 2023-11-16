@@ -5,13 +5,15 @@
  * @Copyright: 2018. All rights reserved.
  */
 
-import exp from "constants";
 import fs from "fs";
 import sysPath from "path";
+import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
 
 class Builder {
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/StyleBuilder.js");
+
     static build(handler) {
         let styleDirectory = handler.getStyleDeployDirectory();
         ioUtilities.createDirectory(styleDirectory);
@@ -23,7 +25,7 @@ class Builder {
             styles = Builder.getStyles(styleFiles);
         }
         catch (err) {
-            console.log("Bundle style files failed:", err);
+            Builder.logger.info("Bundle style files failed:", err);
             return;
         }
 
@@ -47,13 +49,13 @@ class Builder {
     }
 
     static displayMessage(files, target) {
-        console.log("Style files:");
+        Builder.logger.info("Style files:");
 
         for (let index in files) {
-            console.log(files[index], ",");
+            Builder.logger.info(files[index], ",");
         }
 
-        console.log("have been bundled into", target, "completely!");
+        Builder.logger.info("have been bundled into", target, "completely!");
     }
 }
 

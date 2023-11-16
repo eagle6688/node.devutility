@@ -13,9 +13,11 @@ import hbs from "hbs";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import favicon from "serve-favicon";
+import { Logger } from "utilities-common";
 
 class Server {
     constructor(container, handler) {
+        this.logger = Logger.create("node.devutility.web.builder/bin/Server.js");
         this.container = container;
         this.handler = handler;
         this.init();
@@ -111,11 +113,11 @@ class Server {
         this.server = http.createServer(this.app);
 
         this.server.on('listening', function () {
-            console.log('Listening on port:', self.port);
+            self.logger.info('Listening on port:', self.port);
         });
 
         this.server.on('error', function (error) {
-            console.log('Listening error:', error);
+            self.logger.info('Listening error:', error);
         });
     }
 
