@@ -17,8 +17,12 @@ module.exports = {
     },
     copy: [
         {
-            source: "resources/styles",
-            target: "dist/styles1"
+            source: "resources/styles/bootstrap-theme.min.css.map",
+            target: "dist/stylesheets/bootstrap-theme.min.css.map"
+        },
+        {
+            source: "resources/styles/bootstrap.min.css.map",
+            target: "dist/stylesheets/bootstrap.min.css.map"
         }
     ],
     webpack: {

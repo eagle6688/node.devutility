@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "cwd": "${workspaceFolder}\\node.devutility.website",
-            "program": "${workspaceFolder}\\node.devutility.website\\test\\bootstrap.js"
+            "program": "${workspaceFolder}\\node.devutility.website\\bin\\build\\build-lib.js"
         }
     ]
 }

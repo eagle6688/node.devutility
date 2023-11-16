@@ -1,2 +1,4 @@
 import WebBuilder from "utilities-web-builder";
-WebBuilder.build().build_scriptLib();
+const webBuilder = WebBuilder.build();
+webBuilder.build_scriptLib();
+webBuilder.build_styleLib();

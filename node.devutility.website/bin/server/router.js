@@ -13,7 +13,7 @@ export default function (app, handler) {
         let data = handler.getPageData("login");
         data.title = "Login";
         data.requireAuth = false;
-        handler.render(arguments, data);
+        Service.render(arguments, data);
     });
 
     app.use(Service.login);
@@ -26,7 +26,7 @@ export default function (app, handler) {
         let data = handler.getPageData("index");
         data.title = "Index";
         data.requireAuth = true;
-        handler.render(arguments, data);
+        Service.render(arguments, data);
     });
 
     app.use(function (request, response, next) {
