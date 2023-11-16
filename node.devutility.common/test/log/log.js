@@ -7,3 +7,7 @@ logger.warn("Hello world!");
 logger.error("Hello world!");
 
 logger.debug("Hello world!", "asd", "qwe");
+
+logger.debug({
+    asd: "Hello world!"
+});

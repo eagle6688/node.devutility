@@ -43,8 +43,15 @@ class Logger {
 
     #log(level, message, ...optionalParams) {
         let header = this.#createHeader(new Date(), level);
-        message = header + message;
-        console.log(message, ...optionalParams);
+
+        if (typeof message == 'string') {
+            header = header + message;
+        }
+        else {
+            optionalParams.push(message);
+        }
+
+        console.log(header, ...optionalParams);
     }
 
     debug(message, ...optionalParams) {
