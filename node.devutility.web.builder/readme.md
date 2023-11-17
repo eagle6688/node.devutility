@@ -43,6 +43,12 @@ webBuilder.start();
 
 ### Version 1.3.1
 
+* 1. Add dependency `utilities-common`;
+* 2. Use `Logger` from `utilities-common` to print message;
+* 3. Use `BaseValidator` from `utilities-common` for validator.
+
+### Version 1.3.0
+
 * 1. Upgrade javascript to ES 6;
 * 2. Optimize codes and restructure folders;
 * 3. Rename configuration file from `webbuilder.config.js` to `webbuilder.config.cjs`;
