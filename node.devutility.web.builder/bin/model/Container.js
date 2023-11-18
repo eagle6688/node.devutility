@@ -5,6 +5,8 @@
  * @Copyright: 2023. All rights reserved.
  */
 
+import "dotenv/config";
+
 class Container {
     constructor(options, resources) {
         this.setOptions(options);
@@ -12,6 +14,12 @@ class Container {
     }
 
     getPort() {
+        let port = process.env.WEB_PORT;
+
+        if (port) {
+            return port;
+        }
+
         if (!this.options) {
             return null;
         }

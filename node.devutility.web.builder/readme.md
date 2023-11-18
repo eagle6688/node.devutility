@@ -20,6 +20,14 @@ import { WebBuilder } from "utilities-web-builder";
 // Create instance
 const webBuilder = WebBuilder.build(config, router);
 
+/**
+ * Both of two parameters are optional, you can just use the following command to create the instance.
+ * In this way, web builder will find configuration file 'webbuilder.config.cjs' from root directory of project or '$project_directory/conf/webbuilder.config.cjs'.
+ * The content of webbuilder.config.cjs can ref Default configuration file in following section. 
+ * The parameter 'router' is the URL handler for express.js which also * present in configuration example file.
+ */
+const webBuilder = WebBuilder.build(null, router);
+
 //Start instance
 webBuilder.start();
 ```
@@ -40,6 +48,24 @@ webBuilder.start();
 * 2. Rename configuration file from `webbuilder.config.js` to `webbuilder.config.cjs`.
 
 ## Change list
+
+### Version 1.3.2
+
+* 1. Add new dependcy `dotenv`;
+* 2. Support dynamic port from environment variable `WEB_PORT`, can use the following commands to start with specific port:
+
+``` javascript
+// Linux
+WEB_PORT=1234 npm run start
+
+// Windows CMD
+set WEB_PORT=1234
+npm run start
+
+// Windows PowerShell
+$env:WEB_PORT=1234
+npm run start
+```
 
 ### Version 1.3.1
 

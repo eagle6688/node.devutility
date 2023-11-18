@@ -1,6 +1,6 @@
 {
     "name": "utilities-web-builder",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "type": "module",
     "main": "index.js",
     "description": "Developing utilities for website building.",
@@ -25,6 +25,7 @@
     "dependencies": {
         "body-parser": "^1.20.2",
         "cookie-parser": "^1.4.6",
+        "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "extend": "^3.0.2",
         "hbs": "^4.2.0",
