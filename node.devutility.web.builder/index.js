@@ -104,7 +104,7 @@ class WebBuilder {
     }
 
     build_copy() {
-        CopyBuilder.build(this.options);
+        CopyBuilder.build(this.handler);
     }
 
     start() {
