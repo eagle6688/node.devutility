@@ -67,6 +67,10 @@ $env:WEB_PORT=1234
 npm run start
 ```
 
+### Version 1.3.3
+
+* 1. Separate validators for `complie` and `runtime`.
+
 ### Version 1.3.1
 
 * 1. Add dependency `utilities-common`;
