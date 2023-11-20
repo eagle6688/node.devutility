@@ -10,11 +10,21 @@ import sysPath from "path";
 import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import scriptUtilities from "utilities-script";
+import ScriptsValidator from "../validator/complie/ScriptsValidator.js";
 
 class Builder {
-    static logger = Logger.create("node.devutility.web.builder/bin/builder/ScriptBuilder.js");
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/ScriptsBuilder.js");
 
     static build(handler) {
+        this.logger.info("Start building scripts...");
+
+        ScriptsValidator.verify(handler);
+        this.#build(handler);
+
+        this.logger.info("Build scripts completed.");
+    }
+
+    static #build(handler) {
         let options = handler.options;
 
         if (!options.resources.scripts) {
@@ -35,10 +45,10 @@ class Builder {
         }
 
         fs.writeFileSync(scriptLibPath, array.join('\n'));
-        Builder.displayMessage(scriptFiles, scriptLibPath);
+        Builder.#displayMessage(scriptFiles, scriptLibPath);
     }
 
-    static displayMessage(files, target) {
+    static #displayMessage(files, target) {
         Builder.logger.info("Script files:");
 
         for (let index in files) {

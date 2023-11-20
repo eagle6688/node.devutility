@@ -1,11 +1,15 @@
-import BaseValidator from "./BaseValidator.js";
+import BaseValidator from "../BaseValidator.js";
 
 class Validator extends BaseValidator {
     constructor(handler) {
         super(handler);
     }
 
-    verify() {
+    static verify(handler) {
+        new Validator(handler).#verify();
+    }
+
+    #verify() {
         let options = super.getOptions();
         let copy = options.copy;
         super.optionalObject(copy, "copy", "configuration");

@@ -9,20 +9,21 @@ import fs from "fs";
 import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
+import SassValidator from "../validator/complie/SassValidator.js";
 
 class Builder {
     static logger = Logger.create("node.devutility.web.builder/bin/builder/SassBuilder.js");
 
-    static compile(styleFile, pageName, handler) {
-        let style = styleUtilities.compile(styleFile).css;
-        let styleFilePath = handler.getPageStylePath(pageName);
-        fs.writeFileSync(styleFilePath, style);
+    static build(handler) {
+        this.logger.info("Start building images...");
 
-        let styleFileName = handler.getPageStyleName(pageName);
-        Builder.logger.info(styleFileName, "compiled completed!");
+        SassValidator.verify(handler);
+        this.#build(handler);
+
+        this.logger.info("Build images completed.");
     }
 
-    static build(handler) {
+    static #build(handler) {
         let styleDirectory = handler.getStyleDeployDirectory();
         ioUtilities.createDirectory(styleDirectory);
         let pagePaths = handler.getPagesDirectories();
@@ -36,10 +37,19 @@ class Builder {
                 continue;
             }
 
-            Builder.compile(styleFiles[0], pageName, handler);
+            this.#compile(styleFiles[0], pageName, handler);
         }
 
-        Builder.logger.info("All style files compiled completed!");
+        this.logger.info("All style files compiled completed!");
+    }
+
+    static #compile(styleFile, pageName, handler) {
+        let style = styleUtilities.compile(styleFile).css;
+        let styleFilePath = handler.getPageStylePath(pageName);
+        fs.writeFileSync(styleFilePath, style);
+
+        let styleFileName = handler.getPageStyleName(pageName);
+        this.logger.info(styleFileName, "compiled completed!");
     }
 }
 

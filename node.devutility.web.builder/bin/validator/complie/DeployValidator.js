@@ -1,4 +1,4 @@
-import BaseValidator from "./BaseValidator.js";
+import BaseValidator from "../BaseValidator.js";
 
 class Validator extends BaseValidator {
     constructor(handler) {
@@ -14,10 +14,6 @@ class Validator extends BaseValidator {
         super.requireString(deploy.dir, "deploy.dir", "configuration");
         super.requireString(deploy.host, "deploy.host", "configuration");
         super.requireString(deploy.favicon, "deploy.favicon", "configuration");
-        super.requireString(deploy.fontsDir, "deploy.fontsDir", "configuration");
-        super.requireString(deploy.imagesDir, "deploy.imagesDir", "configuration");
-        super.requireString(deploy.stylesDir, "deploy.stylesDir", "configuration");
-        super.requireString(deploy.scriptsDir, "deploy.scriptsDir", "configuration");
     }
 
     #verify_versionedType(versionedType) {

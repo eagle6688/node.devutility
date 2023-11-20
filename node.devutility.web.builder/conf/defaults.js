@@ -8,17 +8,17 @@
 export default {
     port: 8000, //Website server port.
     views: "app", //Express views directory.
-    staticPaths: [], //Static paths need be regitered in express, will automatically add the "deploy.dir".
+    staticPaths: [], //Static paths need to be regitered in express.
     hbs: {
-        pages: [], //Handlebars pages root directory, default is "{defaults.views}/pages".
-        partials: [], //Handlebars partials directories, default is "{defaults.views}/partials".
-        defaultLayout: "layouts/default" //Default handlebars layout, located in "views".
+        pages: [], //Handlebars pages root directory, default is "{views}/pages".
+        partials: [], //Handlebars partials directories, default is "{views}/partials".
+        defaultLayout: "layouts/default" //Handlebars default layout, should locate in "views".
     },
     resources: {
-        fontsDir: "resources/fonts", //Root directory for fonts resource.
-        imagesDir: "resources/images", //Root directory for images resource.
-        styles: [], //Directories for css files.
-        scripts: [] //Directories for javascript files.
+        fontsDir: "resources/fonts", //Root directory for fonts.
+        imagesDir: "resources/images", //Root directory for images.
+        styles: [], //Paths for CSS files.
+        scripts: [] //Paths for Javascript files.
     },
     compile: {
         pageStyleNameRegex: /.+(index.scss|index.sass)$/, //Regex for match page main style.
@@ -44,7 +44,7 @@ export default {
         scriptsDir: "scripts" //Directory for scripts, located in "deploy.dir".
     },
     /**
-     * The files that need copy from one place to another.
+     * Files which need copy from one place to another.
      */
     copy: [
         {

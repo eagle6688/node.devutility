@@ -16,11 +16,11 @@ import Container from "./bin/model/Container.js";
 import ResourceProvider from "./bin/service/ResourceProvider.js";
 
 import CopyBuilder from "./bin/builder/CopyBuilder.js";
-import FontBuilder from "./bin/builder/FontBuilder.js";
-import ImageBuilder from "./bin/builder/ImageBuilder.js";
+import FontsBuilder from "./bin/builder/FontsBuilder.js";
+import ImagesBuilder from "./bin/builder/ImagesBuilder.js";
 import SassBuilder from "./bin/builder/SassBuilder.js";
-import Builder4Script from "./bin/builder/ScriptBuilder.js";
-import StyleBuilder from "./bin/builder/StyleBuilder.js";
+import StylesBuilder from "./bin/builder/StylesBuilder.js";
+import ScriptsBuilder from "./bin/builder/ScriptsBuilder.js";
 import TypeScriptBuilder from "./bin/builder/TypeScriptBuilder.js";
 
 class WebBuilder {
@@ -80,19 +80,19 @@ class WebBuilder {
     }
 
     build_fonts() {
-        FontBuilder.build(this.options);
+        FontsBuilder.build(this.handler);
     }
 
     build_images() {
-        ImageBuilder.build(this.options);
+        ImagesBuilder.build(this.handler);
     }
 
     build_styleLib() {
-        StyleBuilder.build(this.handler);
+        StylesBuilder.build(this.handler);
     }
 
     build_scriptLib() {
-        Builder4Script.build(this.handler);
+        ScriptsBuilder.build(this.handler);
     }
 
     build_sass() {

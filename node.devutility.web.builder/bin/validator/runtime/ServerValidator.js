@@ -1,4 +1,4 @@
-import BaseValidator from "./BaseValidator.js";
+import BaseValidator from "../BaseValidator.js";
 
 class Validator extends BaseValidator {
     constructor(handler) {

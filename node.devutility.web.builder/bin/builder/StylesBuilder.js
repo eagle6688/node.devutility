@@ -10,11 +10,21 @@ import sysPath from "path";
 import { Logger } from "utilities-common";
 import ioUtilities from "utilities-io";
 import styleUtilities from "utilities-style";
+import StylesValidator from "../validator/complie/StylesValidator.js";
 
 class Builder {
-    static logger = Logger.create("node.devutility.web.builder/bin/builder/StyleBuilder.js");
+    static logger = Logger.create("node.devutility.web.builder/bin/builder/StylesBuilder.js");
 
     static build(handler) {
+        this.logger.info("Start building styles...");
+
+        StylesValidator.verify(handler);
+        this.#build(handler);
+
+        this.logger.info("Build styles completed.");
+    }
+
+    static #build(handler) {
         let styleDirectory = handler.getStyleDeployDirectory();
         ioUtilities.createDirectory(styleDirectory);
 
@@ -22,7 +32,7 @@ class Builder {
         let styleFiles = handler.options.resources.styles;
 
         try {
-            styles = Builder.getStyles(styleFiles);
+            styles = Builder.#getStyles(styleFiles);
         }
         catch (err) {
             Builder.logger.info("Bundle style files failed:", err);
@@ -33,10 +43,10 @@ class Builder {
         let styleLibName = handler.getStyleLibName();
         let styleLibPath = sysPath.join(styleDirectory, styleLibName);
         fs.writeFileSync(styleLibPath, content);
-        Builder.displayMessage(styleFiles, styleLibPath);
+        Builder.#displayMessage(styleFiles, styleLibPath);
     }
 
-    static getStyles(files) {
+    static #getStyles(files) {
         let array = [];
 
         for (let index in files) {
@@ -48,7 +58,7 @@ class Builder {
         return array;
     }
 
-    static displayMessage(files, target) {
+    static #displayMessage(files, target) {
         Builder.logger.info("Style files:");
 
         for (let index in files) {
