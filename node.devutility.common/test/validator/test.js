@@ -5,6 +5,7 @@ class Validator extends Common.BaseValidator {
         this.#verify_require();
         this.#verify_requireType();
         this.#verify_optionalType();
+        this.#verify_boolean();
     }
 
     #verify_require() {
@@ -27,6 +28,13 @@ class Validator extends Common.BaseValidator {
         super.optionalType(0, 'number', 'asd');
         //super.optionalType('123', 'number', 'asd', 'configuration');
         //super.optionalType('123', 'number', 'asd');
+    }
+
+    #verify_boolean() {
+        super.requireBoolean(false, "bool", "configuration");
+        //super.requireBoolean(1, "bool", "configuration");
+        super.optionalBoolean(false, "bool", "configuration");
+        //super.optionalBoolean(1, "bool", "configuration");
     }
 }
 

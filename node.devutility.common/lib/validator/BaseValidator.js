@@ -1,4 +1,5 @@
 import fs from "fs";
+import { type } from "os";
 
 class BaseValidator {
     #miss_message(prefix, name) {
@@ -32,7 +33,13 @@ class BaseValidator {
     }
 
     requireBoolean(value, name, prefix) {
-        this.requireType(value, 'boolean', name, prefix);
+        if (value == null) {
+            throw new Error(this.#miss_message(prefix, name));
+        }
+
+        if (typeof value != 'boolean') {
+            throw new Error(this.#invalid_type_message(prefix, name, 'boolean'));
+        }
     }
 
     requireNumber(value, name, prefix) {
@@ -80,7 +87,13 @@ class BaseValidator {
     }
 
     optionalBoolean(value, name, prefix) {
-        this.optionalType(value, 'boolean', name, prefix);
+        if (value == null || typeof value == 'undefined') {
+            return;
+        }
+
+        if (typeof value != 'boolean') {
+            throw new Error(this.#invalid_type_message(prefix, name, 'boolean'));
+        }
     }
 
     optionalNumber(value, name, prefix) {
